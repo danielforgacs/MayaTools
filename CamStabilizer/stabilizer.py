@@ -36,10 +36,10 @@
     !!! DO NOT USE with cameras when camera offset is used !!!
 
     test environment:
-        - maya 2011 x64, linux
+        - maya 2015 x64, Windows
 
     changelog:
-    22 Jan 2016     - Started refactoring.
+    22 Jan 2016     - Started refactoring and tests
 
     12 july 2012    - second eye works.
 
@@ -70,6 +70,10 @@
                     - works with zoom lens
 
     knowns bugs:
+
+    todo:
+        - module name is hardcoded for the window handling.
+            should be working with any import name
 
     planned developement:
         - stereo camera offset handling
