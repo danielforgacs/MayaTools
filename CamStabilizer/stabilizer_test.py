@@ -1,4 +1,5 @@
 """
+!!! test currently don't test second eye functions !!!
 """
 
 import unittest
@@ -61,6 +62,13 @@ class StabizilerTests(TestSceneSetup):
         button = pymel.core.uitypes.Button('button_stabilizer')
 
         self.assertEqual(button.getCommand(), 'fstab.stabilizer("start")')
+
+    def test_stabilizer_button_color_is_green_turned_off(self):
+        stabilizer.gui()
+        button = pymel.core.uitypes.Button('button_stabilizer')
+
+        for k, value in enumerate([0, 0.5, 0]):
+            self.assertAlmostEqual(button.getBackgroundColor()[k], value, 4)
 
 
 
