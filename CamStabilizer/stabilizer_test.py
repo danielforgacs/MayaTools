@@ -1,3 +1,6 @@
+"""
+"""
+
 import unittest
 
 
@@ -8,16 +11,21 @@ class TestSceneSetup(unittest.TestCase):
         pymel.core.newFile(force=True)
 
         pymel.core.polyCube()
+
         camaim = pymel.core.spaceLocator()
-        cam, camshape = pymel.core.camera()
+        cam, camshape = pymel.core.camera(displayResolution=True, displayFilmGate=True, overscan=1.8)
+
         cam.setAttr('translateZ', 5)
         cam.setParent(camaim)
+
         pymel.core.setKeyframe(camaim)
         pymel.core.currentTime(120, edit=True)
+
         camaim.setAttr('rotateY', 60)
         camaim.setAttr('rotateX', -45)
         camaim.setAttr('translateY', 5)
         camaim.setAttr('translateZ', 3)
+
         pymel.core.setKeyframe(camaim)
         pymel.core.lookThru('perspView', camshape)
 
@@ -34,8 +42,10 @@ class StabilizerFunctionalTests(TestSceneSetup):
 
 
 def main():
-    print('/////////////////////////////////////')
-    print('/////////////////////////////////////')
+    print('/'*50)
+    print('\\'*50)
+    print('/'*50)
+
     loader = unittest.TestLoader()
     suite = loader.loadTestsFromTestCase(StabizilerTests)
     suite_func = loader.loadTestsFromTestCase(StabilizerFunctionalTests)
