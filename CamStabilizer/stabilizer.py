@@ -216,17 +216,6 @@ def add_eye():
 		else:
 			ok	= False
 
-#	expression.append(	oldExpression[2:6] )
-#	expression.append( '$pos2 =`python "fstab.get_normalized_screen_position(\'%s\',\'%s\',fov_h, fov_v,aperture_h,aperture_v)"`;' % ( oldExpression[1][3:], cameraShape2 ) )
-#	expression.append( '$off_h = ($pos[2] + $pos2[2]) * 0.5;' )
-#	expression.append( '$off_v = ($pos[3] + $pos2[3]) * 0.5;' )
-#	expression.append( cam1_pos_h[:-9] + ' $off_h;' )
-#	expression.append( cam1_pos_v[:-9] + ' $off_v;' )
-#	expression.append( 'setAttr "%s.horizontalFilmOffset" $off_h;' % cameraShape )
-#	expression.append( 'setAttr "%s.verticalFilmOffset" $off_v;' % cameraShape )
-
-	#cmds.expression( 'stabilizator_expression', string = expression, edit = True )
-
 	print expression
 	cmds.button( 'Stabilizer|cl|add_eye_btn', enable = False, edit = True, backgroundColor = (1, 0, 0) )
 
@@ -309,4 +298,5 @@ def gui ():
 	cmds.showWindow( 'Stabilizer' )
 
 ### MAIN ###############################
-gui()
+def main():
+	gui()
