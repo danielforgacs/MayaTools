@@ -12,6 +12,7 @@ reload(stabilizer)
 
 class TestSceneSetup(unittest.TestCase):
     def setUp(self):
+        panel = pymel.core.getPanel(withFocus=True)
         window = pymel.core.uitypes.Window('Stabilizer')
 
         try:
@@ -43,6 +44,8 @@ class TestSceneSetup(unittest.TestCase):
 
         pymel.core.select('pCube1.vtx[5]')
 
+        pymel.core.setFocus(panel)
+
     def tearDown(self):
         pass
 
@@ -73,15 +76,37 @@ class StabizilerGUITests(TestSceneSetup):
             self.assertAlmostEqual(button.getBackgroundColor()[k], value, 4)
 
 
+class CameraClassTests(TestSceneSetup):
+    def test_StabilizerTests_runs(self):
+        self.assertTrue(True)
+
+    def test_class_gets_cam_from_module(self):
+        cam = stabilizer.Camera()
+        testcam = pymel.core.nt.Transform('camera1')
+
+        self.assertEqual(cam.transform, testcam)
+        self.assertEqual(cam.shape, testcam.getShape())
+
+
+class StabilizerTests(TestSceneSetup):
+    def test_StabilizerTest_is_running(self):
+        self.assertTrue(True)
+
+
 def main():
     print('/'*50)
     print('\\'*50)
     print('/'*50)
 
     loader = unittest.TestLoader()
-    suite_GUI = loader.loadTestsFromTestCase(StabizilerGUITests)
 
-    unittest.TextTestRunner(verbosity=1).run(suite_GUI)
+    suite_GUI = loader.loadTestsFromTestCase(StabizilerGUITests)
+    suite_CameraClass = loader.loadTestsFromTestCase(CameraClassTests)
+    suite_stabilizer = loader.loadTestsFromTestCase(StabilizerTests)
+
+    # unittest.TextTestRunner(verbosity=1).run(suite_GUI)
+    unittest.TextTestRunner(verbosity=1).run(suite_CameraClass)
+    unittest.TextTestRunner(verbosity=1).run(suite_stabilizer)
 
 
 if __name__ == '__main__':
