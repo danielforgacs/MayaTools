@@ -47,50 +47,30 @@ class TestSceneSetup(unittest.TestCase):
         pass
 
 
-class StabizilerTests(TestSceneSetup):
-    # def test_unittests_running(self):
-    #     self.assertTrue(True)
-
-    # def test_gui_creates_stabilizer_window(self):
-    #     stabilizer.gui()
-    #     self.assertTrue(pymel.core.window('Stabilizer', query=True, exists=True))
-
-    # def test_window_has_stabilize_button(self):
-    #     stabilizer.gui()
-    #     self.assertTrue(pymel.core.uitypes.Button('button_stabilizer'))
-
-    # def test_stabilizer_button_command_is_stabilize(self):
-    #     stabilizer.gui()
-    #     button = pymel.core.uitypes.Button('button_stabilizer')
-
-    #     self.assertEqual(button.getCommand(), 'fstab.stabilizer("start")')
-
-    # def test_stabilizer_button_color_is_green_turned_off(self):
-    #     stabilizer.gui()
-    #     button = pymel.core.uitypes.Button('button_stabilizer')
-
-    #     for k, value in enumerate([0, 0.5, 0]):
-    #         self.assertAlmostEqual(button.getBackgroundColor()[k], value, 4)
-
-    def test_stabilizer_button_color_is_red_turned_on(self):
-        stabilizer.gui()
-        button = pymel.core.uitypes.Button('button_stabilizer')
-        # stabilizer.stabilizer('start')
-        # eval('fstab.stabilizer("start")')
-
-        # for k, value in enumerate([0.3, 0.3, 0.3]):
-        #     self.assertAlmostEqual(button.getBackgroundColor()[k], value, 4)
-
-
-
-class StabilizerFunctionalTests(TestSceneSetup):
-    def test_functional_tests_running(self):
+class StabizilerGUITests(TestSceneSetup):
+    def test_unittests_running(self):
         self.assertTrue(True)
 
-    def test_functional(self):
-        stabilizer.main()
+    def test_gui_creates_stabilizer_window(self):
+        stabilizer.gui()
         self.assertTrue(pymel.core.window('Stabilizer', query=True, exists=True))
 
+    def test_window_has_stabilize_button(self):
+        stabilizer.gui()
+        self.assertTrue(pymel.core.uitypes.Button('button_stabilizer'))
+
+    def test_stabilizer_button_command_is_stabilize(self):
+        stabilizer.gui()
+        button = pymel.core.uitypes.Button('button_stabilizer')
+
+        self.assertEqual(button.getCommand(), 'fstab.stabilizer("start")')
+
+    def test_stabilizer_button_color_is_green_turned_off(self):
+        stabilizer.gui()
+        button = pymel.core.uitypes.Button('button_stabilizer')
+
+        for k, value in enumerate([0, 0.5, 0]):
+            self.assertAlmostEqual(button.getBackgroundColor()[k], value, 4)
 
 
 def main():
@@ -99,11 +79,9 @@ def main():
     print('/'*50)
 
     loader = unittest.TestLoader()
-    suite = loader.loadTestsFromTestCase(StabizilerTests)
-    suite_func = loader.loadTestsFromTestCase(StabilizerFunctionalTests)
+    suite_GUI = loader.loadTestsFromTestCase(StabizilerGUITests)
 
-    unittest.TextTestRunner(verbosity=1).run(suite)
-    # unittest.TextTestRunner(verbosity=1).run(suite_func)
+    unittest.TextTestRunner(verbosity=1).run(suite_GUI)
 
 
 if __name__ == '__main__':
