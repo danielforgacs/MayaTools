@@ -1,7 +1,3 @@
-### import ford_stabilizer_v0_8_1 as fstab
-### reload(fstab)
-
-
 """
     ---------------------------
     ford_stabilizer_v0_8_1 for Maya
