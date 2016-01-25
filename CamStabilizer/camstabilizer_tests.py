@@ -6,7 +6,7 @@ reload(camstabilizer)
 
 class MayaTestScene(unittest.TestCase):
     def setUp(self):
-        panel = pymel.core.getPanel(withFocus=True)
+        # panel = pymel.core.getPanel(withFocus=True)
 
         pymel.core.newFile(force=True)
         cube = pymel.core.polyCube()
@@ -35,22 +35,26 @@ class MayaTestScene(unittest.TestCase):
 
         pymel.core.select('test_box.vtx[5]')
 
-        pymel.core.setFocus(panel)
+        # pymel.core.setFocus(panel)
 
 
 class CamStabilizerUnitTests(MayaTestScene):
     def test_CamStabilizerUnitTests_is_running(self):
         self.assertTrue(True)
 
-    def test_get_camera_returns_camera_from_panel_or_selection(self):
+    def test_get_camera_returns_camera_from_panel(self):
+        pymel.core.setFocus('modelPanel4')
         cam = camstabilizer.get_camera()
         camtest = pymel.core.nt.Transform('test_camera')
 
-        # print('\n\n')
-        # print(cam)
-        # print('\n\n')
-        # print(camtest)
-        # print('\n\n')
+        self.assertEqual(cam, camtest)
+
+    def test_get_camera_returns_camera_from_selection(self):
+        pymel.core.select('test_camera', add=True)
+        pymel.core.setFocus('scriptEditorPanel1')
+
+        cam = camstabilizer.get_camera()
+        camtest = pymel.core.nt.Transform('test_camera')
 
         self.assertEqual(cam, camtest)
 
