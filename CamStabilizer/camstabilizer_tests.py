@@ -6,9 +6,9 @@ reload(camstabilizer)
 
 class MayaTestScene(unittest.TestCase):
     def setUp(self):
-        pymel.core.newFile(force=True)
-
         panel = pymel.core.getPanel(withFocus=True)
+
+        pymel.core.newFile(force=True)
         cube = pymel.core.polyCube()
         camaim = pymel.core.spaceLocator()
         cam, camshape = pymel.core.camera(displayResolution=True,
@@ -45,6 +45,12 @@ class CamStabilizerUnitTests(MayaTestScene):
     def test_get_camera_returns_camera_from_panel_or_selection(self):
         cam = camstabilizer.get_camera()
         camtest = pymel.core.nt.Transform('test_camera')
+
+        # print('\n\n')
+        # print(cam)
+        # print('\n\n')
+        # print(camtest)
+        # print('\n\n')
 
         self.assertEqual(cam, camtest)
 
