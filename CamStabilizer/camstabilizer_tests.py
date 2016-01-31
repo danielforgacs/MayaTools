@@ -182,12 +182,5 @@ class CamStabilizerUnitTests(MayaTestScene):
         self.assertIsInstance(camstabilizer.stabilize()[2], str)
 
 
-
-
-
 def main():
-    print('/'*50)
-    print('\\'*50)
-    print('/'*50)
-
     unittest.main(module='CamStabilizer.camstabilizer_tests', exit=False)
