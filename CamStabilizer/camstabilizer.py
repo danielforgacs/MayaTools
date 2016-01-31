@@ -104,7 +104,7 @@ def get_camera():
     log.debug(camera)
     log.debug(camera_shape)
 
-    return camera
+    return camera_shape
 
 
 def get_position_object():
@@ -118,11 +118,6 @@ def get_position_object():
 
     else:
         vertex = type(transform) is pymel.core.general.MeshVertex
-
-    # print('pos', transform, type(transform), transform.getPosition())
-    # print('tform', transform, type(transform), transform.getTransform())
-    # print('tlate', transform, type(transform), transform.getTranslation())
-    # print('getPoint', transform, type(transform), transform.getPoint(0))
 
     if not (locator or vertex):
         raise Exception("--> can't retrieve transform...")
@@ -139,7 +134,7 @@ def stabilize():
     transform = get_position_object()
     log.debug('--> transform ok...')
 
-    expression = None
+    expression = ''
 
     return (transform, camera, expression)
 
