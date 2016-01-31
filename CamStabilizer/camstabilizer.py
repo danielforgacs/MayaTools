@@ -34,15 +34,33 @@ log.handlers = []
 ch = logging.StreamHandler()
 ch.setFormatter(formatter)
 log.setLevel(logging.INFO)
-log.setLevel(logging.DEBUG)
+# log.setLevel(logging.DEBUG)
 log.addHandler(ch)
 
 
 
+def get_selection():
+    selection = pymel.core.selected()
+    error_message = ('--> Select a transform and a camera'
+                ' or click in a pane and select a transform')
+
+    if len(selection) not in (1, 2):
+        log.debug('selection not 1, 2')
+
+        raise Exception(error_message)
+
+    if type(selection[0]) != pymel.core.nodetypes.Transform:
+        log.debug('selection is not transform type')
+
+        if len(selection[0]) != 1:
+            raise Exception(error_message)
+
+    return selection
+
 
 def get_camera():
     active_pane = pymel.core.getPanel(withFocus=True)
-    selection = pymel.core.selected()
+    selection = get_selection()
     camera = None
     camera_shape = None
 
@@ -79,8 +97,14 @@ def get_camera():
     return camera
 
 
-def get_aimtransform():
+def get_position_object():
     selection = pymel.core.selected()
+
+    if len(selection) not in (1, 2):
+        message = '--> Select a transform and a camera or click in a pane and select a transform'
+
+        raise Exception(message)
+
     transform = None
 
     transform = selection[0]
@@ -94,7 +118,7 @@ def stabilize():
     camera = get_camera()
     log.debug('--> camera ok...')
 
-    aimtransform = get_aimtransform()
+    aimtransform = get_position_object()
     log.debug('--> transform ok...')
 
     return [camera]
