@@ -26,16 +26,6 @@ pm.inViewMessage(
     )
 
 ###
-// |test_locator|test_camera|test_cameraShape
-// |test_box
-python "import maya.cmds as cmds";
-python "fov_h = cmds.camera ('|test_locator|test_camera|test_cameraShape', query = True, horizontalFieldOfView = True)";
-python "fov_v = cmds.camera ('|test_locator|test_camera|test_cameraShape', query = True, verticalFieldOfView = True)";
-python "aperture_h = cmds.camera ('|test_locator|test_camera|test_cameraShape', query = True, horizontalFilmAperture = True)";
-python "aperture_v = cmds.camera ('|test_locator|test_camera|test_cameraShape', query = True, verticalFilmAperture = True)";
-$pos =`python "fstab.get_normalized_screen_position('|test_box','|test_locator|test_camera',fov_h, fov_v,aperture_h,aperture_v)"`;
-setAttr "|test_locator|test_camera|test_cameraShape.horizontalFilmOffset" $pos[2];
-setAttr "|test_locator|test_camera|test_cameraShape.verticalFilmOffset" $pos[3];
 """
 
 import logging
@@ -142,10 +132,32 @@ def get_position_object():
 
 
 def create_expression(cam, pos):
-    expression = ''
-    expression_node = pymel.core.expression()
+    expression = '// {0}'.format(cam.fullPathName())
+    expression += '\n// {0}'.format(pos)
+    expression += '\npython "import maya.cmds as cmds";'
+    expression += ("""\npython "fov_h = cmds.camera"""
+                    """ ('{0}', query = True,"""
+                    """ horizontalFieldOfView = True)";""").format(cam.fullPathName())
+    expression += ("""\npython "fov_v = cmds.camera"""
+                    """ ('{0}',"""
+                    """ query = True, verticalFieldOfView = True)";""").format(cam.fullPathName())
 
-    return (expression, expression_node)
+
+
+        # python "aperture_h = cmds.camera ('|test_locator|test_camera|test_cameraShape', query = True, horizontalFilmAperture = True)";
+        # python "aperture_v = cmds.camera ('|test_locator|test_camera|test_cameraShape', query = True, verticalFilmAperture = True)";
+        # $pos =`python "fstab.get_normalized_screen_position('|test_box.vtx[4]','|test_locator|test_camera',fov_h, fov_v,aperture_h,aperture_v)"`;
+        # setAttr "|test_locator|test_camera|test_cameraShape.horizontalFilmOffset" $pos[2];
+        # setAttr "|test_locator|test_camera|test_cameraShape.verticalFilmOffset" $pos[3];
+
+    expression_node = pymel.core.expression()
+    expression_node.rename('camera_stabilizer_' + cam.name())
+
+    print('~@~'*5)
+    print(expression)
+    print('~@~'*5)
+
+    return expression, expression_node
 
 
 def stabilize():
@@ -157,9 +169,10 @@ def stabilize():
     transform = get_position_object()
     log.debug('--> transform ok...')
 
-    expression = ''
+    expression, expression_node = create_expression(camera, transform)
+    log.debug('--> transform ok...')
 
-    return (transform, camera, expression)
+    return (transform, camera, expression, expression_node)
 
 
 def main(**kwargs):
