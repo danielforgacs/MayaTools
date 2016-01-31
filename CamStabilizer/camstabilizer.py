@@ -1,3 +1,6 @@
+#! Python2.7
+
+
 """
 camera viewport stabilizer
 for Maya for matchmovers
@@ -8,11 +11,16 @@ select one anything with transform.
 geo, locator, geo components...
 activate pane with camera
 or add a camera to the selection
+
+Maya version: Maya 2015 Extension 1 + SP5
 """
 
 import logging
 
-import pymel.core
+try:
+    import pymel.core
+except ImportError:
+    pymel = None
 
 
 formatter = logging.Formatter('--> %(levelname)s'
@@ -26,7 +34,7 @@ log.handlers = []
 ch = logging.StreamHandler()
 ch.setFormatter(formatter)
 log.setLevel(logging.INFO)
-# log.setLevel(logging.DEBUG)
+log.setLevel(logging.DEBUG)
 log.addHandler(ch)
 
 
@@ -61,9 +69,9 @@ def get_camera():
         camera_shape = None
 
     if not camera_shape:
-            pymel.core.warning('--> Select a transform and a camera or click in a pane and select a transform')
+        message = '--> Select a transform and a camera or click in a pane and select a transform'
 
-            return None
+        raise Exception(message)
 
     log.debug(camera)
     log.debug(camera_shape)
@@ -71,12 +79,31 @@ def get_camera():
     return camera
 
 
+def get_aimtransform():
+    selection = pymel.core.selected()
+    transform = None
+
+    transform = selection[0]
+
+    return transform
+
+
 def stabilize():
+    log.debug('--> Start stabilize...')
+
     camera = get_camera()
+    log.debug('--> camera ok...')
+
+    aimtransform = get_aimtransform()
+    log.debug('--> transform ok...')
 
     return [camera]
 
 
 def main(**kwargs):
+    print('/'*50)
+    print('\\'*50)
+    print('/'*50)
+
     if kwargs['task'] == 'stabilize':
         stabilize()
