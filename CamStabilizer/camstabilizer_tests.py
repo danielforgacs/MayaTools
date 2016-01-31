@@ -157,6 +157,30 @@ class CamStabilizerUnitTests(MayaTestScene):
             pymel.core.select(sel)
             self.assertRaises(Exception, camstabilizer.get_position_object)
 
+    def test_main_exits_without_error_with_good_selection(self):
+        pymel.core.select('test_box.vtx[0]')
+        pymel.core.setFocus('modelPanel4')
+
+        self.assertIsNone(camstabilizer.main(task='stabilize'))
+
+        pymel.core.select(clear=True)
+        pymel.core.select('test_box.vtx[0]', 'test_camera')
+
+        self.assertIsNone(camstabilizer.main(task='stabilize'))
+
+        pymel.core.select(clear=True)
+        pymel.core.select('test_locator', 'test_camera')
+
+        self.assertIsNone(camstabilizer.main(task='stabilize'))
+
+    def test_stabilize_returns_transform_cam_expression_tuple(self):
+        pymel.core.select('test_box.vtx[0]')
+        pymel.core.setFocus('modelPanel4')
+
+        self.assertIsInstance(camstabilizer.stabilize(), tuple)
+
+
+
 
 
 def main():
