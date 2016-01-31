@@ -14,12 +14,28 @@ or add a camera to the selection
 
 Maya version: Maya 2015 Extension 1 + SP5
 
+
+###
+###
+###
 pm.inViewMessage(
     assistMessage ='<MESSAGE COMES HERE',
     pos='midCenter',
     fade=True,
     fadeOutTime=2
     )
+
+###
+// |test_locator|test_camera|test_cameraShape
+// |test_box
+python "import maya.cmds as cmds";
+python "fov_h = cmds.camera ('|test_locator|test_camera|test_cameraShape', query = True, horizontalFieldOfView = True)";
+python "fov_v = cmds.camera ('|test_locator|test_camera|test_cameraShape', query = True, verticalFieldOfView = True)";
+python "aperture_h = cmds.camera ('|test_locator|test_camera|test_cameraShape', query = True, horizontalFilmAperture = True)";
+python "aperture_v = cmds.camera ('|test_locator|test_camera|test_cameraShape', query = True, verticalFilmAperture = True)";
+$pos =`python "fstab.get_normalized_screen_position('|test_box','|test_locator|test_camera',fov_h, fov_v,aperture_h,aperture_v)"`;
+setAttr "|test_locator|test_camera|test_cameraShape.horizontalFilmOffset" $pos[2];
+setAttr "|test_locator|test_camera|test_cameraShape.verticalFilmOffset" $pos[3];
 """
 
 import logging
@@ -123,6 +139,13 @@ def get_position_object():
         raise Exception("--> can't retrieve transform...")
 
     return transform
+
+
+def create_expression(cam, pos):
+    expression = ''
+    expression_node = pymel.core.expression()
+
+    return (expression, expression_node)
 
 
 def stabilize():
