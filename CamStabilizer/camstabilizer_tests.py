@@ -112,9 +112,30 @@ class CamStabilizerUnitTests(MayaTestScene):
         self.assertRaises(Exception, camstabilizer.get_camera)
 
     # @unittest.skip('not implemented')
-    def test_get_position_object_returns_transform_object_or_error(self):
-        pass
+    def test_get_position_object_retruns_queryable_position_object(self):
+        nodetypes = (
+                    pymel.core.nodetypes.Transform,
+                    pymel.core.general.MeshVertex,
+                    pymel.core.general.MeshEdge,
+                    pymel.core.general.MeshFace,
+                )
 
+        selection_sets = (
+                ('test_camera',),
+                ('test_locator',),
+                ('test_camera','test_box'),
+                ('test_box', 'test_camera',),
+            )
+
+        for selection in selection_sets:
+            pymel.core.select(clear=True)
+            pymel.core.select(selection)
+            obj = camstabilizer.get_position_object()
+
+            self.assertIn(type(obj), nodetypes)
+
+    def test_get_position_object_errors_without_queryable_position(self):
+        pass
 
 
 def main():
