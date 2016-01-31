@@ -181,6 +181,15 @@ class CamStabilizerUnitTests(MayaTestScene):
         self.assertIsInstance(camstabilizer.stabilize()[1], pymel.core.nodetypes.Camera)
         self.assertIsInstance(camstabilizer.stabilize()[2], str)
 
+    def test__create_expression__returns_expression_and_node_as_tuple(self):
+        cam = pymel.core.PyNode('test_locator|test_camera|test_cameraShape')
+        pos = pymel.core.PyNode('test_boxShape.vtx[3]')
+
+        self.assertIsInstance(camstabilizer.create_expression(cam, pos), tuple)
+        self.assertIsInstance(camstabilizer.create_expression(cam, pos)[0], str)
+        self.assertIsInstance(camstabilizer.create_expression(cam, pos)[1],
+                pymel.core.nodetypes.Expression)
+
 
 def main():
     unittest.main(module='CamStabilizer.camstabilizer_tests', exit=False)
