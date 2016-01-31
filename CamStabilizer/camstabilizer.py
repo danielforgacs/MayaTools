@@ -132,30 +132,30 @@ def get_position_object():
 
 
 def create_expression(cam, pos):
-    expression = '// {0}'.format(cam.fullPathName())
-    expression += '\n// {0}'.format(pos)
-    expression += '\npython "import maya.cmds as cmds";'
-    expression += ("""\npython "fov_h = cmds.camera"""
-                    """ ('{0}', query = True,"""
-                    """ horizontalFieldOfView = True)";""").format(cam.fullPathName())
-    expression += ("""\npython "fov_v = cmds.camera"""
-                    """ ('{0}',"""
-                    """ query = True, verticalFieldOfView = True)";""").format(cam.fullPathName())
-
-
-
-        # python "aperture_h = cmds.camera ('|test_locator|test_camera|test_cameraShape', query = True, horizontalFilmAperture = True)";
-        # python "aperture_v = cmds.camera ('|test_locator|test_camera|test_cameraShape', query = True, verticalFilmAperture = True)";
-        # $pos =`python "fstab.get_normalized_screen_position('|test_box.vtx[4]','|test_locator|test_camera',fov_h, fov_v,aperture_h,aperture_v)"`;
-        # setAttr "|test_locator|test_camera|test_cameraShape.horizontalFilmOffset" $pos[2];
-        # setAttr "|test_locator|test_camera|test_cameraShape.verticalFilmOffset" $pos[3];
-
+    expression = """
+// {camshape}
+// {pos}
+python "import maya.cmds as cmds";
+python "fov_h = cmds.camera ('{camshape}', query = True, horizontalFieldOfView = True)";
+python "fov_v = cmds.camera ('{camshape}', query = True, verticalFieldOfView = True)";
+python "aperture_h = cmds.camera ('{camshape}', query = True, horizontalFilmAperture = True)";
+python "aperture_v = cmds.camera ('{camshape}', query = True, verticalFilmAperture = True)";
+$pos =`python "fstab.get_normalized_screen_position('{pos}','{camtransform}',fov_h, fov_v,aperture_h,aperture_v)"`;
+setAttr "{camshape}.horizontalFilmOffset" $pos[2];
+setAttr "{camshape}.verticalFilmOffset" $pos[3];
+"""
+    expression = expression.format(
+            camshape=cam.fullPathName(),
+            pos=pos,
+            camtransform=cam,
+            )
     expression_node = pymel.core.expression()
-    expression_node.rename('camera_stabilizer_' + cam.name())
+    # expression_node.rename('camera_stabilizer_' + cam.name())
+    expression_node.rename(cam.name() + '_stabilizer')
 
-    print('~@~'*5)
-    print(expression)
-    print('~@~'*5)
+    # print('~@~'*5)
+    # print(expression)
+    # print('~@~'*5)
 
     return expression, expression_node
 
@@ -171,6 +171,8 @@ def stabilize():
 
     expression, expression_node = create_expression(camera, transform)
     log.debug('--> transform ok...')
+
+    # setup_expression_node()
 
     return (transform, camera, expression, expression_node)
 
