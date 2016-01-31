@@ -1,3 +1,6 @@
+#! Python2.7
+
+import __future__
 import unittest
 import pymel.core
 import camstabilizer
@@ -57,6 +60,24 @@ class CamStabilizerUnitTests(MayaTestScene):
         camtest = pymel.core.nt.Transform('test_camera')
 
         self.assertEqual(cam, camtest)
+
+    def test_get_camera_errors_wihout_camera(self):
+        pymel.core.select(clear=True)
+
+        self.assertRaises(Exception, camstabilizer.get_camera)
+
+    def test_get_aimtransform_returns_transform_object_or_error(self):
+        objects = ['test_camera']
+
+        # for obj in objects:
+        #     pymel.core.select(obj)
+        #     transform = camstabilizer.get_aimtransform()
+
+        #     if transform:
+        #         print(type(transform))
+        #         has_get_pos = hasattr(transform, 'getPosition')
+        #         has_get_trans = hasattr(transform, 'getTransform')
+        #         self.assertTrue(has_get_pos or has_get_trans)
 
 
 def main():
