@@ -1,16 +1,18 @@
 #! Python2.7
 
-import __future__
 import unittest
-import pymel.core
 import camstabilizer
 reload(camstabilizer)
+
+try:
+    import pymel.core
+except ImportError:
+    pymel = None
+
 
 
 class MayaTestScene(unittest.TestCase):
     def setUp(self):
-        # panel = pymel.core.getPanel(withFocus=True)
-
         pymel.core.newFile(force=True)
         cube = pymel.core.polyCube()
         camaim = pymel.core.spaceLocator()
@@ -36,23 +38,65 @@ class MayaTestScene(unittest.TestCase):
         pymel.core.setKeyframe(camaim)
         pymel.core.lookThru('perspView', camshape)
 
-        pymel.core.select('test_box.vtx[5]')
+        pymel.core.select(clear=True)
+        pymel.core.setFocus('outlinerPanel1')
 
-        # pymel.core.setFocus(panel)
+    def tearDown(self):
+        pymel.core.select(clear=True)
+        pymel.core.setFocus('outlinerPanel1')
+
 
 
 class CamStabilizerUnitTests(MayaTestScene):
+    # @unittest.skip('already works')
     def test_CamStabilizerUnitTests_is_running(self):
         self.assertTrue(True)
 
+    # @unittest.skip('already works')
+    def test_get_selection_errors_on_empty_selection(self):
+        pymel.core.select(clear=True)
+        self.assertRaises(Exception, camstabilizer.get_selection)
+
+    # @unittest.skip('already works')
+    def test_get_selection_errors_on_long_or_no_selection(self):
+        pymel.core.select(clear=True)
+        self.assertRaises(Exception, camstabilizer.get_selection)
+
+        pymel.core.select(clear=True)
+        pymel.core.select('test_box.vtx[1:5]')
+        self.assertRaises(Exception, camstabilizer.get_selection)
+
+        pymel.core.select(clear=True)
+        pymel.core.select(('test_box', 'test_camera', 'test_locator'))
+        self.assertRaises(Exception, camstabilizer.get_selection)
+
+    # @unittest.skip('already works')
+    def test_get_selection_returns_selection(self):
+        pymel.core.select(clear=True)
+        selection = (
+            ['test_box',],
+            ['test_box', 'test_locator'],
+            ['test_box', 'test_camera'],
+            ['test_box', 'test_box.vtx[1:3]'],
+            )
+
+        for case in selection:
+            pymel.core.select(case)
+            self.assertEqual(pymel.core.selected(), camstabilizer.get_selection())
+
+    # @unittest.skip('already works')
     def test_get_camera_returns_camera_from_panel(self):
+        pymel.core.select(clear=True)
+        pymel.core.select('test_box.vtx[1]')
         pymel.core.setFocus('modelPanel4')
         cam = camstabilizer.get_camera()
         camtest = pymel.core.nt.Transform('test_camera')
 
         self.assertEqual(cam, camtest)
 
+    # @unittest.skip('already works')
     def test_get_camera_returns_camera_from_selection(self):
+        pymel.core.select('test_box.vtx[1]')
         pymel.core.select('test_camera', add=True)
         pymel.core.setFocus('scriptEditorPanel1')
 
@@ -61,23 +105,16 @@ class CamStabilizerUnitTests(MayaTestScene):
 
         self.assertEqual(cam, camtest)
 
+    # @unittest.skip('already works')
     def test_get_camera_errors_wihout_camera(self):
         pymel.core.select(clear=True)
 
         self.assertRaises(Exception, camstabilizer.get_camera)
 
-    def test_get_aimtransform_returns_transform_object_or_error(self):
-        objects = ['test_camera']
+    # @unittest.skip('not implemented')
+    def test_get_position_object_returns_transform_object_or_error(self):
+        pass
 
-        # for obj in objects:
-        #     pymel.core.select(obj)
-        #     transform = camstabilizer.get_aimtransform()
-
-        #     if transform:
-        #         print(type(transform))
-        #         has_get_pos = hasattr(transform, 'getPosition')
-        #         has_get_trans = hasattr(transform, 'getTransform')
-        #         self.assertTrue(has_get_pos or has_get_trans)
 
 
 def main():
@@ -85,8 +122,4 @@ def main():
     print('\\'*50)
     print('/'*50)
 
-    loader = unittest.TestLoader()
-
-    suite_units = loader.loadTestsFromTestCase(CamStabilizerUnitTests)
-
-    unittest.TextTestRunner(verbosity=1).run(suite_units)
+    unittest.main(module='CamStabilizer.camstabilizer_tests', exit=False)
