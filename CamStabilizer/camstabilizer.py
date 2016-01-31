@@ -52,6 +52,9 @@ def get_selection():
     if type(selection[0]) != pymel.core.nodetypes.Transform:
         log.debug('selection is not transform type')
 
+        if isinstance(selection[0], pymel.core.nodetypes.Camera):
+            raise Exception(error_message)
+
         if len(selection[0]) != 1:
             raise Exception(error_message)
 
@@ -98,16 +101,11 @@ def get_camera():
 
 
 def get_position_object():
-    selection = pymel.core.selected()
-
-    if len(selection) not in (1, 2):
-        message = '--> Select a transform and a camera or click in a pane and select a transform'
-
-        raise Exception(message)
-
-    transform = None
-
+    selection = get_selection()
     transform = selection[0]
+
+    # transform.getPosition()
+    print(transform.getTransform())
 
     return transform
 
