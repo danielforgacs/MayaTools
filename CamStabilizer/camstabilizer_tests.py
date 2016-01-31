@@ -43,6 +43,9 @@ class MayaTestScene(unittest.TestCase):
         pymel.core.setKeyframe(camaim)
         pymel.core.lookThru('perspView', camshape)
 
+        grp = pymel.core.group('test_curve', 'test_box')
+        pymel.core.duplicate(grp)
+
         pymel.core.select(clear=True)
         pymel.core.setFocus('outlinerPanel1')
 
@@ -68,21 +71,26 @@ class CamStabilizerUnitTests(MayaTestScene):
         self.assertRaises(Exception, camstabilizer.get_selection)
 
         pymel.core.select(clear=True)
-        pymel.core.select('test_box.vtx[1:5]')
+        pymel.core.select('|group1|test_box.vtx[1:5]')
         self.assertRaises(Exception, camstabilizer.get_selection)
 
         pymel.core.select(clear=True)
-        pymel.core.select(('test_box', 'test_camera', 'test_locator'))
+        pymel.core.select(('|group1|test_box', 'test_camera', 'test_locator'))
         self.assertRaises(Exception, camstabilizer.get_selection)
 
     # @unittest.skip('already works')
     def test_get_selection_returns_selection(self):
         pymel.core.select(clear=True)
         selection = (
-            ['test_box',],
-            ['test_box', 'test_locator'],
-            ['test_box', 'test_camera'],
-            ['test_box', 'test_box.vtx[1:3]'],
+            ['|group1|test_box',],
+            ['|group1|test_box', 'test_locator'],
+            ['|group1|test_box', 'test_camera'],
+            ['|group1|test_box', '|group1|test_box.vtx[1:3]'],
+            ['|group1|test_box', '|group2|test_box.vtx[1:3]'],
+            ['|group2|test_box',],
+            ['|group2|test_box', 'test_locator'],
+            ['|group2|test_box', 'test_camera'],
+            ['|group2|test_box', '|group1|test_box.vtx[1:3]'],
             )
 
         for case in selection:
@@ -92,7 +100,7 @@ class CamStabilizerUnitTests(MayaTestScene):
     # @unittest.skip('already works')
     def test_get_camera_returns_camera_from_panel(self):
         pymel.core.select(clear=True)
-        pymel.core.select('test_box.vtx[1]')
+        pymel.core.select('|group1|test_box.vtx[1]')
         pymel.core.setFocus('modelPanel4')
         camtest = pymel.core.nt.Transform('test_camera')
 
@@ -100,7 +108,7 @@ class CamStabilizerUnitTests(MayaTestScene):
 
     # @unittest.skip('already works')
     def test_get_camera_returns_camera_from_selection(self):
-        pymel.core.select('test_box.vtx[1]')
+        pymel.core.select('|group1|test_box.vtx[1]')
         pymel.core.select('test_camera', add=True)
         pymel.core.setFocus('scriptEditorPanel1')
 
@@ -136,18 +144,18 @@ class CamStabilizerUnitTests(MayaTestScene):
     # @unittest.skip('already works')
     def test_get_position_object_errors_without_queryable_position(self):
         selection_list = (
-                    'test_box',
+                    '|group1|test_box',
                     'test_camera',
                     'test_cameraShape',
-                    'test_box.e[2]',
-                    'test_box.f[2]',
-                    'test_curve.cv[0]',
-                    'test_curve.ep[0]',
+                    '|group1|test_box.e[2]',
+                    '|group1|test_box.f[2]',
+                    '|group1|test_curve.cv[0]',
+                    '|group1|test_curve.ep[0]',
                     'defaultLightSet',
                     'test_locator_rotateX',
                     'hardwareRenderGlobals',
                     'lambert1',
-                    'test_curve',
+                    '|group1|test_curve',
                 )
 
         for sel in selection_list:
@@ -157,13 +165,13 @@ class CamStabilizerUnitTests(MayaTestScene):
 
     # @unittest.skip('already works')
     def test_main_exits_without_error_with_good_selection(self):
-        pymel.core.select('test_box.vtx[0]')
+        pymel.core.select('|group2|test_box.vtx[0]')
         pymel.core.setFocus('modelPanel4')
 
         self.assertIsNone(camstabilizer.main(task='stabilize'))
 
         pymel.core.select(clear=True)
-        pymel.core.select('test_box.vtx[0]', 'test_camera')
+        pymel.core.select('|group2|test_box.vtx[0]', 'test_camera')
 
         self.assertIsNone(camstabilizer.main(task='stabilize'))
 
@@ -174,7 +182,7 @@ class CamStabilizerUnitTests(MayaTestScene):
 
     # @unittest.skip('already works')
     def test_stabilize_returns_transform_cam_expression_tuple(self):
-        pymel.core.select('test_box.vtx[0]')
+        pymel.core.select('|group1|test_box.vtx[0]')
         pymel.core.setFocus('modelPanel4')
 
         self.assertIsInstance(camstabilizer.stabilize(), tuple)
@@ -182,8 +190,8 @@ class CamStabilizerUnitTests(MayaTestScene):
         self.assertIsInstance(camstabilizer.stabilize()[2], str)
 
     def test__create_expression__returns_expression_and_node_as_tuple(self):
-        cam = pymel.core.PyNode('test_locator|test_camera|test_cameraShape')
-        pos = pymel.core.PyNode('test_boxShape.vtx[3]')
+        cam = pymel.core.PyNode('|test_locator|test_camera|test_cameraShape')
+        pos = pymel.core.PyNode('|group1|test_box|test_boxShape.vtx[3]')
 
         self.assertIsInstance(camstabilizer.create_expression(cam, pos), tuple)
         self.assertIsInstance(camstabilizer.create_expression(cam, pos)[0], str)
