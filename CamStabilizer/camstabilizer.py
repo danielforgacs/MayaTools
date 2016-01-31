@@ -13,19 +13,6 @@ activate pane with camera
 or add a camera to the selection
 
 Maya version: Maya 2015 Extension 1 + SP5
-
-
-###
-###
-###
-pm.inViewMessage(
-    assistMessage ='<MESSAGE COMES HERE',
-    pos='midCenter',
-    fade=True,
-    fadeOutTime=2
-    )
-
-###
 """
 
 import logging
@@ -149,15 +136,19 @@ setAttr "{camshape}.verticalFilmOffset" $pos[3];
             pos=pos,
             camtransform=cam,
             )
-    expression_node = pymel.core.expression()
-    # expression_node.rename('camera_stabilizer_' + cam.name())
-    expression_node.rename(cam.name() + '_stabilizer')
 
-    # print('~@~'*5)
-    # print(expression)
-    # print('~@~'*5)
+    return expression
 
-    return expression, expression_node
+
+def setup_expression_node(expression, camname, **kwargs):
+    if kwargs.get('task', None) is 'create':
+        expression_node = pymel.core.expression()
+        expression_node.rename(camname + '_stabilizer')
+
+        return expression_node
+
+    else:
+        pass
 
 
 def stabilize():
@@ -169,10 +160,11 @@ def stabilize():
     transform = get_position_object()
     log.debug('--> transform ok...')
 
-    expression, expression_node = create_expression(camera, transform)
+    expression = create_expression(camera, transform)
     log.debug('--> transform ok...')
 
-    # setup_expression_node()
+    expression_node = setup_expression_node(expression, camera.name(), task='create')
+    log.debug('--> expression node ok...')
 
     return (transform, camera, expression, expression_node)
 
@@ -180,3 +172,15 @@ def stabilize():
 def main(**kwargs):
     if kwargs['task'] == 'stabilize':
         stabilize()
+        pymel.core.inViewMessage(assistMessage ='camera stabilized',
+                                pos='midCenter',
+                                fade=True,
+                                fadeOutTime=2
+                            )
+
+    elif kwargs['task'] == 'clear':
+        pymel.core.inViewMessage(assistMessage ='cam stab turned off...',
+                                pos='midCenter',
+                                fade=True,
+                                fadeOutTime=2
+                            )
