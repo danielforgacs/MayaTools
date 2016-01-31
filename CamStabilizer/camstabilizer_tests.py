@@ -16,12 +16,17 @@ class MayaTestScene(unittest.TestCase):
         pymel.core.newFile(force=True)
         cube = pymel.core.polyCube()
         camaim = pymel.core.spaceLocator()
+        curve = pymel.core.curve(p=[(-1.5, 0, 2),
+                                (-0.8, 0.5, 0.6),
+                                (0.1, 0, -0.8),
+                                (1, 0, -2.2)])
         cam, camshape = pymel.core.camera(displayResolution=True,
                 displayFilmGate=False, overscan=1.8)
 
 
 
         cam.rename('test_camera')
+        curve.rename('test_curve')
         camaim.rename('test_locator')
         cube[0].rename('test_box')
         cam.setAttr('translateZ', 5)
@@ -111,20 +116,16 @@ class CamStabilizerUnitTests(MayaTestScene):
 
         self.assertRaises(Exception, camstabilizer.get_camera)
 
-    # @unittest.skip('not implemented')
-    def test_get_position_object_retruns_queryable_position_object(self):
+    # @unittest.skip('already works')
+    def test_get_position_object_returns_queryable_position_object(self):
         nodetypes = (
                     pymel.core.nodetypes.Transform,
                     pymel.core.general.MeshVertex,
-                    pymel.core.general.MeshEdge,
-                    pymel.core.general.MeshFace,
                 )
 
         selection_sets = (
-                ('test_camera',),
                 ('test_locator',),
-                ('test_camera','test_box'),
-                ('test_box', 'test_camera',),
+                ('test_locator', 'test_camera',),
             )
 
         for selection in selection_sets:
@@ -134,8 +135,28 @@ class CamStabilizerUnitTests(MayaTestScene):
 
             self.assertIn(type(obj), nodetypes)
 
+    # @unittest.skip('already works')
     def test_get_position_object_errors_without_queryable_position(self):
-        pass
+        selection_list = (
+                    'test_box',
+                    'test_camera',
+                    'test_cameraShape',
+                    'test_box.e[2]',
+                    'test_box.f[2]',
+                    'test_curve.cv[0]',
+                    'test_curve.ep[0]',
+                    'defaultLightSet',
+                    'test_locator_rotateX',
+                    'hardwareRenderGlobals',
+                    'lambert1',
+                    'test_curve',
+                )
+
+        for sel in selection_list:
+            pymel.core.select(clear=True)
+            pymel.core.select(sel)
+            self.assertRaises(Exception, camstabilizer.get_position_object)
+
 
 
 def main():
