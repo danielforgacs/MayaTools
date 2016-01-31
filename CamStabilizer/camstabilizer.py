@@ -13,6 +13,13 @@ activate pane with camera
 or add a camera to the selection
 
 Maya version: Maya 2015 Extension 1 + SP5
+
+pm.inViewMessage(
+    assistMessage ='<MESSAGE COMES HERE',
+    pos='midCenter',
+    fade=True,
+    fadeOutTime=2
+    )
 """
 
 import logging
@@ -129,16 +136,14 @@ def stabilize():
     camera = get_camera()
     log.debug('--> camera ok...')
 
-    aimtransform = get_position_object()
+    transform = get_position_object()
     log.debug('--> transform ok...')
 
-    return [camera]
+    expression = None
+
+    return (transform, camera, expression)
 
 
 def main(**kwargs):
-    print('/'*50)
-    print('\\'*50)
-    print('/'*50)
-
     if kwargs['task'] == 'stabilize':
         stabilize()
