@@ -103,9 +103,22 @@ def get_camera():
 def get_position_object():
     selection = get_selection()
     transform = selection[0]
+    locator = False
+    vertex = False
 
-    # transform.getPosition()
-    print(transform.getTransform())
+    if hasattr(transform, 'getShape'):
+        locator = type(transform.getShape()) is pymel.core.nodetypes.Locator
+
+    else:
+        vertex = type(transform) is pymel.core.general.MeshVertex
+
+    # print('pos', transform, type(transform), transform.getPosition())
+    # print('tform', transform, type(transform), transform.getTransform())
+    # print('tlate', transform, type(transform), transform.getTranslation())
+    # print('getPoint', transform, type(transform), transform.getPoint(0))
+
+    if not (locator or vertex):
+        raise Exception("--> can't retrieve transform...")
 
     return transform
 
