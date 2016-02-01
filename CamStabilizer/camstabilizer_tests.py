@@ -1,7 +1,8 @@
 #! Python2.7
 
 import unittest
-import camstabilizer
+# import camstabilizer
+from . import camstabilizer
 reload(camstabilizer)
 
 try:
@@ -236,4 +237,4 @@ class CamStabilizerUnitTests(MayaTestScene):
 
 
 def main():
-    unittest.main(module='Maya_tools.CamStabilizer.camstabilizer_tests', exit=False)
+    unittest.main(module='MayaTools.CamStabilizer.camstabilizer_tests', exit=False)
