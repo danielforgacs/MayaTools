@@ -173,9 +173,11 @@ class CamStabilizerUnitTests(MayaTestScene):
         pymel.core.select(clear=True)
         pymel.core.select('|group2|test_box.vtx[0]', 'test_camera')
 
+        pymel.core.delete('test_cameraShape_stabilizer')
         self.assertIsNone(camstabilizer.main(task='stabilize'))
 
         pymel.core.select(clear=True)
+        pymel.core.delete('test_cameraShape_stabilizer')
         pymel.core.select('test_locator', 'test_camera')
 
         self.assertIsNone(camstabilizer.main(task='stabilize'))
@@ -186,8 +188,11 @@ class CamStabilizerUnitTests(MayaTestScene):
         pymel.core.setFocus('modelPanel4')
 
         self.assertIsInstance(camstabilizer.stabilize(), tuple)
+        pymel.core.delete('test_cameraShape_stabilizer')
         self.assertIsInstance(camstabilizer.stabilize()[1], pymel.core.nodetypes.Camera)
+        pymel.core.delete('test_cameraShape_stabilizer')
         self.assertIsInstance(camstabilizer.stabilize()[2], str)
+        pymel.core.delete('test_cameraShape_stabilizer')
 
     # @unittest.skip('already works')
     def test__create_expression__returns_expression_and_node_as_tuple(self):
@@ -197,6 +202,14 @@ class CamStabilizerUnitTests(MayaTestScene):
         self.assertIsInstance(camstabilizer.create_expression(cam, pos), str)
         self.assertIn(cam.name(), camstabilizer.create_expression(cam, pos))
         self.assertIn(pos.name(), camstabilizer.create_expression(cam, pos))
+
+    def test__setup_expression_node__errors_if_expression_exists(self):
+        camstabilizer.setup_expression_node('//', 'test_cameraShape', task='create')
+        self.assertRaises(Exception,
+                        camstabilizer.setup_expression_node,
+                        '//', 'test_cameraShape', task='create'
+                        )
+
 
 
 def main():
