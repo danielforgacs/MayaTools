@@ -1,7 +1,3 @@
-### import ford_stabilizer_v0_8_1 as fstab
-### reload(fstab)
-
-
 """
     ---------------------------
     ford_stabilizer_v0_8_1 for Maya
@@ -286,15 +282,16 @@ def gui ():
     except:
         pass
 
-    cmds.window('Stabilizer', sizeable=True, resizeToFitChildren=True,
-        retain=False, topLeftCorner=(10, 700))
-
+    cmds.window(
+            'Stabilizer', sizeable=True, resizeToFitChildren=True,
+            retain=False, topLeftCorner=(10, 700) )
     cmds.columnLayout('cl')
-    cmds.button('button_stabilizer', label="stabilize", width=120,
-        backgroundColor=(0, 0.5, 0), command='fstab.stabilizer("start")')
-
-    cmds.button('add_eye_btn', enable=False, label="add eye",
-        width=120, backgroundColor=(0.3, 0.3, 0.3), command='fstab.add_eye()')
+    cmds.button(
+            'button_stabilizer', label="stabilize", width=120,
+            backgroundColor=(0, 0.5, 0), command='fstab.stabilizer("start")')
+    cmds.button(
+            'add_eye_btn', enable=False, label="add eye",
+            width=120, backgroundColor=(0.3, 0.3, 0.3), command='fstab.add_eye()')
     cmds.showWindow('Stabilizer')
 
 
