@@ -52,7 +52,7 @@ class MayaTestScene(unittest.TestCase):
     def tearDown(self):
         pymel.core.select(clear=True)
         pymel.core.setFocus('outlinerPanel1')
-        pymel.core.newFile(force=True)
+        # pymel.core.newFile(force=True)
 
 
 
