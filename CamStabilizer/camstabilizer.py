@@ -100,6 +100,12 @@ def get_camera():
 
         raise Exception(message)
 
+    offset_h = camera_shape.getHorizontalFilmOffset() != 0
+    offset_v = camera_shape.getVerticalFilmOffset() != 0
+
+    if offset_h or offset_v:
+        raise Exception('--> Camera Has Not Zero Offset Value...')
+
     log.debug(camera)
     log.debug(camera_shape)
 
