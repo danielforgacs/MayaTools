@@ -236,4 +236,4 @@ class CamStabilizerUnitTests(MayaTestScene):
 
 
 def main():
-    unittest.main(module='CamStabilizer.camstabilizer_tests', exit=False)
+    unittest.main(module='Maya_tools.CamStabilizer.camstabilizer_tests', exit=False)
