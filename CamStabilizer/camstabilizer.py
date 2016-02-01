@@ -22,6 +22,11 @@ try:
 except ImportError:
     pymel = None
 
+try:
+    import maya.cmds as cmds
+except ImportError:
+    maya = None
+
 
 formatter = logging.Formatter('--> %(levelname)s'
                                 # ': %(name)s'
@@ -127,7 +132,7 @@ python "fov_h = cmds.camera ('{camshape}', query = True, horizontalFieldOfView =
 python "fov_v = cmds.camera ('{camshape}', query = True, verticalFieldOfView = True)";
 python "aperture_h = cmds.camera ('{camshape}', query = True, horizontalFilmAperture = True)";
 python "aperture_v = cmds.camera ('{camshape}', query = True, verticalFilmAperture = True)";
-$pos =`python "fstab.get_normalized_screen_position('{pos}','{camtransform}',fov_h, fov_v,aperture_h,aperture_v)"`;
+$pos =`python "{module_}.get_normalized_screen_position('{pos}','{camtransform}',fov_h, fov_v,aperture_h,aperture_v)"`;
 setAttr "{camshape}.horizontalFilmOffset" $pos[2];
 setAttr "{camshape}.verticalFilmOffset" $pos[3];
 """
@@ -135,6 +140,7 @@ setAttr "{camshape}.verticalFilmOffset" $pos[3];
             camshape=cam.fullPathName(),
             pos=pos,
             camtransform=cam,
+            module_=__name__
             )
 
     return expression
@@ -142,13 +148,37 @@ setAttr "{camshape}.verticalFilmOffset" $pos[3];
 
 def setup_expression_node(expression, camname, **kwargs):
     if kwargs.get('task', None) is 'create':
+        nodename = camname + '_stabilizer'
+
+        if pymel.core.objExists(nodename):
+            raise Exception('--> camera is already stabilized...')
+
         expression_node = pymel.core.expression()
-        expression_node.rename(camname + '_stabilizer')
+        expression_node.rename(nodename)
+        expression_node.setExpression(expression)
 
         return expression_node
 
-    else:
-        pass
+
+def get_normalized_screen_position  (point, camera, fieldOfView_h, fieldOfView_v, aperture_h, aperture_v):
+    from math import tan, radians
+
+    _pointWorldPos = cmds.xform (point, query = True, worldSpace = True, translation = True)
+    _camWorldInverseMatrix = cmds.getAttr (camera + '.worldInverseMatrix')
+
+    _posX = _pointWorldPos[0] * _camWorldInverseMatrix[0] + _pointWorldPos[1] * _camWorldInverseMatrix[4] + _pointWorldPos[2] * _camWorldInverseMatrix[8] + 1 * _camWorldInverseMatrix[12]
+    _posY = _pointWorldPos[0] * _camWorldInverseMatrix[1] + _pointWorldPos[1] * _camWorldInverseMatrix[5] + _pointWorldPos[2] * _camWorldInverseMatrix[9] + 1 * _camWorldInverseMatrix[13]
+    _posZ = _pointWorldPos[0] * _camWorldInverseMatrix[2] + _pointWorldPos[1] * _camWorldInverseMatrix[6] + _pointWorldPos[2] * _camWorldInverseMatrix[10] + 1 * _camWorldInverseMatrix[14]
+
+    _screenPosX = (_posX / -_posZ) / tan (radians (fieldOfView_h / 2)) / (2.0) + 0.5
+    _screenPosY = (_posY / -_posZ) / tan (radians (fieldOfView_v / 2)) / (2.0) + 0.5
+
+    _cameraFilmOffsetX = (_screenPosX - 0.5) * aperture_h
+    _cameraFilmOffsetY = (_screenPosY - 0.5) * aperture_v
+
+    # _screenPos is the normalized position in 2D camera space
+    # export it to get 2D tracks for compositing softwares
+    return [_screenPosX, _screenPosY, _cameraFilmOffsetX, _cameraFilmOffsetY]
 
 
 def stabilize():
@@ -172,15 +202,17 @@ def stabilize():
 def main(**kwargs):
     if kwargs['task'] == 'stabilize':
         stabilize()
-        pymel.core.inViewMessage(assistMessage ='camera stabilized',
-                                pos='midCenter',
-                                fade=True,
-                                fadeOutTime=2
-                            )
+        pymel.core.inViewMessage(
+                assistMessage ='camera is stabilized, turn off for renders!',
+                pos='midCenter',
+                fade=True,
+                fadeOutTime=2
+            )
 
     elif kwargs['task'] == 'clear':
-        pymel.core.inViewMessage(assistMessage ='cam stab turned off...',
-                                pos='midCenter',
-                                fade=True,
-                                fadeOutTime=2
-                            )
+        pymel.core.inViewMessage(
+                assistMessage ='cam stab turned off...',
+                pos='midCenter',
+                fade=True,
+                fadeOutTime=2
+            )
