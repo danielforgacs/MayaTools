@@ -124,7 +124,8 @@ def get_position_object():
         vertex = type(transform) is pymel.core.general.MeshVertex
 
     if not (locator or vertex):
-        raise Exception("--> can't retrieve transform...")
+        raise Exception("--> can't get transform."""
+                """ Select vertex or locator..""")
 
     return transform
 
@@ -138,7 +139,7 @@ python "fov_h = cmds.camera ('{camshape}', query = True, horizontalFieldOfView =
 python "fov_v = cmds.camera ('{camshape}', query = True, verticalFieldOfView = True)";
 python "aperture_h = cmds.camera ('{camshape}', query = True, horizontalFilmAperture = True)";
 python "aperture_v = cmds.camera ('{camshape}', query = True, verticalFilmAperture = True)";
-$pos =`python "{module_}.get_normalized_screen_position('{pos}','{camtransform}',fov_h, fov_v,aperture_h,aperture_v)"`;
+$pos =`python "{module_}.get_screen_pos_norm('{pos}','{camtransform}',fov_h, fov_v,aperture_h,aperture_v)"`;
 setAttr "{camshape}.horizontalFilmOffset" $pos[2];
 setAttr "{camshape}.verticalFilmOffset" $pos[3];
 """
@@ -166,25 +167,43 @@ def setup_expression_node(expression, camname, **kwargs):
         return expression_node
 
 
-def get_normalized_screen_position  (point, camera, fieldOfView_h, fieldOfView_v, aperture_h, aperture_v):
+def get_screen_pos_norm(point, camera, fieldOfView_h,
+            fieldOfView_v, aperture_h, aperture_v):
+    """
+    called from camera expression
+
+    PxScreen, PyScreen is the normalized position in 2D camera space
+    export it to get 2D tracks for compositing softwares
+
+    returns list:
+        normalized x & y screen position for export to 2D transforms,
+        camera shape film offset x & y
+    """
     from math import tan, radians
 
-    _pointWorldPos = cmds.xform (point, query = True, worldSpace = True, translation = True)
-    _camWorldInverseMatrix = cmds.getAttr (camera + '.worldInverseMatrix')
+    PPosWrld = cmds.xform(point, query=True,
+            worldSpace=True, translation=True)
+    camWrldInvMatrix = cmds.getAttr(camera+'.worldInverseMatrix')
 
-    _posX = _pointWorldPos[0] * _camWorldInverseMatrix[0] + _pointWorldPos[1] * _camWorldInverseMatrix[4] + _pointWorldPos[2] * _camWorldInverseMatrix[8] + 1 * _camWorldInverseMatrix[12]
-    _posY = _pointWorldPos[0] * _camWorldInverseMatrix[1] + _pointWorldPos[1] * _camWorldInverseMatrix[5] + _pointWorldPos[2] * _camWorldInverseMatrix[9] + 1 * _camWorldInverseMatrix[13]
-    _posZ = _pointWorldPos[0] * _camWorldInverseMatrix[2] + _pointWorldPos[1] * _camWorldInverseMatrix[6] + _pointWorldPos[2] * _camWorldInverseMatrix[10] + 1 * _camWorldInverseMatrix[14]
+    Px = PPosWrld[0]*camWrldInvMatrix[0]+PPosWrld[1] \
+            *camWrldInvMatrix[4]+PPosWrld[2] \
+            *camWrldInvMatrix[8]+1*camWrldInvMatrix[12]
 
-    _screenPosX = (_posX / -_posZ) / tan (radians (fieldOfView_h / 2)) / (2.0) + 0.5
-    _screenPosY = (_posY / -_posZ) / tan (radians (fieldOfView_v / 2)) / (2.0) + 0.5
+    Py = PPosWrld[0]*camWrldInvMatrix[1]+PPosWrld[1] \
+            *camWrldInvMatrix[5]+PPosWrld[2] \
+            *camWrldInvMatrix[9]+1*camWrldInvMatrix[13]
 
-    _cameraFilmOffsetX = (_screenPosX - 0.5) * aperture_h
-    _cameraFilmOffsetY = (_screenPosY - 0.5) * aperture_v
+    Pz = PPosWrld[0]*camWrldInvMatrix[2]+PPosWrld[1] \
+            *camWrldInvMatrix[6]+PPosWrld[2] \
+            *camWrldInvMatrix[10]+1*camWrldInvMatrix[14]
 
-    # _screenPos is the normalized position in 2D camera space
-    # export it to get 2D tracks for compositing softwares
-    return [_screenPosX, _screenPosY, _cameraFilmOffsetX, _cameraFilmOffsetY]
+    PxScreen = (Px/-Pz)/tan(radians(fieldOfView_h/2))/(2.0)+0.5
+    PyScreen = (Py/-Pz)/tan(radians(fieldOfView_v/2))/(2.0)+0.5
+
+    FilmOffsetX = (PxScreen-0.5)*aperture_h
+    FilmOffsetY = (PyScreen-0.5)*aperture_v
+
+    return [PxScreen, PyScreen, FilmOffsetX, FilmOffsetY]
 
 
 def stabilize():
