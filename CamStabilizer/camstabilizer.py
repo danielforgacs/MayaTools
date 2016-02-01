@@ -13,6 +13,12 @@ activate pane with camera
 or add a camera to the selection
 
 Maya version: Maya 2015 Extension 1 + SP5
+
+to do:
+    - turn off
+    - error checking for existing camera offset
+    - second eye
+
 """
 
 import logging
