@@ -205,6 +205,16 @@ def stabilize():
     return (transform, camera, expression, expression_node)
 
 
+def clear_stabilizer():
+    if not pymel.core.objExists('test_cameraShape_stabilizer'):
+        raise Exception('--> Stabilizer is turned off...')
+
+    else:
+        pymel.core.delete('test_cameraShape_stabilizer')
+
+        return True
+
+
 def main(**kwargs):
     if kwargs['task'] == 'stabilize':
         stabilize()
@@ -216,9 +226,12 @@ def main(**kwargs):
             )
 
     elif kwargs['task'] == 'clear':
+        clear_stabilizer()
         pymel.core.inViewMessage(
                 assistMessage ='cam stab turned off...',
                 pos='midCenter',
                 fade=True,
                 fadeOutTime=2
             )
+
+    return True
