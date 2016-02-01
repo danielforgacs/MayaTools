@@ -135,11 +135,13 @@ def create_expression(cam, pos):
 // {camshape}
 // {pos}
 python "import maya.cmds as cmds";
+python "from {module_} import get_screen_pos";
+// python "reload(get_screen_pos)";
 python "fov_h = cmds.camera ('{camshape}', query = True, horizontalFieldOfView = True)";
 python "fov_v = cmds.camera ('{camshape}', query = True, verticalFieldOfView = True)";
 python "aperture_h = cmds.camera ('{camshape}', query = True, horizontalFilmAperture = True)";
 python "aperture_v = cmds.camera ('{camshape}', query = True, verticalFilmAperture = True)";
-$pos =`python "{module_}.get_screen_pos('{pos}','{camtransform}',fov_h, fov_v,aperture_h,aperture_v)"`;
+$pos =`python "get_screen_pos('{pos}','{camtransform}',fov_h, fov_v,aperture_h,aperture_v)"`;
 setAttr "{camshape}.horizontalFilmOffset" $pos[2];
 setAttr "{camshape}.verticalFilmOffset" $pos[3];
 """
