@@ -168,19 +168,19 @@ class CamStabilizerUnitTests(MayaTestScene):
         pymel.core.select('|group2|test_box.vtx[0]')
         pymel.core.setFocus('modelPanel4')
 
-        self.assertIsNone(camstabilizer.main(task='stabilize'))
+        self.assertTrue(camstabilizer.main(task='stabilize'))
 
         pymel.core.select(clear=True)
         pymel.core.select('|group2|test_box.vtx[0]', 'test_camera')
 
         pymel.core.delete('test_cameraShape_stabilizer')
-        self.assertIsNone(camstabilizer.main(task='stabilize'))
+        self.assertTrue(camstabilizer.main(task='stabilize'))
 
         pymel.core.select(clear=True)
         pymel.core.delete('test_cameraShape_stabilizer')
         pymel.core.select('test_locator', 'test_camera')
 
-        self.assertIsNone(camstabilizer.main(task='stabilize'))
+        self.assertTrue(camstabilizer.main(task='stabilize'))
 
     # @unittest.skip('already works')
     def test_stabilize_returns_transform_cam_expression_tuple(self):
@@ -203,12 +203,30 @@ class CamStabilizerUnitTests(MayaTestScene):
         self.assertIn(cam.name(), camstabilizer.create_expression(cam, pos))
         self.assertIn(pos.name(), camstabilizer.create_expression(cam, pos))
 
+    # @unittest.skip('already works')
     def test__setup_expression_node__errors_if_expression_exists(self):
         camstabilizer.setup_expression_node('//', 'test_cameraShape', task='create')
         self.assertRaises(Exception,
                         camstabilizer.setup_expression_node,
                         '//', 'test_cameraShape', task='create'
                         )
+
+    # @unittest.skip('already works')
+    def test__clear_stabilizer__deletes_expression_if_exists_or_error(self):
+        pymel.core.select('|group1|test_box.vtx[0]')
+        pymel.core.setFocus('modelPanel4')
+        cam = camstabilizer.get_camera()
+        camstabilizer.main(task='stabilize')
+        camstabilizer.main(task='clear')
+
+        self.assertRaises(Exception, camstabilizer.main, task='clear')
+
+        camstabilizer.main(task='stabilize')
+        camstabilizer.main(task='clear')
+        self.assertFalse(pymel.core.objExists(cam.name() + '_stabilizer'))
+
+        camstabilizer.main(task='stabilize')
+        self.assertTrue(camstabilizer.main(task='clear'))
 
 
 
