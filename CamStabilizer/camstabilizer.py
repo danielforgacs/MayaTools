@@ -21,8 +21,6 @@ to do:
     - HARDCODED NODES: clear_stabilizer()
     - turn off camera reset
     - second eye
-
-    # - error checking for existing camera offset
 """
 
 import logging
