@@ -18,10 +18,11 @@ geo mormalized screen positions for 2D transforms
 Maya version: Maya 2015 Extension 1 + SP5
 
 to do:
+    - HARDCODED NODES: clear_stabilizer()
     - turn off camera reset
-    - error checking for existing camera offset
     - second eye
 
+    # - error checking for existing camera offset
 """
 
 import logging
@@ -230,7 +231,13 @@ def clear_stabilizer():
         raise Exception('--> Stabilizer is turned off...')
 
     else:
+        expr_node = pymel.core.PyNode('test_cameraShape_stabilizer')
+        campath = expr_node.getExpression().split('\n')[0][3:]
         pymel.core.delete('test_cameraShape_stabilizer')
+        camera_shape = pymel.core.PyNode(campath)
+
+        camera_shape.setHorizontalFilmOffset(0)
+        camera_shape.setVerticalFilmOffset(0)
 
         return True
 
