@@ -12,10 +12,13 @@ geo, locator, geo components...
 activate pane with camera
 or add a camera to the selection
 
+>>> get_screen_pos() returns
+geo mormalized screen positions for 2D transforms
+
 Maya version: Maya 2015 Extension 1 + SP5
 
 to do:
-    - turn off
+    - turn off camera reset
     - error checking for existing camera offset
     - second eye
 
@@ -23,15 +26,8 @@ to do:
 
 import logging
 
-try:
-    import pymel.core
-except ImportError:
-    pymel = None
-
-try:
-    import maya.cmds as cmds
-except ImportError:
-    maya = None
+import pymel.core
+import maya.cmds as cmds
 
 
 formatter = logging.Formatter('--> %(levelname)s'
@@ -47,7 +43,6 @@ ch.setFormatter(formatter)
 log.setLevel(logging.INFO)
 # log.setLevel(logging.DEBUG)
 log.addHandler(ch)
-
 
 
 def get_selection():
@@ -139,7 +134,7 @@ python "fov_h = cmds.camera ('{camshape}', query = True, horizontalFieldOfView =
 python "fov_v = cmds.camera ('{camshape}', query = True, verticalFieldOfView = True)";
 python "aperture_h = cmds.camera ('{camshape}', query = True, horizontalFilmAperture = True)";
 python "aperture_v = cmds.camera ('{camshape}', query = True, verticalFilmAperture = True)";
-$pos =`python "{module_}.get_screen_pos_norm('{pos}','{camtransform}',fov_h, fov_v,aperture_h,aperture_v)"`;
+$pos =`python "{module_}.get_screen_pos('{pos}','{camtransform}',fov_h, fov_v,aperture_h,aperture_v)"`;
 setAttr "{camshape}.horizontalFilmOffset" $pos[2];
 setAttr "{camshape}.verticalFilmOffset" $pos[3];
 """
@@ -167,7 +162,7 @@ def setup_expression_node(expression, camname, **kwargs):
         return expression_node
 
 
-def get_screen_pos_norm(point, camera, fieldOfView_h,
+def get_screen_pos(point, camera, fieldOfView_h,
             fieldOfView_v, aperture_h, aperture_v):
     """
     called from camera expression
