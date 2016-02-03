@@ -1,6 +1,6 @@
 #! python2
 
-__author__		= 'forgacs.daniel@gmail.com'
+__author__      = 'forgacs.daniel@gmail.com'
 
 
 """
@@ -9,19 +9,21 @@ to a vertex with an expression
 """
 
 
-import maya.cmds as cmds
+import pymel.core
 
 
-def	constrain_locator_to_vertex	():
-	vertex		= cmds.ls(selection = True)[0]
-	geo			= vertex[:vertex.rfind('.')]
-	locator		= cmds.createNode('locator')
-	locator		= cmds.listRelatives(locator, parent = True)[0]
-	locator		= cmds.rename(locator, 'locator_vertexConstrained')
-	#locator		= cmds.pickWalk (direction = 'up')[0]
-	cmds.expression	(name = locator, string	='''
-float $BBoxSize = '''	+	geo	+	'''.boundingBoxMinX;\n
-$vertexWorldPos = `pointPosition -world '''		+	vertex	+	'''`;\n'''	+
-locator	+	'''.translateX = $vertexWorldPos[0];\n'''	+
-locator	+	'''.translateY = $vertexWorldPos[1];\n'''	+
-locator	+	'''.translateZ = $vertexWorldPos[2];'''	)
+def constrain_loc_to_vtx():
+    selection = pymel.core.selected(long=True, absoluteName=True, flatten=True, head=2)
+    vtx = selection.pop(0)
+    geo = pymel.core.PyNode(vtx.node())
+    locator = pymel.core.spaceLocator()
+    locator = locator.rename('locator_vertexConstrained')
+    expression = (
+            """float $BBoxSize = test_cube.boundingBoxMinX;"""
+            """\n\n$vertexWorldPos = `pointPosition -world test_cube.vtx[1]`;"""
+            """\nlocator_vertexConstrained.translateX = $vertexWorldPos[0];"""
+            """\nlocator_vertexConstrained.translateY = $vertexWorldPos[1];"""
+            """\nlocator_vertexConstrained.translateZ = $vertexWorldPos[2];"""
+            )
+    expression = expression.format()
+    pymel.core.expression(name=locator.name(), string=expression)
