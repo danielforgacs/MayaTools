@@ -13,17 +13,22 @@ import pymel.core
 
 
 def constrain_loc_to_vtx():
-    selection = pymel.core.selected(long=True, absoluteName=True, flatten=True, head=2)
+    selection = pymel.core.selected(
+            long=True,
+            absoluteName=True,
+            flatten=True,
+            head=2,
+        )
     vtx = selection.pop(0)
-    geo = pymel.core.PyNode(vtx.node())
+    mesh = pymel.core.PyNode(vtx).getParent()
     locator = pymel.core.spaceLocator()
     locator = locator.rename('locator_vertexConstrained')
     expression = (
-            """float $BBoxSize = test_cube.boundingBoxMinX;"""
-            """\n\n$vertexWorldPos = `pointPosition -world test_cube.vtx[1]`;"""
-            """\nlocator_vertexConstrained.translateX = $vertexWorldPos[0];"""
-            """\nlocator_vertexConstrained.translateY = $vertexWorldPos[1];"""
-            """\nlocator_vertexConstrained.translateZ = $vertexWorldPos[2];"""
-            )
-    expression = expression.format()
+            """float $BBoxSize = {mesh}.boundingBoxMinX;"""
+            """\n\n$vertexWorldPos = `pointPosition -world {vtx}`;"""
+            """\n{locator}.translateX = $vertexWorldPos[0];"""
+            """\n{locator}.translateY = $vertexWorldPos[1];"""
+            """\n{locator}.translateZ = $vertexWorldPos[2];"""
+        )
+    expression = expression.format(mesh=mesh, vtx=str(vtx), locator=locator)
     pymel.core.expression(name=locator.name(), string=expression)
