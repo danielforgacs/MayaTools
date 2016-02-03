@@ -50,7 +50,7 @@ class ContrsainLoc2vtxTest(unittest.TestCase):
         ContrsainLoc2vtxUnittest.setUp()
 
     def test__functional_test(self):
-        pymel.core.select('test_cube.vtx[1]')
+        pymel.core.select('test_cubeShape.vtx[1]')
 
         constrainLoc2vtx.constrain_loc_to_vtx()
 
@@ -75,7 +75,7 @@ class ContrsainLoc2vtxTest(unittest.TestCase):
         expression is:
         """
         expression = ("""float $BBoxSize = test_cube.boundingBoxMinX;"""
-        """\n\n$vertexWorldPos = `pointPosition -world test_cube.vtx[1]`;"""
+        """\n\n$vertexWorldPos = `pointPosition -world test_cubeShape.vtx[1]`;"""
         """\nlocator_vertexConstrained.translateX = $vertexWorldPos[0];"""
         """\nlocator_vertexConstrained.translateY = $vertexWorldPos[1];"""
         """\nlocator_vertexConstrained.translateZ = $vertexWorldPos[2];""")
@@ -91,7 +91,124 @@ class ContrsainLoc2vtxTest(unittest.TestCase):
         """
 
         loc = pymel.core.PyNode('locator_vertexConstrained')
-        vtx = pymel.core.PyNode('test_cube.vtx[1]')
+        vtx = pymel.core.PyNode('test_cubeShape.vtx[1]')
+
+        loc_x, loc_y, loc_z = loc.getTranslation(space='world')
+        vtx_x, vtx_y, vtx_z = vtx.getPosition(space='world')
+
+        pymel.core.currentTime(2)
+        self.assertEqual(loc_x, vtx_x)
+        self.assertEqual(loc_y, vtx_y)
+        self.assertEqual(loc_z, vtx_z)
+
+        pymel.core.currentTime(50)
+        self.assertEqual(loc_x, vtx_x)
+        self.assertEqual(loc_y, vtx_y)
+        self.assertEqual(loc_z, vtx_z)
+
+    def test__functional_test_2(self):
+        ContrsainLoc2vtxUnittest.setUp()
+
+        pymel.core.select('test_cubeShape.vtx[2]')
+
+        constrainLoc2vtx.constrain_loc_to_vtx()
+
+        """
+        creates locator with name:
+        locator_vtx_constrain_test_cube
+
+        FIX THIS
+        """
+        self.assertTrue(pymel.core.PyNode('locator_vertexConstrained'))
+
+        """
+        creates expression node with name:
+        expression_vtx_constrain_test_cube
+
+        FIX THIS
+        """
+        self.assertTrue(pymel.core.PyNode('locator_vertexConstrained1'))
+
+
+        """
+        expression is:
+        """
+        expression = ("""float $BBoxSize = test_cube.boundingBoxMinX;"""
+        """\n\n$vertexWorldPos = `pointPosition -world test_cubeShape.vtx[2]`;"""
+        """\nlocator_vertexConstrained.translateX = $vertexWorldPos[0];"""
+        """\nlocator_vertexConstrained.translateY = $vertexWorldPos[1];"""
+        """\nlocator_vertexConstrained.translateZ = $vertexWorldPos[2];""")
+
+        self.assertEqual(
+                pymel.core.PyNode('locator_vertexConstrained1').getExpression(),
+                expression
+                )
+
+        """
+        Locator position equals
+        vertex position
+        """
+
+        loc = pymel.core.PyNode('locator_vertexConstrained')
+        vtx = pymel.core.PyNode('test_cubeShape.vtx[2]')
+
+        loc_x, loc_y, loc_z = loc.getTranslation(space='world')
+        vtx_x, vtx_y, vtx_z = vtx.getPosition(space='world')
+
+        pymel.core.currentTime(2)
+        self.assertEqual(loc_x, vtx_x)
+        self.assertEqual(loc_y, vtx_y)
+        self.assertEqual(loc_z, vtx_z)
+
+        pymel.core.currentTime(50)
+        self.assertEqual(loc_x, vtx_x)
+        self.assertEqual(loc_y, vtx_y)
+        self.assertEqual(loc_z, vtx_z)
+
+        ### PART 2
+
+        pymel.core.select('test_cubeShape.vtx[5]')
+
+        constrainLoc2vtx.constrain_loc_to_vtx()
+
+        """
+        creates locator with name:
+        locator_vtx_constrain_test_cube
+
+        FIX THIS
+        """
+        self.assertTrue(pymel.core.PyNode('locator_vertexConstrained'))
+
+        """
+        creates expression node with name:
+        expression_vtx_constrain_test_cube
+
+        FIX THIS
+        """
+        self.assertTrue(pymel.core.PyNode('locator_vertexConstrained1'))
+
+
+        """
+        expression is:
+        """
+        expression = ("""float $BBoxSize = test_cube.boundingBoxMinX;"""
+        """\n\n$vertexWorldPos = `pointPosition -world test_cubeShape.vtx[5]`;"""
+        """\nlocator_vertexConstrained2.translateX = $vertexWorldPos[0];"""
+        """\nlocator_vertexConstrained2.translateY = $vertexWorldPos[1];"""
+        """\nlocator_vertexConstrained2.translateZ = $vertexWorldPos[2];""")
+
+        self.assertEqual(
+                pymel.core.PyNode('locator_vertexConstrained3').getExpression(),
+                expression
+                )
+
+        """
+        Locator position equals
+        vertex position
+        """
+
+        loc = pymel.core.PyNode('locator_vertexConstrained2')
+        vtx = pymel.core.PyNode('test_cubeShape.vtx[5]')
 
         loc_x, loc_y, loc_z = loc.getTranslation(space='world')
         vtx_x, vtx_y, vtx_z = vtx.getPosition(space='world')
