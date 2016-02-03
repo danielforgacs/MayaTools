@@ -6,6 +6,10 @@ __author__      = 'forgacs.daniel@gmail.com'
 """
 create and constrain a locator
 to a vertex with an expression
+
+todo:
+    - name locator as vertex: locator_at_sphere_vtx123
+    - name expression as vertex: expression_locator_at_sphere_vtx123
 """
 
 
