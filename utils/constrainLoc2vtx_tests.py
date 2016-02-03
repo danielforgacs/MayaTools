@@ -40,7 +40,7 @@ class ContrsainLoc2vtxUnittest(unittest.TestCase):
         transform.setScale((1, 2, 1))
         pymel.core.setKeyframe(transform, time=120)
 
-    @unittest.skip('--> Passed...')
+    # @unittest.skip('--> Passed...')
     def test__test_is_running(self):
         self.assertTrue(True)
 
@@ -52,7 +52,7 @@ class ContrsainLoc2vtxTest(unittest.TestCase):
     def test__functional_test(self):
         pymel.core.select('test_cube.vtx[1]')
 
-        constrainLoc2vtx.constrain_locator_to_vertex()
+        constrainLoc2vtx.constrain_loc_to_vtx()
 
         """
         creates locator with name:
@@ -70,13 +70,6 @@ class ContrsainLoc2vtxTest(unittest.TestCase):
         """
         self.assertTrue(pymel.core.PyNode('locator_vertexConstrained1'))
 
-        ### WORKING EXPRESSIOON
-        # float $BBoxSize = test_cube.boundingBoxMinX;
-
-        # $vertexWorldPos = `pointPosition -world test_cube.vtx[5]`;
-        # locator_vertexConstrained.translateX = $vertexWorldPos[0];
-        # locator_vertexConstrained.translateY = $vertexWorldPos[1];
-        # locator_vertexConstrained.translateZ = $vertexWorldPos[2];
 
         """
         expression is:
