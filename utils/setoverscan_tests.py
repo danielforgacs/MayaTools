@@ -63,6 +63,7 @@ class SetOverscanFuncTests(unittest.TestCase):
 
         """test for error if camera has post scale
         value already set to other than 1.0"""
+        self.assertRaises(Exception, setoverscan.main)
 
 
 
