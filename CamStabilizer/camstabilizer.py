@@ -239,8 +239,6 @@ def clear_stabilizer():
         camera_shape.setHorizontalFilmOffset(0)
         camera_shape.setVerticalFilmOffset(0)
 
-        return True
-
 
 def main(**kwargs):
     if kwargs['task'] == 'stabilize':
@@ -262,7 +260,6 @@ def main(**kwargs):
             )
     elif kwargs['task'] == 'test':
         import camstabilizer_tests
+        reload(camstabilizer_tests)
 
         camstabilizer_tests.main()
-
-    return True
