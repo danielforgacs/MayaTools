@@ -8,20 +8,9 @@ image proportions
 default overscan:
     10 / 10 pixels :: left / right
 
-
-###
-w = 1920.0
-h = 1440.0
-w_osc = 1980
-w_extra = w_osc - w
-osc_factor = w / w_osc
-h_osc = h / osc_factor
-
-print '\\noriginal res: ', w, '*', h
-print 'overscan res', w_osc, '*', h_osc
-print 'overscan factor (uniform)', osc_factor
-print 'extra pixels (width, height)', w_osc - w, h_osc - h
-###
+without selection only the render
+resolution is set!
+render resolution is always set!
 """
 
 
@@ -37,8 +26,12 @@ def set_camera_post_scale(ratio):
     except:
         pass
 
-    if cam:
+    # assert cam.getAttr('postScale') == 1.0
+
+    if cam and cam.getAttr('postScale') == 1.0:
         cam.setAttr('postScale', ratio)
+    else:
+        raise Exception('--> Camera already has post scale!')
 
 
 def set_osc_resolution(pixels):
