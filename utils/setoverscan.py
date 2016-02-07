@@ -30,9 +30,15 @@ import pymel.core
 
 
 def set_camera_post_scale(ratio):
-    postscale = None
+    cam = None
 
-    return postscale
+    try:
+        cam = pymel.core.selected().pop().getShape()
+    except:
+        pass
+
+    if cam:
+        cam.setAttr('postScale', ratio)
 
 
 def set_osc_resolution(pixels):
@@ -41,10 +47,13 @@ def set_osc_resolution(pixels):
     res_y = rendersettings.getAttr('height')
     image_ratio = Fraction(res_x, res_y)
     res_y_new = res_y+(pixels*2)
+    postscale_ratio = Fraction(res_y, res_y_new)
     res_x_new = float(res_y_new * image_ratio)
 
     rendersettings.setAttr('width', res_x_new)
     rendersettings.setAttr('height', res_y_new)
+
+    set_camera_post_scale(float(postscale_ratio))
 
     return (res_x_new, res_y_new)
 
