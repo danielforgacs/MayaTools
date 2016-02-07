@@ -260,5 +260,9 @@ def main(**kwargs):
                 fade=True,
                 fadeOutTime=2
             )
+    elif kwargs['task'] == 'test':
+        import camstabilizer_tests
+
+        camstabilizer_tests.main()
 
     return True
