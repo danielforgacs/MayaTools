@@ -36,3 +36,10 @@ def constrain_loc_to_vtx():
         )
     expression = expression.format(mesh=mesh, vtx=str(vtx), locator=locator)
     pymel.core.expression(name=locator.name(), string=expression)
+
+
+def test():
+    import constrainLoc2vtx_tests
+    reload(constrainLoc2vtx_tests)
+
+    constrainLoc2vtx_tests.main()
