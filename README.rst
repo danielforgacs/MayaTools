@@ -17,3 +17,10 @@ modules
 
 CamStabilizer
 RiggingAid
+Utils
+
+todo:
+    - stabilizer hardcoded nodes clean
+    - prerender scripts
+
+    (- overscan setter)
