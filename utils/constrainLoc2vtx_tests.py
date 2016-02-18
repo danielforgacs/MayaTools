@@ -225,12 +225,15 @@ class ContrsainLoc2vtxTest(unittest.TestCase):
 
 
 
-def run():
-    print('//'*25)
-    print('\\\\'*25)
-    print('//'*25)
-    unittest.main(module=__name__, exit=False, verbosity=1)
+# def run():
+#     print('//'*25)
+#     print('\\\\'*25)
+#     print('//'*25)
+#     unittest.main(module=__name__, exit=False, verbosity=1)
 
 
-if __name__ == '__main__':
-    run()
+# if __name__ == '__main__':
+    # run()
+
+def main():
+    unittest.main(module=__name__, exit=False)

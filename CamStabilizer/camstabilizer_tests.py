@@ -1,7 +1,6 @@
 #! Python2.7
 
 import unittest
-# import camstabilizer
 from . import camstabilizer
 reload(camstabilizer)
 
@@ -170,17 +169,17 @@ class CamStabilizerUnitTests(MayaTestScene):
         pymel.core.select('|group2|test_box.vtx[0]')
         pymel.core.setFocus('modelPanel4')
 
-        self.assertTrue(camstabilizer.main(task='stabilize'))
+        self.assertIsNone(camstabilizer.main(task='stabilize'))
 
         super(CamStabilizerUnitTests, self).setUp()
         pymel.core.select('|group2|test_box.vtx[0]', 'test_camera')
 
-        self.assertTrue(camstabilizer.main(task='stabilize'))
+        self.assertIsNone(camstabilizer.main(task='stabilize'))
 
         super(CamStabilizerUnitTests, self).setUp()
         pymel.core.select('test_locator', 'test_camera')
 
-        self.assertTrue(camstabilizer.main(task='stabilize'))
+        self.assertIsNone(camstabilizer.main(task='stabilize'))
 
     # @unittest.skip('already works')
     def test__stabilize__returns_transform_cam_expression_tuple(self):
@@ -224,7 +223,7 @@ class CamStabilizerUnitTests(MayaTestScene):
         self.assertFalse(pymel.core.objExists(cam.name() + '_stabilizer'))
 
         camstabilizer.main(task='stabilize')
-        self.assertTrue(camstabilizer.main(task='clear'))
+        self.assertIsNone(camstabilizer.main(task='clear'))
 
     # @unittest.skip('already works')
     def test__get_camera__errors_on_camera_w_offset(self):
@@ -237,4 +236,5 @@ class CamStabilizerUnitTests(MayaTestScene):
 
 
 def main():
-    unittest.main(module='MayaTools.CamStabilizer.camstabilizer_tests', exit=False)
+    # unittest.main(module='MayaTools.CamStabilizer.camstabilizer_tests', exit=False)
+    unittest.main(module=__name__, exit=False)
