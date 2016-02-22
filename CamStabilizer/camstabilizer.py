@@ -226,7 +226,7 @@ def stabilize():
     return (transform, camera, expression, expression_node)
 
 
-def clear_stabilizer():
+def clear_stabilizer_OBSOLETE():
     if not pymel.core.objExists('test_cameraShape_stabilizer'):
         raise Exception('--> Stabilizer is turned off...')
 
@@ -238,6 +238,22 @@ def clear_stabilizer():
 
         camera_shape.setHorizontalFilmOffset(0)
         camera_shape.setVerticalFilmOffset(0)
+
+
+def clear_stabilizer():
+    stabexpression = [node for node in pymel.core.ls(exactType='expression') if 'stabilizer' in node.name()]
+
+    if len(stabexpression) > 1:
+        raise Exception('--> There are more than one stabilized camera in the scene...')
+
+    for node in stabexpression:
+        exprstring = node.expression.get()
+        camname = exprstring.splitlines()[0][3:]
+        cam = pymel.core.PyNode(camname)
+        pymel.core.delete(node)
+        cam.horizontalFilmOffset.set(0)
+        cam.verticalFilmOffset.set(0)
+
 
 
 def main(**kwargs):
