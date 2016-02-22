@@ -1,0 +1,183 @@
+// *********************************** //
+// Created by Christopher Ryan (Nogard)//
+// *********************************** //
+//          Creation History:          //        
+// ----------------------------------- //
+// Verison 1      Date: Feb 12th, 2008 //
+//     Prime Focus,  Vancouver, BC     //
+// *********************************** //
+// Contact: chris.ryan@primefocusworld.com
+
+// ******************** //
+// ** Object Retimer ** //
+// ******************** //
+// Allows selected objects to be retimed based on a Nuke curve test file.
+// If everything works you can just select the objecc over and over again to apply the retime.
+// You can even retime the retime curve, ect...
+// A strong suggestion would be to bake this into a new camera if this will be passed along to other packages.
+// FBX will combine the curves into one object, but have no idea with any inhouse tools.  
+
+
+// ** Version History ** //
+// V1.0 - Initial iteration.
+// V1.1 - Skipped first 5 lines of input file.
+// V1.2 - Added additional checks and code optimization
+// V1.3 - Added in check for existence of TIME node on object.  If it exists I delete and replace.
+// V1.4 - Updated for Maya 2011.  Last MEL version.  New Python version coming soon with extra fanciness.
+
+
+// ******************* //
+// ** Program Start ** //
+// ******************* //
+global proc objectRetimer()
+{
+
+	// **************************** //
+	// ** Initial Variable Setup ** //
+	// **************************** //
+	string	$selected[] = `ls -sl -l`;
+	string  $timeNodeName[];
+	string 	$data[];
+	int	$objAmount = size($selected);
+	int	$i;
+	int	$n;
+	int	$evalLength = 0;
+	int	$counter = 0;
+	
+	// ******************* //
+	// ** Object Checks ** //
+	// ******************* //
+	
+	// ** Check for ZERO objects **
+	if ($objAmount == 0)
+	{
+		confirmDialog -title "Error" -message "Please select at least one object, camera, or light.";
+		print "\nError: Please select at least one object, camera, or light.\n";
+		return;
+	}
+
+	// ** Check to verify all selected objects have animation ** //
+	for ($i=0; $i < $objAmount; $i++)
+	{
+		string $animCurves[] = `keyframe -q -name ($selected[$i])`;
+	 	$evalLength = size($animCurves);
+	 	
+	 	if ($evalLength == 0)
+		{
+			print "The object "; print $selected[$i]; print " currently has no animation on it.\n";
+			$counter = $counter + 1;
+		}
+	}
+	
+	if ($counter > 0)
+	{
+		confirmDialog -title "Error" -message "Please select only objects with animation on them.";
+		print "\nError: Please select only objects with animation on them.\n";
+		return;
+	}
+	
+	
+	
+	
+	// *********************** //
+	// ** Input file dialog ** //
+	// *********************** //
+	string $fname = `fileDialog -t "Please pick a Nuke retime file:"`;
+	if ($fname == "")
+	{
+		print "No file selected. \n";
+		return;
+	}
+	
+
+	
+	// ************************************** //
+	// ** Add Retime Curve Node to Objects ** //
+	// ************************************** //
+	for ($i = 0; $i < $objAmount; $i++)
+	{
+
+		string $timeNameTemp = $selected[$i] + "_TIME";
+		int $stringData = `tokenize $timeNameTemp "|" $data`;
+		string $timeName = "";
+		
+		for ($n = 0; $n < ($stringData-1); $n++)
+		{
+			$timeName = $timeName + $data[$n] + "_";
+		}
+		$timeName = $timeName + $data[($stringData-1)];
+		
+		print $timeName; print "\n";
+		
+		// ** Time Node Check ** //
+		if (`objExists ($timeName+"_translateX")`)
+		{
+			print "Retime Exists.  Removing.\n";
+			delete ($timeName + "_translateX");
+			;
+		}
+
+
+		$timeNodeName[$i] = `createNode "transform" -n ($timeName)`;
+		setKeyframe -t -5000 -at translateX $timeNodeName[$i];
+		$timeNodeNameAnim = $timeNodeName[$i] + "_translateX";
+		string $animCurves[] = `keyframe -q -name ($selected[$i])`;
+		int $evalAnim[];
+		int $evalLength = size($animCurves);
+		string $shp[] = `listRelatives -shapes ($selected[$i])`;
+	
+		for ($n = 0; $n < $evalLength; $n++)
+		{
+			connectAttr -f ($timeNodeNameAnim + ".output") ($animCurves[$n] + ".input");
+		}
+					
+	}
+
+	
+	// ************************************ //
+	// ** Read in file and set keyframes ** //
+	// ************************************	//
+	// Reads in the Nuke ASCII file.
+	int $fd = fopen($fname, "r");
+	while (($line = fgetline($fd)) != "")
+ 	{
+		$numData = `tokenize $line "\t" $data`;
+		string $newTimeString = $data[0];
+		string $oldTimeString = $data[1];
+		string $hash = "#";
+		print ("Converting Frame: " +  $newTimeString + " to " + $oldTimeString);
+		
+		if (($newTimeString) != ($hash))
+		{	
+			float $newTime = $data[0];
+			float $oldTime = $data[1];
+
+			for ($i = 0; $i < $objAmount; $i++)
+			{
+				string $timeName = $timeNodeName[$i] + ".translateX";
+				setKeyframe -v ($oldTime) -t $newTime ($timeName);
+			}
+			
+
+		}
+	}
+	
+	// ***********************
+	// ** Remove Setup Data **
+	// ***********************
+	// Removes the intial -5000 keyframe and removes the stand-in retime node.
+	// Should just end up with a single curve connected into the object's animatipon curves.
+	for ($i = 0; $i < $objAmount; $i++)
+	{
+		cutKey -t -5000 -attribute translateX -option keys ($timeNodeName[$i]) ;
+		delete $timeNodeName[$i];
+	}
+	 
+	// End //
+	print "Object(s) retimed!\n";
+	confirmDialog -title "Done!" -message "All object(s) have been retimed.";
+}
+
+objectRetimer;
+
+	

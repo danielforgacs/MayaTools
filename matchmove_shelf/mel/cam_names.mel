@@ -1,0 +1,31 @@
+//select your scene node first.
+//script assumes that on import the left cam is first and the right cam is second.
+
+
+pickWalk -d down;
+
+string $sel[] = `ls -sl`;
+select -r $sel[0];
+rename "left";
+
+//safely rename the shape
+string $selShape[] = `listRelatives -s`;
+select -r $selShape[0];
+rename "left_Shape";
+
+clear($sel); 
+clear($selShape);
+
+pickWalk -d up;
+pickWalk -d right;
+
+string $sel[] = `ls -sl`;
+select -r $sel[0];
+rename "right";
+
+//safely rename the shape
+string $selShape[] = `listRelatives -s`;
+select -r $selShape[0];
+rename "right_Shape";
+
+print "renamed your cameras!";

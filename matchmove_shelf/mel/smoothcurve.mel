@@ -1,0 +1,828 @@
+//Declare global variables
+
+global int $checkTranXval;
+global int $checkTranYval;
+global int $checkTranZval;
+global int $checkRotXval;
+global int $checkRotYval;
+global int $checkRotZval;
+global int $checkFrameDelval;
+global float $startFrame;
+global string $cName[];
+
+//Define procedures
+
+//Average translateX curve procedure
+
+global proc trX_smooth()
+{
+
+//Average translateX variables
+
+float $startFrame = `playbackOptions -query -minTime` ;
+float $endFrame = `playbackOptions -query -maxTime` ;
+float $place = ($startFrame -3) ;
+global string $cName[];
+string $cName[] = `ls -sl` ;
+string $at[6] = {".translateX", ".translateY", ".translateZ", ".rotateX", ".rotateY", ".rotateZ"} ;
+
+// Get transforms on pre frame
+
+currentTime ($place - 1) ;
+float $preKey = `getAttr ($cName[0]) ($at[0])`;
+
+//Get transforms on frame
+
+currentTime $place ;
+float $currentKey = `getAttr ($cName[0]) ($at[0])`;
+
+//Get transforms on post frame
+
+currentTime ($place + 1) ;
+float $postKey = `getAttr ($cName[0]) ($at[0])`;
+
+// Create New Key Value  
+
+float $newKeyValue = ($preKey + $currentKey + $postKey) / 3 ;
+
+// Set new keyframe for first frame
+
+currentTime $place ;
+setAttr (($cName[0]) + ($at[0])) $newKeyValue ;
+setKeyframe (($cName[0]) + ($at[0])) ;
+
+//Set new current frame and save unaveraged current frame value
+
+$place = ($place + 1) ;
+$preKey = $currentKey ;
+
+// Loop for frame range
+
+while( $place < $endFrame )
+{
+
+//Get transforms on frame
+
+currentTime $place ;
+float $currentKey = `getAttr ($cName[0]) ($at[0])`;
+
+//Get transforms on post frame
+
+currentTime ($place + 1) ;
+float $postKey = `getAttr ($cName[0]) ($at[0])`;
+
+// Create New Key Value  
+
+float $newKeyValue = ($preKey + $currentKey + $postKey) / 3 ;
+
+// Set new keyframe for first frame
+
+currentTime $place ;
+setAttr (($cName[0]) + ($at[0])) $newKeyValue ;
+setKeyframe (($cName[0]) + ($at[0])) ;
+
+//Set new current frame and save unaveraged current frame value
+
+$place = ($place + 1) ;
+$preKey = $currentKey ;
+
+}
+}
+
+
+//Average translateY curve procedure
+
+global proc trY_smooth()
+{
+
+//Average translateY variables
+
+float $startFrame = `playbackOptions -query -minTime` ;
+float $endFrame = `playbackOptions -query -maxTime` ;
+float $place = ($startFrame -3) ;
+global string $cName[];
+string $cName[] = `ls -sl` ;
+string $at[6] = {".translateX", ".translateY", ".translateZ", ".rotateX", ".rotateY", ".rotateZ"} ;
+
+// Get transforms on pre frame
+
+currentTime ($place - 1) ;
+float $preKey = `getAttr ($cName[0]) ($at[1])`;
+
+//Get transforms on frame
+
+currentTime $place ;
+float $currentKey = `getAttr ($cName[0]) ($at[1])`;
+
+//Get transforms on post frame
+
+currentTime ($place + 1) ;
+float $postKey = `getAttr ($cName[0]) ($at[1])`;
+
+// Create New Key Value  
+
+float $newKeyValue = ($preKey + $currentKey + $postKey) / 3 ;
+
+// Set new keyframe for first frame
+
+currentTime $place ;
+setAttr (($cName[0]) + ($at[1])) $newKeyValue ;
+setKeyframe (($cName[0]) + ($at[1])) ;
+
+//Set new current frame and save unaveraged current frame value
+
+$place = ($place + 1) ;
+$preKey = $currentKey ;
+
+// Loop for frame range
+
+while( $place < $endFrame )
+{
+
+//Get transforms on frame
+
+currentTime $place ;
+float $currentKey = `getAttr ($cName[0]) ($at[1])`;
+
+//Get transforms on post frame
+
+currentTime ($place + 1) ;
+float $postKey = `getAttr ($cName[0]) ($at[1])`;
+
+// Create New Key Value  
+
+float $newKeyValue = ($preKey + $currentKey + $postKey) / 3 ;
+
+// Set new keyframe for first frame
+
+currentTime $place ;
+setAttr (($cName[0]) + ($at[1])) $newKeyValue ;
+setKeyframe (($cName[0]) + ($at[1])) ;
+
+//Set new current frame and save unaveraged current frame value
+
+$place = ($place + 1) ;
+$preKey = $currentKey ;
+
+}
+}
+
+
+//Average translateZ curve procedure
+
+global proc trZ_smooth()
+{
+
+//Average translateZ variables
+
+float $startFrame = `playbackOptions -query -minTime` ;
+float $endFrame = `playbackOptions -query -maxTime` ;
+float $place = ($startFrame -3) ;
+global string $cName[];
+string $cName[] = `ls -sl` ;
+string $at[6] = {".translateX", ".translateY", ".translateZ", ".rotateX", ".rotateY", ".rotateZ"} ;
+
+// Get transforms on pre frame
+
+currentTime ($place - 1) ;
+float $preKey = `getAttr ($cName[0]) ($at[2])`;
+
+//Get transforms on frame
+
+currentTime $place ;
+float $currentKey = `getAttr ($cName[0]) ($at[2])`;
+
+//Get transforms on post frame
+
+currentTime ($place + 1) ;
+float $postKey = `getAttr ($cName[0]) ($at[2])`;
+
+// Create New Key Value  
+
+float $newKeyValue = ($preKey + $currentKey + $postKey) / 3 ;
+
+// Set new keyframe for first frame
+
+currentTime $place ;
+setAttr (($cName[0]) + ($at[2])) $newKeyValue ;
+setKeyframe (($cName[0]) + ($at[2])) ;
+
+//Set new current frame and save unaveraged current frame value
+
+$place = ($place + 1) ;
+$preKey = $currentKey ;
+
+// Loop for frame range
+
+while( $place < $endFrame )
+{
+
+//Get transforms on frame
+
+currentTime $place ;
+float $currentKey = `getAttr ($cName[0]) ($at[2])`;
+
+//Get transforms on post frame
+
+currentTime ($place + 1) ;
+float $postKey = `getAttr ($cName[0]) ($at[2])`;
+
+// Create New Key Value  
+
+float $newKeyValue = ($preKey + $currentKey + $postKey) / 3 ;
+
+// Set new keyframe for first frame
+
+currentTime $place ;
+setAttr (($cName[0]) + ($at[2])) $newKeyValue ;
+setKeyframe (($cName[0]) + ($at[2])) ;
+
+//Set new current frame and save unaveraged current frame value
+
+$place = ($place + 1) ;
+$preKey = $currentKey ;
+
+}
+}
+
+
+//Average rotateX curve procedure
+
+global proc rtX_smooth()
+{
+
+//Average rotateX variables
+
+float $startFrame = `playbackOptions -query -minTime` ;
+float $endFrame = `playbackOptions -query -maxTime` ;
+float $place = ($startFrame -3) ;
+global string $cName[];
+string $cName[] = `ls -sl` ;
+string $at[6] = {".translateX", ".translateY", ".translateZ", ".rotateX", ".rotateY", ".rotateZ"} ;
+
+// Get transforms on pre frame
+
+currentTime ($place - 1) ;
+float $preKey = `getAttr ($cName[0]) ($at[3])`;
+
+//Get transforms on frame
+
+currentTime $place ;
+float $currentKey = `getAttr ($cName[0]) ($at[3])`;
+
+//Get transforms on post frame
+
+currentTime ($place + 1) ;
+float $postKey = `getAttr ($cName[0]) ($at[3])`;
+
+// Create New Key Value  
+
+float $newKeyValue = ($preKey + $currentKey + $postKey) / 3 ;
+
+// Set new keyframe for first frame
+
+currentTime $place ;
+setAttr (($cName[0]) + ($at[3])) $newKeyValue ;
+setKeyframe (($cName[0]) + ($at[3])) ;
+
+//Set new current frame and save unaveraged current frame value
+
+$place = ($place + 1) ;
+$preKey = $currentKey ;
+
+// Loop for frame range
+
+while( $place < $endFrame )
+{
+
+//Get transforms on frame
+
+currentTime $place ;
+float $currentKey = `getAttr ($cName[0]) ($at[3])`;
+
+//Get transforms on post frame
+
+currentTime ($place + 1) ;
+float $postKey = `getAttr ($cName[0]) ($at[3])`;
+
+// Create New Key Value  
+
+float $newKeyValue = ($preKey + $currentKey + $postKey) / 3 ;
+
+// Set new keyframe for first frame
+
+currentTime $place ;
+setAttr (($cName[0]) + ($at[3])) $newKeyValue ;
+setKeyframe (($cName[0]) + ($at[3])) ;
+
+//Set new current frame and save unaveraged current frame value
+
+$place = ($place + 1) ;
+$preKey = $currentKey ;
+
+}
+}
+
+
+//Average rotateY curve procedure
+
+global proc rtY_smooth()
+{
+
+//Average rotateY variables
+
+float $startFrame = `playbackOptions -query -minTime` ;
+float $endFrame = `playbackOptions -query -maxTime` ;
+float $place = ($startFrame -3) ;
+global string $cName[];
+string $cName[] = `ls -sl` ;
+string $at[6] = {".translateX", ".translateY", ".translateZ", ".rotateX", ".rotateY", ".rotateZ"} ;
+
+// Get transforms on pre frame
+
+currentTime ($place - 1) ;
+float $preKey = `getAttr ($cName[0]) ($at[4])`;
+
+//Get transforms on frame
+
+currentTime $place ;
+float $currentKey = `getAttr ($cName[0]) ($at[4])`;
+
+//Get transforms on post frame
+
+currentTime ($place + 1) ;
+float $postKey = `getAttr ($cName[0]) ($at[4])`;
+
+// Create New Key Value  
+
+float $newKeyValue = ($preKey + $currentKey + $postKey) / 3 ;
+
+// Set new keyframe for first frame
+
+currentTime $place ;
+setAttr (($cName[0]) + ($at[4])) $newKeyValue ;
+setKeyframe (($cName[0]) + ($at[4])) ;
+
+//Set new current frame and save unaveraged current frame value
+
+$place = ($place + 1) ;
+$preKey = $currentKey ;
+
+// Loop for frame range
+
+while( $place < $endFrame )
+{
+
+//Get transforms on frame
+
+currentTime $place ;
+float $currentKey = `getAttr ($cName[0]) ($at[4])`;
+
+//Get transforms on post frame
+
+currentTime ($place + 1) ;
+float $postKey = `getAttr ($cName[0]) ($at[4])`;
+
+// Create New Key Value  
+
+float $newKeyValue = ($preKey + $currentKey + $postKey) / 3 ;
+
+// Set new keyframe for first frame
+
+currentTime $place ;
+setAttr (($cName[0]) + ($at[4])) $newKeyValue ;
+setKeyframe (($cName[0]) + ($at[4])) ;
+
+//Set new current frame and save unaveraged current frame value
+
+$place = ($place + 1) ;
+$preKey = $currentKey ;
+
+}
+}
+
+
+//Average rotateZ curve procedure
+
+global proc rtZ_smooth()
+{
+
+//Average rotateZ variables
+
+float $startFrame = `playbackOptions -query -minTime` ;
+float $endFrame = `playbackOptions -query -maxTime` ;
+float $place = ($startFrame -3) ;
+global string $cName[];
+string $cName[] = `ls -sl` ;
+string $at[6] = {".translateX", ".translateY", ".translateZ", ".rotateX", ".rotateY", ".rotateZ"} ;
+
+// Get transforms on pre frame
+
+currentTime ($place - 1) ;
+float $preKey = `getAttr ($cName[0]) ($at[5])`;
+
+//Get transforms on frame
+
+currentTime $place ;
+float $currentKey = `getAttr ($cName[0]) ($at[5])`;
+
+//Get transforms on post frame
+
+currentTime ($place + 1) ;
+float $postKey = `getAttr ($cName[0]) ($at[5])`;
+
+// Create New Key Value  
+
+float $newKeyValue = ($preKey + $currentKey + $postKey) / 3 ;
+
+// Set new keyframe for first frame
+
+currentTime $place ;
+setAttr (($cName[0]) + ($at[5])) $newKeyValue ;
+setKeyframe (($cName[0]) + ($at[5])) ;
+
+//Set new current frame and save unaveraged current frame value
+
+$place = ($place + 1) ;
+$preKey = $currentKey ;
+
+// Loop for frame range
+
+while( $place < $endFrame )
+{
+
+//Get transforms on frame
+
+currentTime $place ;
+float $currentKey = `getAttr ($cName[0]) ($at[5])`;
+
+//Get transforms on post frame
+
+currentTime ($place + 1) ;
+float $postKey = `getAttr ($cName[0]) ($at[5])`;
+
+// Create New Key Value  
+
+float $newKeyValue = ($preKey + $currentKey + $postKey) / 3 ;
+
+// Set new keyframe for first frame
+
+currentTime $place ;
+setAttr (($cName[0]) + ($at[5])) $newKeyValue ;
+setKeyframe (($cName[0]) + ($at[5])) ;
+
+//Set new current frame and save unaveraged current frame value
+
+$place = ($place + 1) ;
+$preKey = $currentKey ;
+
+}
+}
+
+//-----------------------------------------------------------------------------------------------
+//Prodcedure deletes excess Translate X keys.
+
+
+global proc keyRemTX()
+{
+global string $cName[];
+global float $startframe;
+$beginIndex = $startframe - 3;
+$endIndex = $startframe;
+string $range = ($beginIndex + ":" + $endIndex) ;
+
+selectKey -r -k -t $range (($cName[0]) + "_translateX");
+cutKey -animation keys -clear -selectKey;
+
+}
+
+//Prodcedure deletes excess Translate Y keys.
+
+global proc keyRemTY()
+{
+global string $cName[];
+global float $startframe;
+$beginIndex = $startframe - 3;
+$endIndex = $startframe;
+string $range = ($beginIndex + ":" + $endIndex) ;
+
+selectKey -r -k -t $range (($cName[0]) + "_translateY");
+cutKey -animation keys -clear -selectKey;
+
+}
+
+//Prodcedure deletes excess Translate Z keys.
+
+global proc keyRemTZ()
+{
+global string $cName[];
+global float $startframe;
+$beginIndex = $startframe - 3;
+$endIndex = $startframe;
+string $range = ($beginIndex + ":" + $endIndex) ;
+
+selectKey -r -k -t $range (($cName[0]) + "_translateZ");
+cutKey -animation keys -clear -selectKey;
+
+}
+
+//Prodcedure deletes excess Rotate X keys.
+
+global proc keyRemRX()
+{
+global string $cName[];
+global float $startframe;
+$beginIndex = $startframe - 3;
+$endIndex = $startframe;
+string $range = ($beginIndex + ":" + $endIndex) ;
+
+selectKey -r -k -t $range (($cName[0]) + "_rotateX");
+cutKey -animation keys -clear -selectKey;
+
+}
+
+//Prodcedure deletes excess Rotate Y keys.
+
+global proc keyRemRY()
+{
+global string $cName[];
+global float $startframe;
+$beginIndex = $startframe - 3;
+$endIndex = $startframe;
+string $range = ($beginIndex + ":" + $endIndex) ;
+
+selectKey -r -k -t $range (($cName[0]) + "_rotateY");
+cutKey -animation keys -clear -selectKey;
+
+}
+
+//Prodcedure deletes excess Rotate Z keys.
+
+global proc keyRemRZ()
+{
+global string $cName[];
+global float $startframe;
+$beginIndex = $startframe - 3;
+$endIndex = $startframe;
+string $range = ($beginIndex + ":" + $endIndex) ;
+
+selectKey -r -k -t $range (($cName[0]) + "_rotateZ");
+cutKey -animation keys -clear -selectKey;
+
+}
+
+// Procedure to unlock locked attributes
+
+global proc checkLocks() 
+{
+
+global string $cName[];
+
+if (`getAttr -l (($cName[0]) + ".translateX")` == 1){
+setAttr -l 0 (($cName[0]) + ".translateX");
+}
+
+if (`getAttr -l (($cName[0]) + ".translateY")` == 1){
+setAttr -l 0 (($cName[0]) + ".translateY");
+}
+
+if (`getAttr -l (($cName[0]) + ".translateZ")` == 1){
+setAttr -l 0 (($cName[0]) + ".translateZ");
+}
+
+if (`getAttr -l (($cName[0]) + ".rotateX")` == 1){
+setAttr -l 0 (($cName[0]) + ".rotateX");
+}
+
+if (`getAttr -l (($cName[0]) + ".rotateY")` == 1){
+setAttr -l 0 (($cName[0]) + ".rotateY");
+}
+
+if (`getAttr -l (($cName[0]) + ".rotateZ")` == 1){
+setAttr -l 0 (($cName[0]) + ".rotateZ");
+}
+
+curveCheck;
+
+}
+
+// Capture Checkbox states
+
+global proc captureCheck() 
+{
+
+global string $cName[];
+string $cName[] = `ls -sl`;
+
+if (($cName[0]) == "") {
+
+print "Please select your camera.";
+
+} else {
+
+global int $checkTranXval;
+$checkTranXval = `checkBox -query -value checkTranX`;
+
+global int $checkTranYval;
+$checkTranYval = `checkBox -query -value checkTranY`;
+
+global int $checkTranZval;
+$checkTranZval = `checkBox -query -value checkTranZ`;
+
+global int $checkRotXval;
+$checkRotXval = `checkBox -query -value checkRotX`;
+
+global int $checkRotYval;
+$checkRotYval = `checkBox -query -value checkRotY`;
+
+global int $checkRotZval;
+$checkRotZval = `checkBox -query -value checkRotZ`;
+
+global int $checkFrameDelval;
+$checkFrameDelval = `checkBox -query -value checkDelFrame`;
+
+checkLocks;
+}
+}
+
+// Procedure to check curves for key deletion
+
+global proc curveDelCheck()
+{
+
+global int $checkTranXval;
+global int $checkTranYval;
+global int $checkTranZval;
+global int $checkRotXval;
+global int $checkRotYval;
+global int $checkRotZval;
+global int $checkFrameDelval;
+
+if ($checkTranXval == 1) {
+
+keyRemTX;
+print "Deleted excess Translate X keys";
+
+}
+
+if ($checkTranYval == 1) {
+
+keyRemTY;
+print "Deleted excess Translate Y keys";
+
+}
+
+if ($checkTranZval == 1) {
+
+keyRemTZ;
+print "Deleted excess Translate Z keys";
+
+}
+
+if ($checkRotXval == 1) {
+
+keyRemRX;
+print "Deleted excess Rotate X keys";
+
+}
+
+if ($checkRotYval == 1) {
+
+keyRemRY;
+print "Deleted excess Rotate Y keys";
+
+}
+
+if ($checkRotZval == 1) {
+
+keyRemRZ;
+print "Deleted Excess Rotate Z keys";
+
+}
+
+deleteUI scGUIwindow;
+
+}
+
+// A procedure that checks what curves have been requested to be smoothed
+
+global proc curveCheck()
+{
+
+global int $checkTranXval;
+global int $checkTranYval;
+global int $checkTranZval;
+global int $checkRotXval;
+global int $checkRotYval;
+global int $checkRotZval;
+global int $checkFrameDelval;
+
+if ($checkTranXval == 1) {
+
+trX_smooth;
+print "Smoothed Translate X";
+
+}
+
+if ($checkTranYval == 1) {
+
+trY_smooth;
+print "Smoothed Translate Y";
+
+}
+
+if ($checkTranZval == 1) {
+
+trZ_smooth;
+print "Smoothed Translate Z";
+
+}
+
+if ($checkRotXval == 1) {
+
+rtX_smooth;
+print "Smoothed Rotate X";
+
+}
+
+if ($checkRotYval == 1) {
+
+rtY_smooth;
+print "Smoothed Rotate Y";
+
+}
+
+if ($checkRotZval == 1) {
+
+rtZ_smooth;
+print "Smoothed Rotate Z";
+
+}
+
+if ($checkFrameDelval == 1) {
+
+curveDelCheck;
+
+} else {
+
+deleteUI scGUIwindow;
+
+}
+}
+
+// GUI
+
+if (`window -exists scGUIwindow` == 1) {
+
+	deleteUI scGUIwindow;
+	
+} else {
+
+	window  -title "Animation Curve Smooth Tool" -width 300 scGUIwindow;
+	columnLayout -width 300 -columnAlign "center" MainGrid;
+	
+	setParent MainGrid;
+	columnLayout -width 300 -columnAlign "center" TextRow;
+
+	text -label "First select your camera." -align "center" -parent TextRow;
+	text -label "Then select which curves you want to smooth:" -align "center" -parent TextRow;
+
+	setParent MainGrid;
+	frameLayout -width 150 -height 100 -label "Translate" -borderStyle "etchedIn" TransFrame;
+	
+	setParent MainGrid;
+	frameLayout -width 150 -height 100 -label "Rotate" -borderStyle "etchedIn" RotFrame;
+	
+	setParent TransFrame;
+	columnLayout TransColumn;
+
+	setParent TransColumn;
+	checkBox -label "X" checkTranX;
+	checkBox -label "Y" checkTranY;
+	checkBox -label "Z" checkTranZ;
+
+	setParent RotFrame;
+	columnLayout RotColumn;
+	
+	setParent RotColumn;
+	checkBox -label "X" checkRotX;
+	checkBox -label "Y" checkRotY;
+	checkBox -label "Z" checkRotZ;
+
+	setParent MainGrid;	
+	columnLayout -width 300 -columnAlign "center" BottomRow;
+
+	text -label "Hit Smooth and it's done." -align "center" -parent BottomRow;
+	button -width 150 -label "Smooth" -align "center" -command "captureCheck" smoothbutton;
+
+	setParent MainGrid;
+	columnLayout -width 300 -columnAlign "center" FrameDelRow;
+	checkBox -value 1 -label "Delete excess frames" checkDelFrame;
+	text -label "Only turn off if your start frame is not the start of the animation." -align "center" -parent FrameDelRow;
+
+	setParent MainGrid;	
+	columnLayout -width 300 -columnAlign "center" CreditRow;
+
+showWindow scGUIwindow;
+	
+}

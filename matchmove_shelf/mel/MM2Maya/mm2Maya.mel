@@ -1,0 +1,213 @@
+//// mm2Maya
+
+//// safename script
+
+proc string makeNameUnique (string $proposedName)
+{
+   string $safeName = $proposedName;
+   string $list[] = `ls ($proposedName+"*")`;
+   if (size($list))
+   {
+       string $n;
+       int $id = 0;
+       for ($n in $list) {
+           int $ext = `match "[0-9]+$" $n`;
+           $id = max($id, $ext);
+       }
+       $id += 1;
+       $safeName = ($proposedName+ "_" +$id);
+   } else {
+       $safeName = $proposedName;
+   }
+   return $safeName;
+}
+
+
+
+//import rz2
+
+global proc importTracks (int $Xres, int $Yres, string $camName, int $keepNames)
+{
+
+int $Xresolution = $Xres;
+int $Yresolution = $Yres;
+
+/*if ($resType == 1)
+{
+$Xresolution = 1024;
+$Yresolution = 778;
+}
+
+else if ($resType == 2)
+{ 
+$Xresolution = 2048;
+$Yresolution = 1556;
+}
+
+else if ($resType == 3)
+{ 
+$Xresolution = 720;
+$Yresolution = 576;
+}
+*/
+
+$cmd = "fileDialog -dm " + "\"./*.rz2\"";
+string $filePath = eval($cmd);
+print("File " + $filePath + " opened OK\n");
+int $file_id = fopen ($filePath, "r");
+int $end;
+string $trk;
+	
+	do
+	{
+	
+	string $buffer[];
+	string $nextLine1;
+	string $numTokens;
+	$nextLine1 = `fgetline $file_id`;
+	$numTokens = tokenize($nextLine1, $buffer);
+	$end = 1;
+	
+		if ($buffer[0] == "")
+		{
+		print "tracks created";
+		$end = 0;
+		//break;
+		} 
+	
+	
+		if ($buffer[0] == "pointTrack")
+		{
+		//print "got to pointtrack";
+		//break;
+		int $num = (int)$buffer[2];
+		string $propName;
+		string $locName = substring ($buffer[1], 2, size($buffer[1])-1);
+		if ($keepNames == 1) {
+			$propName = $locName;
+		} else {
+			$propName = "track" + $num;
+		}
+
+		string $trk = `makeNameUnique ($propName)`;
+		spaceLocator -n $trk;
+		spaceLocator -n ("R" + $trk);
+		parent ("R" + $trk) $trk;
+		addAttr -ln pixelsX -at double $trk;
+		setAttr -e -keyable true ($trk + ".pixelsX");
+		addAttr -ln pixelsY -at double $trk;
+		setAttr -e -keyable true ($trk + ".pixelsY");
+		addAttr -ln Xres -at long $trk;
+		setAttr -e -keyable true ($trk + ".Xres") $Xresolution;
+		addAttr -ln Yres -at long $trk;
+		setAttr -e -keyable true ($trk + ".Yres") $Yresolution;
+		addAttr -ln trackActive -at long $trk;
+		setAttr -e -keyable true ($trk + ".trackActive");
+		
+		int $index;
+		int $start = `playbackOptions -query -minTime`;
+		int $end =`playbackOptions -query -maxTime`;
+		
+		for ($index = $start; $index <= $end; $index++)
+		{
+		setKeyframe -t $index -v 0 ($trk + ".trackActive");
+		}
+		
+		string $trkAct;
+		$trkAct = ($trk + ".visibility=" + $trk + ".trackActive");
+		expression -s  $trkAct -o $trk -n ($trk + "Active") -ae 1 -uc all ; 
+		
+		
+		setAttr -lock true ($trk + ".rx");
+		setAttr -lock true ($trk + ".ry");
+		setAttr -lock true ($trk + ".rz");
+		
+		parent $trk $camName;
+		
+		string $trkTransX;
+		$trkTransX = ($trk + ".tx=((" + $trk + ".pixelsX-(" + $trk + ".Xres/2))/" + $trk + ".Xres)*(((" + $camName + ".hfa*25.4)/" + $camName + ".focalLength)*(" + $trk + ".tz * -1))");
+		expression -s  $trkTransX -o $trk -n ($trk + "transX") -ae 1 -uc all ;
+		
+		string $trkTransY;
+		$trkTransY = ($trk + ".ty=((" + $trk + ".pixelsY-(" + $trk + ".Yres/2))/" + $trk + ".Yres)*(((" + $camName + ".vfa*25.4)/" + $camName + ".focalLength)*" + $trk + ".tz)");
+		expression -s  $trkTransY -o $trk -n ($trk + "transY") -ae 1 -uc all ;
+		
+		setAttr ($trk + ".tz") -5;
+
+
+		int $end2 = 1;
+		float $time;	
+			
+			do
+			{
+	
+			string $buffer2[];
+			string $nextLine2;
+			string $numTokens2;
+			$nextLine2 = `fgetline $file_id`;
+			$numTokens2 = tokenize($nextLine2, $buffer2);
+				
+				float $time = (float)$buffer2[0];
+				float $trkX = (float)$buffer2[1];
+				float $trkY = (float)$buffer2[2];
+				
+			
+				if ($buffer2[0] == "{")
+				{
+				print "begin track";
+				//break;
+				}
+				
+				else if ($buffer2[0] == "}")
+				{
+				print "track created";
+				$end2 = 0;
+				//break;
+				}
+				
+				else
+				{
+				//print "keyframe";
+				setKeyframe -t $time -v $trkX ($trk + ".pixelsX");
+				setKeyframe -t $time -v $trkY ($trk + ".pixelsY");
+				setKeyframe -t $time -v 1 ($trk + ".trackActive");
+				//break;
+				}
+			
+			}
+			while ($end2 > 0);
+			
+		}
+
+
+		if ($buffer[0] == 1) 
+		{
+		float $time = (float)$buffer[0];
+		float $trkX = (float)$buffer[1];
+		float $trkY = (float)$buffer[2];
+		setKeyframe -t $time -v $trkX ($trk + ".translateX");
+		setKeyframe -t $time -v $trkY ($trk + ".translateY"); 
+		//break;
+		}
+	
+	}
+	while ($end > 0);
+	
+
+
+string $trks[] = `ls -type locator "track*"`;
+string $trk;
+
+for ($trk in $trks)
+{
+select -r $trk;
+pickWalk -d up;
+string $sels[] = `ls -sl`;
+string $trk = $sels[0];
+setAttr ($trk + ".tz") -1;
+setAttr ($trk + ".sx") 0.01;
+setAttr ($trk + ".sy") 0.01;
+setAttr ($trk + ".sz") 0.01;
+}
+
+}

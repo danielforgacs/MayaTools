@@ -1,0 +1,148 @@
+
+////////////////////// DELETE RENDER LAYER ////////////////////////////////////////
+
+global proc deleteRenderlayer()
+    {
+    editRenderLayerGlobals -currentRenderLayer defaultRenderLayer;    
+    string $deleteList[] = {"wireframeShader",  "wireframeSG", "wireframe"};
+    string $delete; for ($delete in $deleteList)
+        {
+        string $wireframeExists = `objExists $delete`;
+        if ($wireframeExists == 1)
+            {
+            delete $delete;
+            }
+        }  
+     }  
+////////////////////////////////////////////////////////////    
+    
+    
+    
+////////////////////// CREATE RENDER LAYER ////////////////////////////////////////
+    
+global proc createRenderlayer()
+    { 
+    
+    string $wireframeExists = `objExists "wireframeSG"`;
+    if ($wireframeExists == 0)
+        {
+       // string $add[] = `ls -sl`; 
+        createRenderLayer -global -makeCurrent -n "wireframe";
+        string $wireframeShader = `shadingNode -asShader surfaceShader -n "wireframeShader"`;
+        string $wireframeSG = `sets -renderable true -noSurfaceShader true -empty -name "wireframeSG"`;
+        connectAttr -f ($wireframeShader + ".outColor") ($wireframeSG + ".surfaceShader");
+        setAttr ("wireframeSG.miContourEnable") 1;
+
+         connectAttr wireframeSG.message wireframe.shadingGroupOverride;
+  
+//assign wireframe shader to prop set
+    //   for ($y=0; $y<size($add); $y++)
+     //      {
+     //      select $add[$y]; pickWalk -d up; 
+      //     sets -e -forceElement $wireframeSG;
+     //      print ("done assigning..." + $add[$y]+"\n");
+     //      }
+
+    
+////// SET RENDER GLOBALS //////////////////////////////////////
+    
+    string $wireframeExists = `objExists "miDefaultFramebuffer.contourEnable"`;
+    if ($wireframeExists == 1)
+        {
+    //enable render globals for contours
+        editRenderLayerAdjustment "miDefaultFramebuffer.contourEnable";
+        setAttr "miDefaultFramebuffer.contourClearImage" 1;
+        setAttr "miDefaultFramebuffer.contourClearColorR" 1 ;
+        setAttr "miDefaultFramebuffer.contourClearColorG" 1 ;
+        setAttr "miDefaultFramebuffer.contourClearColorB" 1 ;
+    
+    //set the draw by diffrence
+        setAttr "miDefaultOptions.enableContourTexUV" 0;
+        setAttr "miDefaultOptions.enableContourDist" 0;
+        setAttr "miDefaultOptions.enableContourDepth" 0;
+        setAttr "miDefaultOptions.enableContourColor" 0;
+    
+    //set contours samples
+        setAttr "miDefaultFramebuffer.contourEnable" 1;
+        setAttr "miDefaultFramebuffer.contourSamples" 3;
+        setAttr "miDefaultFramebuffer.contourFilter" 2;
+        setAttr "miDefaultOptions.contourPriData" 1;
+        setAttr "miDefaultOptions.contourMaterial" 0;
+        setAttr "miDefaultOptions.contourNormal" 10;
+        }
+        
+     }
+     
+    float $wfc[] = `colorSliderGrp -q -rgb "wireColor"`;
+    float $wfw = `floatSliderGrp -q -v "wireWith"`;
+    float $wfbgc[] = `colorSliderGrp -q -rgb  "backgroundColor"`; 
+    
+    
+    setAttr "miDefaultFramebuffer.contourClearColor" -type double3 $wfbgc[0] $wfbgc[1] $wfbgc[2];
+    setAttr ("wireframeSG.miContourColor") -type double3 $wfc[0] $wfc[1] $wfc[2] ;
+    setAttr ("wireframeSG.miContourWidth") $wfw; 
+        
+
+} 
+     
+////////////////////////////////////////////////////////////////////////////////////
+        
+       
+       
+       
+        
+        
+////////////////////////////////////////////////////////////////////////////////////
+//////////////// CREATE WIREFRAME LAYER RENDERLAER GUI /////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+ 
+global proc createWireframeLayerGUI()
+     {
+      if(`window -q -ex createWireframeLayerGUI`)
+      {deleteUI createWireframeLayerGUI;}
+
+       window -title "createWireframeLayer" -w 200 -h 30 createWireframeLayerGUI;
+
+        float $currWC[] = {0,0,1};
+        float $currWidth = 1.0;
+        float $currBGC[] = {0,0,0};
+        
+        string $wireframeExists = `objExists "wireframeSG"`;
+        if ($wireframeExists == 1)
+            {
+            $currWC = `getAttr "wireframeSG.miContourColor" `;
+            $currWidth = `getAttr "wireframeSG.miContourWidth"`;
+            $currBGC = `getAttr "miDefaultFramebuffer.contourClearColor"`;
+            }           
+
+
+        columnLayout -adjustableColumn true;
+        text -label "Create Wireframe Layer";
+        
+        columnLayout  -cal left ;
+        colorSliderGrp -label "Wireframe Colour" -rgb $currWC[0] $currWC[1] $currWC[2] "wireColor";
+        floatSliderGrp -w 390 -label "Wireframe Width" -field true -min 0.0 -max 2.0 -value $currWidth "wireWith";
+        colorSliderGrp -label "Background Colour" -rgb $currBGC[0] $currBGC[1] $currBGC[2] "backgroundColor"; 
+        setParent..;
+        
+        
+        int $textEnable = 0; int $buttonEnable = 1;
+        
+        string $mentalRayEx = `objExists "miDefaultFramebuffer.contourEnable"`;
+         if ($mentalRayEx == 0)
+            {
+           text -fn boldLabelFont -label "Please Switch To Mental Ray Globals";
+            $buttonEnable = 0;
+            }
+
+            
+        rowLayout -numberOfColumns 2 -cw2 200 200;
+        button -en $buttonEnable -bgc 0.0 0.8 0.1 -label "Create Wireframe Layer" -w 200 -c createRenderlayer;    
+        button -en $buttonEnable  -bgc 0.85 0.0 0.0 -label "Delete Wireframe Layer" -w 200  -c deleteRenderlayer;
+        showWindow createWireframeLayerGUI;
+
+    }
+createWireframeLayerGUI;
+
+////////////////////////////////////////////////////////////////////////////////////
+

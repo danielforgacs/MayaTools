@@ -1,0 +1,9 @@
+string $selectedItems[] = `ls -sl`;
+string $constrainTarget = $selectedItems[0];
+int $count = 1;
+for( ; $count < size( $selectedItems ); $count++ )
+{
+	select -replace $constrainTarget;
+	select -add $selectedItems[$count];
+	parentConstraint -mo -weight 1;
+}

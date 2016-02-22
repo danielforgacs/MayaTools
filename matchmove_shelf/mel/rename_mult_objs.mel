@@ -1,0 +1,131 @@
+
+/* This file downloaded from Highend3d.com
+''
+'' Highend3d.com File Information:
+''
+'' Script Name: renamingTool v1.0
+'' Author: Seith
+'' Last Updated: October 14, 2002
+'' Update/Change this file at:
+'' http://www.highend3d.com/maya/mel/?section=utilities#1955
+''
+'' Please do not alter any information above this line
+'' it is generated dynamically by Highend3d.com and will
+'' be changed automatically on any updates.
+*/
+// ========================
+//	renamingTool
+// ========================
+global string $renamingToolVersion = "1.0";
+// rename using the fields
+global proc doRenaming ()
+{
+string $originString = `textFieldButtonGrp -q -text originString`;
+string $destinationString = `textFieldButtonGrp -q -text destinationString`;
+renameStuff $originString $destinationString ;
+}
+// rename "L_" to "R_"
+global proc prefixRenameLtoR ()
+{
+renameStuff "L_" "R_" ;
+}
+// rename "left_" to "right_"
+global proc prefixRenameLeftToRight ()
+{
+renameStuff "left_" "right_" ;
+}
+// rename "R_" to "L_"
+global proc prefixRenameRtoL ()
+{
+renameStuff "R_" "L_" ;
+}
+// rename "right_" to "left_"
+global proc prefixRenameRightToLeft ()
+{
+renameStuff "right_" "left_" ;
+}
+// ===============
+// renameStuff
+// ===============
+global proc renameStuff ( string $searchText, string $replaceText )
+{
+string $initialSelection[] = `ls -l -sl` ;
+string $descendants[] = `listRelatives -f -c -ad $initialSelection` ;
+select $descendants $initialSelection ;
+string $mySelection[] = `ls -l -sl` ;
+for ($i = 0; $i < `size $mySelection`; $i++)
+{
+int $numTokensFirst ;
+string $bufferFirst[] ;
+$numTokensFirst = `tokenize $mySelection[$i] "|" $bufferFirst`;
+string $exactName = $bufferFirst[$numTokensFirst - 1] ; //	print (" exactName = " + $exactName) ;
+string $newName = `substitute $searchText $exactName $replaceText`; //	print (" newName = " + $newName) ; //	print (" mySelection $i = " + $mySelection[$i] ) ;
+rename $mySelection[$i] $newName;
+}
+}
+// ==================================================
+// prefixRename Window
+// ==================================================
+global proc renamingToolUI ()
+{
+global string $renamingToolVersion ;
+if ((`window -ex renamingToolWindow`) == true) deleteUI renamingToolWindow;
+window -widthHeight 145 340 -title ("renamingTool " + $renamingToolVersion) renamingToolWindow;
+string $form = `formLayout -numberOfDivisions 100`;
+string $firstField = `textFieldButtonGrp -cw3 70 20 1 -adj 2 -label "Replace:" -text "" originString`;
+string $secondField = `textFieldButtonGrp -cw3 70 20 1 -adj 2 -label "By:" -text "" destinationString`;
+$sep0 = (`separator -hr on -style "out" -width 140`);
+$sep1 = (`separator -hr on -style "out" -width 140`);
+string $a1 = `button -label "REPLACE!" -command "doRenaming"`;
+string $a2 = `button -label "Add Prefix" -command "prefixHierarchy"`;
+string $b1 = `button -label "L_ -> R_" -command "prefixRenameLtoR"`;
+string $b2 = `button -label "Left_ -> Right_" -command "prefixRenameLeftToRight"`;
+string $c1 = `button -label "R_ -> L_" -command "prefixRenameRtoL"`;
+string $c2 = `button -label "Right_ -> Left_" -command "prefixRenameRightToLeft"`;
+formLayout -edit
+// ====================================================================
+-attachForm $sep0 "top" 0
+-attachForm $sep0 "left" 0
+-attachForm $sep0 "right" 0
+// ====================================================================
+-attachControl $firstField "top" 2 $sep0
+-attachForm $firstField "left" 4
+-attachForm $firstField "right" 2
+-attachControl $secondField "top" 2 $firstField
+-attachForm $secondField "left" 4
+-attachForm $secondField "right" 2
+// ====================================================================
+-attachControl $a1 "top" 4 $secondField
+-attachForm $a1 "left" 4
+-attachPosition $a1 "right" 0 33
+-attachControl $a2 "top" 2 $a1
+-attachForm $a2 "left" 4
+-attachPosition $a2 "right" 0 33
+// ====================================================================
+-attachControl $b1 "top" 4 $secondField
+-attachControl $b1 "left" 4 $a1
+-attachNone $b1 "bottom"
+-attachPosition $b1 "right" 33 77
+-attachControl $b2 "top" 2 $b1
+-attachControl $b2 "left" 4 $a2
+-attachNone $b2 "bottom"
+-attachPosition $b2 "right" 33 77
+// ====================================================================
+-attachControl $c1 "top" 4 $secondField
+-attachControl $c1 "left" 4 $b1
+-attachNone $c1 "bottom"
+-attachForm $c1 "right" 4
+-attachControl $c2 "top" 2 $c1
+-attachControl $c2 "left" 4 $b2
+-attachNone $c2 "bottom"
+-attachForm $c2 "right" 4
+// ====================================================================
+-attachControl $sep1 "top" 2 $a2
+-attachForm $sep1 "left" 0
+-attachNone $sep1 "bottom"
+-attachForm $sep1 "right" 0
+// ====================================================================
+$form;
+showWindow renamingToolWindow;
+}
+renamingToolUI ;

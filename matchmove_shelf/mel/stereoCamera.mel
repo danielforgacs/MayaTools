@@ -1,0 +1,83 @@
+
+/////////////// constrain and conect relevant cameras /////////////////////////////
+
+global proc constrainAndConnect(string $left, string $stereoLeft)
+    {        
+    pointConstraint $left $stereoLeft; orientConstraint $left $stereoLeft;
+    $left = getCameraShape($left); $stereoLeft = getCameraShape($stereoLeft);
+    string $attribute[] = `listAttr -c -se -v -s -u -r -w -o -hd -sa $stereoLeft`;
+    string $attr;
+    for ($attr in $attribute)
+        {
+        if (`attributeExists $attr $left`)
+            {
+            if (!`gmatch $attr "*.*"`)
+                {
+                int $conn = `size(listConnections ($stereoLeft + "." +  $attr))`;
+                if ($conn== 0)
+                    { 
+                    connectAttr ($left + "." +  $attr) ($stereoLeft + "." + $attr);
+                    print ("Connected..." + $left + "." +  $attr + " to " + $stereoLeft + "." + $attr + "\n");
+                    }   
+                }
+           }
+    }
+    string $imagePlane[] = `listConnections -type imagePlane $left`;
+    connectAttr ($imagePlane[0] + ".message") ($stereoLeft + ".imagePlane[0]");
+    print ("Connected..." + $imagePlane[0] + " to " + $stereoLeft +"\n");
+}  
+ 
+//////////////////////////////////////////////////////////////////////////////////////    
+    
+    
+    
+    
+    
+/////////////// get camera shape if transform selected /////////////////////////////
+ 
+global proc string getCameraShape(string $dragger_camera)
+    {
+    string $objectType = `objectType $dragger_camera`;
+    if (!`gmatch $objectType "camera"`)
+        {
+        string $camera[] = `listRelatives -s $dragger_camera`;
+        $dragger_camera = $camera[0];
+        return $dragger_camera;
+        }   
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+global proc createStereoCamera()
+    {
+    
+///// find correct cameras for selection
+
+    string $leftRightCam[] =`ls -sl`;
+    string $shape = getCameraShape($leftRightCam[0]);
+    string $left; string $right;
+    float $hfo = `getAttr ($leftRightCam[0] + ".hfo")`;
+    if ($hfo == 0)
+        {
+        $left = $leftRightCam[1];
+        $right = $leftRightCam[0];
+        }
+    if (!$hfo == 0)
+        {
+        $left = $leftRightCam[0];
+        $right = $leftRightCam[1];
+        }     
+ 
+/////
+     
+    file -import -type "mayaBinary" ("/" + "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/stereoCam/stereoCamera.mb");
+    string $stereoLeft = "stereoCameraLeft"; string $stereoRight = "stereoCameraRight"; $stereo = "stereoCamera";     
+    pointConstraint $left $right $stereo; orientConstraint $left $right $stereo;
+    constrainAndConnect($left, $stereoLeft); constrainAndConnect($right, $stereoRight);
+
+    }
+createStereoCamera;

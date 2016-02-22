@@ -1,0 +1,48 @@
+global proc setClippingPlanes()
+    {
+    string $list[] = `ls -type camera`;
+    string $items[] = {"perspShape", "frontShape", "sideShape", "topShape"};
+    string $cameras[] = stringArrayRemove($items, $list);
+    
+    
+    
+    string $cam;
+    for ($cam in $cameras)
+        {       
+        string $camTran[] = `listRelatives -p $cam`;
+        float $pos2[] = `getAttr ($camTran[0] + ".translate")`;
+    
+        string $listAllObjs[] = `ls -type transform`;   
+        string $orthCamera[] = {"persp", "front", "side", "top"};
+        string $listAllObj[] = stringArrayRemove($orthCamera, $listAllObjs);
+        
+        float $furthestDist = 0 ; string $furthestObj;
+        string $imagePlanes[] = `listConnections -type "imagePlane" $cam`;
+        if (size($imagePlanes) > 0)
+            {
+            $furthestObj = $imagePlanes[0];
+            $furthestDist = `getAttr ($furthestObj + ".depth")`;
+            }
+       // print ("Furtherest object from " + $cam + " is " + $furthestObj + " and " + $furthestDist + " from camera\n");
+         
+    
+        for ($o=0; $o<size($listAllObj); $o++)
+            {               
+            float $pos1[] = `getAttr ($listAllObj[$o] + ".translate")`;
+            float $dist = sqrt(((($pos1[0]-$pos2[0])*($pos1[0]-$pos2[0]))+(($pos1[1]-$pos2[1])*($pos1[1]-$pos2[1]))+(($pos1[2]-$pos2[2])*($pos1[2]-$pos2[2]))));
+            if ($dist > $furthestDist)
+                {
+                $furthestDist = $dist;
+                $furthestObj = $listAllObj[$o];
+                }
+            }
+        if (size($imagePlanes) > 0)
+            {
+           setAttr ($imagePlanes[0] + ".depth") ($furthestDist +  80);
+            }
+            
+        print ("Furtherest object from " + $camTran[0] + " is " + $furthestObj + " and " + ($furthestDist + 100) + " from camera\n");
+        setAttr ($camTran[0] + ".farClipPlane") ($furthestDist * 100);
+        }
+    }
+setClippingPlanes;

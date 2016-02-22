@@ -1,0 +1,183 @@
+
+global proc updateProj()
+    {
+    string $projectionNode[] = `ls -type projection "projNode"`; 
+    setAttr ($projectionNode[0] + ".projType") 8;
+    string $currentSel[]  = `ls -sl`;
+    select "projFile"; select $currentSel;
+    }
+
+global proc string getModelPanel()
+    {   	
+	string $modelPanel;
+	if (`modelEditor -q -activeView modelPanel1`) $modelPanel = "modelPanel1";
+	if (`modelEditor -q -activeView modelPanel2`) $modelPanel = "modelPanel2";
+	if (`modelEditor -q -activeView modelPanel3`) $modelPanel = "modelPanel3";
+	if (`modelEditor -q -activeView modelPanel4`) $modelPanel = "modelPanel4";
+
+	// dragger works now for up to 10 tear off panels
+	// if you need more, add more lines and increase the numbers...
+	if (`modelEditor -exists modelPanel5`) if (`modelEditor -q -activeView modelPanel5`) $modelPanel = "modelPanel5";	
+	if (`modelEditor -exists modelPanel6`) if (`modelEditor -q -activeView modelPanel6`) $modelPanel = "modelPanel6";
+	if (`modelEditor -exists modelPanel7`) if (`modelEditor -q -activeView modelPanel7`) $modelPanel = "modelPanel7";
+	if (`modelEditor -exists modelPanel8`) if (`modelEditor -q -activeView modelPanel8`) $modelPanel = "modelPanel8";
+	if (`modelEditor -exists modelPanel9`) if (`modelEditor -q -activeView modelPanel9`) $modelPanel = "modelPanel9";
+	if (`modelEditor -exists modelPanel10`) if (`modelEditor -q -activeView modelPanel10`) $modelPanel = "modelPanel10";
+	if (`modelEditor -exists modelPanel11`) if (`modelEditor -q -activeView modelPanel11`) $modelPanel = "modelPanel11";
+	if (`modelEditor -exists modelPanel12`) if (`modelEditor -q -activeView modelPanel12`) $modelPanel = "modelPanel12";
+	if (`modelEditor -exists modelPanel13`) if (`modelEditor -q -activeView modelPanel13`) $modelPanel = "modelPanel13";
+	if (`modelEditor -exists modelPanel14`) if (`modelEditor -q -activeView modelPanel14`) $modelPanel = "modelPanel14";
+	if (`modelEditor -exists modelPanel15`) if (`modelEditor -q -activeView modelPanel15`) $modelPanel = "modelPanel15"; 
+    return $modelPanel;
+    }
+    
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+/////////////// get camera shape if transform selected /////////////////////////////
+ 
+global proc string getCameraShape(string $dragger_camera)
+    {
+    string $objectType = `objectType $dragger_camera`;
+    if (!`gmatch $objectType "camera"`)
+       {
+        string $camera[] = `listRelatives -s $dragger_camera`;
+        $dragger_camera = $camera[0];
+        } 
+	return $dragger_camera;	  
+    }
+    
+   
+///////////////////////////////////////////////////////////////////////////////////////
+
+global proc deleteRotoView()
+    {
+     editRenderLayerGlobals -currentRenderLayer defaultRenderLayer;    
+    string $delete[] = {"projFile", "projNode", "shadingNode", "shadingNodeSG", "place2dTextFile", "rotoView"};
+    string $del; for ($del in $delete){
+    if (`objExists $del`){delete $del;}}
+    scriptJob -ka; rotoViewGUI; 
+    string $modelPanel = getModelPanel();
+    setWireframeOnShadedOption false $modelPanel;
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+global proc createRotoView()
+    {
+     
+    string $currentSel[] = `ls -sl`;
+    string $modelPanel = getModelPanel();
+    string $cameras = `modelEditor -q -camera $modelPanel`;
+    $cameras = getCameraShape($cameras);
+    string $listConn[] = `listConnections -type "imagePlane" $cameras`; 
+    string $imagePath = `getAttr ($listConn[0] + ".imageName")`;
+
+    if (size($imagePath) == 0)
+        {  
+        print "no image plane through viewed camera";
+        }
+     else
+         {
+    int $exists = `objExists "projFile"`;
+    if ($exists == 0)
+        {
+        createRenderLayer -global -makeCurrent -n "rotoView";
+        setWireframeOnShadedOption true $modelPanel;
+        string $projFile = `shadingNode -asTexture file -n "projFile"`;
+        string $place2dTextFile = `shadingNode -asUtility place2dTexture -n "place2dTextFile"`;
+        string $attrs[] = `listAttr $place2dTextFile`;
+
+/////////////////////////// create file texture node and 2d placement ///////////////////////////////////////
+    
+    string $removeAttr[] = {"isHierarchicalConnection", "binMembership", "message", "*.*", "*bounding*", "rmbCommand", "miLensShaderList",
+    "center", "*atrix", "transMinusRotatePivot*", "m*Limit*", "geometry", "dynamics", "specifiedManipLocation", "rotationInterpolation", "miOutputShaderList"};
+        
+    string $attributeToRemove[];  int $dontAdd; int $o = 0;
+    for ($i=0; $i<size($attrs); $i++)
+        {string $remove; for ($remove in $removeAttr){$dontAdd = 0;
+           if (!`gmatch $attrs[$i] $remove`){$dontAdd = 1;}
+           if ($dontAdd == 0){$attributeToRemove[$o] = $attrs[$i]; $o++;}}}   
+    
+        string $connectAttr[] = stringArrayRemove($attributeToRemove, $attrs);
+
+//////////// create reflection camera and connect attrubies ///////////////////
+      
+    string $attrConn;
+    for ($attrConn in $connectAttr){
+        if (`attributeExists $attrConn $projFile`){
+            connectAttr -f ($place2dTextFile + "." + $attrConn) ($projFile + "." + $attrConn) ;
+            print ("Connected..." + $place2dTextFile + "." +  $attrConn + " to " + $projFile + "." + $attrConn + "\n");}} 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    setAttr -type "string" ($projFile + ".fileTextureName") $imagePath;        
+    setAttr ($projFile + ".useFrameExtension") 1;
+    
+    
+    string $projNod = `shadingNode -asUtility projection -n "projNode"`;
+    string $shadingNod = `shadingNode -asShader surfaceShader -n "shadingNode"`;
+    string $shadingNodSG = `sets -r true -nss true -empty -n "shadingNodeSG"`;
+    connectAttr -f ($shadingNod + ".outColor") ($shadingNodSG + ".surfaceShader");
+    connectAttr -f ($projFile + ".outColor") ($projNod + ".image");
+    connectAttr ($cameras + ".message") ($projNod + ".linkedCamera");
+    connectAttr -f ($projNod +".outColor") ($shadingNod + ".outColor");
+    
+    addAttr -ln "resolution" -at long $shadingNod;
+    setAttr ($shadingNod + ".resolution") 256;
+    setAttr ($projNod + ".projType") 8; setAttr ($projNod + ".fitFill") 1;
+    }
+  //  string $engine[] =`ls "shadingNodeSG"`;
+  //  select $selection; sets -e -forceElement $engine[0];
+    
+    connectAttr shadingNodeSG.message rotoView.shadingGroupOverride;
+
+///////////////////////////////////// create script job on selected objects /////////////////////////////////////////////////////////////
+ 
+     string $selections[] = `ls -type  "mesh"`;
+     string $nurbs[] = `ls -type "makeNurbSphere"`;
+     stringArrayCatenate($selections, $nurbs);
+
+    string $scriptJobs[];
+    for ($i=0; $i<size($selections); $i++)
+        {
+        string $transform[] = `listRelatives -p $selections[$i]`;
+        if (`attributeExists "translate" $transform[0] `)
+            {
+            scriptJob -attributeChange ($transform[0] + ".translate") updateProj;
+            scriptJob -attributeChange ($transform[0]  + ".rotate") updateProj;
+            scriptJob -attributeChange ($transform[0] + ".scale") updateProj;
+            }
+       } 
+       
+       select "projFile";
+       }   
+
+       rotoViewGUI; 
+}
+
+
+
+
+
+global proc rotoViewGUI()
+    {
+    if(`window -q -ex rotoLayer`)
+    {deleteUI rotoLayer;}  
+    window -title "rotoLayer" rotoLayer;
+    frameLayout -label "Roto View" -borderStyle "in" -w 414 -bgc 0.41 0.518 0 ;
+    columnLayout;
+    if (`objExists "projFile"`)
+        {
+        attrFieldSliderGrp -label "Resolution:" -min -0 -max 1000 -at ("shadingNode.resolution");
+        }
+    int $w = 207;
+    rowLayout -numberOfColumns 2 -cw2 $w $w;
+    button -bgc 0.200 0.1 0.1 -label "Create Roto View" -w $w -c createRotoView;    
+    button -bgc 0.832 0.5 0.832 -label "Delete Roto View" -w $w  -c deleteRotoView;
+    setParent..;
+    showWindow rotoLayer;    
+    }
+rotoViewGUI;
+

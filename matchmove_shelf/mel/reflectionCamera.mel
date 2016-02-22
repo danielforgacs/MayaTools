@@ -1,0 +1,75 @@
+
+global proc reflectionCamera()
+    {   
+    
+    /// connect shaped and transform
+    string $currcam[] = `ls -sl`;
+    
+    string $reflCamera[] = `duplicate $currcam[0]`;
+    string $cameraShape[] = `listRelatives -c $currcam[0]`;
+    connectCamera($currcam[0],  $reflCamera[0]);
+    connectCamera($cameraShape[0], $reflCamera[1]);
+    
+    
+    /// create multiply divide node
+    string $multiPly = `createNode "multiplyDivide" -n "invert_verticalFilm0ffset"`;
+    setAttr ($multiPly + ".input2Y") -1; cycleCheck -e off;
+    connectAttr -f ($cameraShape[0] + ".verticalFilmOffset") ($multiPly + ".input1Y");
+    connectAttr -f  ($multiPly + ".outputY")  ($cameraShape[0] + ".verticalFilmOffset");
+    
+    /// flip camera under node
+
+    select $reflCamera[0];  group -n "reflectionCamera_"; setAttr "reflectionCamera_.scaleY" -1;
+    
+    rename $reflCamera[0] ($currcam[0] + "reflection");
+    print "done";
+    }
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+/////////////// gather camera attributes and remove certain ones ///////////////////////////////
+
+global proc connectCamera(string $cam, string $reflCam)
+    {
+    string $removeAttr[] = {"isHierarchicalConnection", "binMembership", "message", "*.*", "*bounding*", "rmbCommand", "miLensShaderList",
+    "center", "*atrix", "transMinusRotatePivot*", "m*Limit*", "geometry", "dynamics", "specifiedManipLocation", "rotationInterpolation",
+    "miOutputShaderList"};
+    
+    string $attributes[];  int $dontAdd; int $o = 0;
+    string $attrs[] = `listAttr $cam`;
+    for ($i=0; $i<size($attrs); $i++)
+        {
+        string $remove; for ($remove in $removeAttr)
+           {
+           $dontAdd = 0;
+           if (!`gmatch $attrs[$i] $remove`){$dontAdd = 1;}
+           if ($dontAdd == 0){$attributes[$o] = $attrs[$i]; $o++;}
+           }
+        }   
+    string $connectAttr[] = stringArrayRemove($attributes, $attrs);
+
+//////////// create reflection camera and connect attrubies ///////////////////
+  
+    string $attrConn;
+    for ($attrConn in $connectAttr)
+            {
+            if (`attributeExists $attrConn $cam`)
+                {
+                setAttr -lock false ($reflCam + "." + $attrConn);
+                string $currentConn[] = `listConnections ($reflCam + "." +  $attrConn)`;
+                if (size($currentConn) == 0)
+                    {
+                    connectAttr ($cam + "." +  $attrConn) ($reflCam + "." + $attrConn);
+                    print ("Connected..." + $cam + "." +  $attrConn + " to " + $reflCam + "." + $attrConn + "\n");
+                    }
+                }
+           }    
+    }
+    
+
+
+reflectionCamera;
+    

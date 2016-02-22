@@ -1,0 +1,506 @@
+/* This file downloaded from Highend3d.com
+''  
+''  Highend3d.com File Information:
+''  
+''    Script Name: Time Remapping
+''    Author: flewis 
+''    Last Updated: Jun 29, 2009
+''    Update/Change this file at:
+''    http://Highend3d.com/maya/downloads/mel_scripts/animation/3135.html
+''  
+''  Please do not alter any information above this line
+''  it is generated dynamically by Highend3d.com and will
+''  be changed automatically on any updates.
+*/
+// Toggle Time Remapping on or off for the selected objects
+
+// Time Remapping MEL script v02, Copyright 2009 by Fred Lewis
+
+
+
+// Define the "Add Time Remapping" Process:
+
+
+proc addTR(string $selected) {
+
+
+	// Add Time Remapping Channel
+
+
+	addAttr -ln "TimeRemapping"  -at double  $selected;
+
+	setAttr ($selected + ".TimeRemapping") -e-keyable true;
+
+	$startTime = `playbackOptions -q -ast`;
+	$endTime = `playbackOptions -q -aet`;
+	setKeyframe -t $startTime -v $startTime ($selected + ".TimeRemapping");
+	setKeyframe -t $endTime -v $endTime ($selected + ".TimeRemapping");
+
+
+	//  Replace Transform Connections With Expressions
+
+
+	$tranXChan = ($selected + ".translate.translateX");
+	if (`connectionInfo -id $tranXChan`) {
+		$tranXKeys = (`connectionInfo -sfd $tranXChan`);
+		disconnectAttr $tranXKeys $tranXChan;
+		expression -s ("$junk = " + $tranXKeys + ";\r\n" + $selected 
+			+ ".translateX = `getAttr -t (" + $selected + ".TimeRemapping)" 
+			+ $tranXKeys + "`;")  -o "" -n ($selected + "_translate_X") 
+			-ae 1 -uc none ;
+		$tranXKeys = `plugNode $tranXKeys`;
+		setAttr ($tranXKeys + ".useCurveColor") 1;
+		setAttr ($tranXKeys + ".curveColor") -type double3 1 0 0 ;
+	}
+
+
+	$tranYChan = ($selected + ".translate.translateY");
+	if (`connectionInfo -id $tranYChan`) {
+		$tranYKeys = (`connectionInfo -sfd $tranYChan`);
+		disconnectAttr $tranYKeys $tranYChan;
+		expression -s ("$junk = " + $tranYKeys + ";\r\n" + $selected 
+			+ ".translateY = `getAttr -t (" + $selected + ".TimeRemapping)" 
+			+ $tranYKeys + "`;")  -o "" -n ($selected + "_translate_Y") 
+			-ae 1 -uc none ;
+		$tranYKeys = `plugNode $tranYKeys`;
+		setAttr ($tranYKeys + ".useCurveColor") 1;
+		setAttr ($tranYKeys + ".curveColor") -type double3 0 1 0 ;
+	}
+
+
+	$tranZChan = ($selected + ".translate.translateZ");
+	if (`connectionInfo -id $tranZChan`) {
+		$tranZKeys = (`connectionInfo -sfd $tranZChan`);
+		disconnectAttr $tranZKeys $tranZChan;
+		expression -s ("$junk = " + $tranZKeys + ";\r\n" + $selected 
+			+ ".translateZ = `getAttr -t (" + $selected + ".TimeRemapping)" 
+			+ $tranZKeys + "`;")  -o "" -n ($selected + "_translate_Z") 
+			-ae 1 -uc none ;
+		$tranZKeys = `plugNode $tranZKeys`;
+		setAttr ($tranZKeys + ".useCurveColor") 1;
+		setAttr ($tranZKeys + ".curveColor") -type double3 0 0 1 ;
+	}
+
+
+
+	$rotXChan = ($selected + ".rotate.rotateX");
+	if (`connectionInfo -id $rotXChan`) {
+		$rotXKeys = (`connectionInfo -sfd $rotXChan`);
+		disconnectAttr $rotXKeys $rotXChan;
+		expression -s ("$junk = " + $rotXKeys + ";\r\n" + $selected 
+			+ ".rotateX = `getAttr -t (" + $selected + ".TimeRemapping)" 
+			+ $rotXKeys + "` / 57.296;")  -o "" -n ($selected + "_rotate_X") 
+			-ae 1 -uc none ;
+		$rotXKeys = `plugNode $rotXKeys`;
+		setAttr ($rotXKeys + ".useCurveColor") 1;
+		setAttr ($rotXKeys + ".curveColor") -type double3 1 0 0 ;
+	}
+
+
+
+	$rotYChan = ($selected + ".rotate.rotateY");
+	if (`connectionInfo -id $rotYChan`) {
+		$rotYKeys = (`connectionInfo -sfd $rotYChan`);
+		disconnectAttr $rotYKeys $rotYChan;
+		expression -s ("$junk = " + $rotYKeys + ";\r\n" + $selected 
+			+ ".rotateY = `getAttr -t (" + $selected + ".TimeRemapping)" 
+			+ $rotYKeys + "` / 57.296;")  -o "" -n ($selected + "_rotate_Y")
+			-ae 1 -uc none ;
+		$rotYKeys = `plugNode $rotYKeys`;
+		setAttr ($rotYKeys + ".useCurveColor") 1;
+		setAttr ($rotYKeys + ".curveColor") -type double3 0 1 0 ;
+	}
+
+
+
+	$rotZChan = ($selected + ".rotate.rotateZ");
+	if (`connectionInfo -id $rotZChan`) {
+		$rotZKeys = (`connectionInfo -sfd $rotZChan`);
+		disconnectAttr $rotZKeys $rotZChan;
+		expression -s ("$junk = " + $rotZKeys + ";\r\n" + $selected 
+			+ ".rotateZ = `getAttr -t (" + $selected + ".TimeRemapping)" 
+			+ $rotZKeys + "` / 57.296;")  -o "" -n ($selected + "_rotate_Z") 
+			-ae 1 -uc none ;
+		$rotZKeys = `plugNode $rotZKeys`;
+		setAttr ($rotZKeys + ".useCurveColor") 1;
+		setAttr ($rotZKeys + ".curveColor") -type double3 0 0 1 ;
+	}
+
+
+	$scalXChan = ($selected + ".scale.scaleX");
+	if (`connectionInfo -id $scalXChan`) {
+		$scalXKeys = (`connectionInfo -sfd $scalXChan`);
+		disconnectAttr $scalXKeys $scalXChan;
+		expression -s ("$junk = " + $scalXKeys + ";\r\n" + $selected 
+			+ ".scaleX = `getAttr -t (" + $selected + ".TimeRemapping)" 
+			+ $scalXKeys + "`;")  -o "" -n ($selected + "_scale_X") 
+			-ae 1 -uc none ;
+		$scalXKeys = `plugNode $scalXKeys`;
+		setAttr ($scalXKeys + ".useCurveColor") 1;
+		setAttr ($scalXKeys + ".curveColor") -type double3 1 0 0 ;
+	}
+
+
+	$scalYChan = ($selected + ".scale.scaleY");
+	if (`connectionInfo -id $scalYChan`) {
+		$scalYKeys = (`connectionInfo -sfd $scalYChan`);
+		disconnectAttr $scalYKeys $scalYChan;
+		expression -s ("$junk = " + $scalYKeys + ";\r\n" + $selected 
+			+ ".scaleY = `getAttr -t (" + $selected + ".TimeRemapping)" 
+			+ $scalYKeys + "`;")  -o "" -n ($selected + "_scale_Y") 
+			-ae 1 -uc none ;
+		$scalYKeys = `plugNode $scalYKeys`;
+		setAttr ($scalYKeys + ".useCurveColor") 1;
+		setAttr ($scalYKeys + ".curveColor") -type double3 0 1 0 ;
+	}
+
+
+	$scalZChan = ($selected + ".scale.scaleZ");
+	if (`connectionInfo -id $scalZChan`) {
+		$scalZKeys = (`connectionInfo -sfd $scalZChan`);
+		disconnectAttr $scalZKeys $scalZChan;
+		expression -s ("$junk = " + $scalZKeys + ";\r\n" + $selected 
+			+ ".scaleZ = `getAttr -t (" + $selected + ".TimeRemapping)" 
+			+ $scalZKeys + "`;")  -o "" -n ($selected + "_scale_Z") 
+			-ae 1 -uc none ;
+		$scalZKeys = `plugNode $scalZKeys`;
+		setAttr ($scalZKeys + ".useCurveColor") 1;
+		setAttr ($scalZKeys + ".curveColor") -type double3 0 0 1 ;
+	}
+
+}
+
+
+
+
+
+// Define the "Remove Time Remapping" Process:
+
+
+proc remTR(string $selected) {
+
+
+	//  Replace Expressions With Transform Connections
+
+
+	$tranXChan = ($selected + ".translate.translateX");
+	if (`connectionInfo -id $tranXChan`) {
+		$tranXExpr = (`connectionInfo -sfd $tranXChan`);
+		$tranXExpr = `plugNode $tranXExpr`;
+		if (`nodeType $tranXExpr` == "expression") {
+			$tranXKeys = (`connectionInfo -sfd ($tranXExpr + ".input[0]")`);
+			if (`nodeType $tranXKeys` == "animCurveTL") {
+				connectAttr -f $tranXKeys $tranXChan;
+				delete $tranXExpr;
+				$tranXKeys = `plugNode $tranXKeys`;
+				setAttr ($tranXKeys + ".useCurveColor") 0;
+				setAttr ($tranXKeys + ".curveColor") -type double3 0 0 0 ;
+			}
+		}
+	}
+
+
+	$tranYChan = ($selected + ".translate.translateY");
+	if (`connectionInfo -id $tranYChan`) {
+		$tranYExpr = (`connectionInfo -sfd $tranYChan`);
+		$tranYExpr = `plugNode $tranYExpr`;
+		if (`nodeType $tranYExpr` == "expression") {
+			$tranYKeys = (`connectionInfo -sfd ($tranYExpr + ".input[0]")`);
+			if (`nodeType $tranYKeys` == "animCurveTL") {
+				connectAttr -f $tranYKeys $tranYChan;
+				delete $tranYExpr;
+				$tranYKeys = `plugNode $tranYKeys`;
+				setAttr ($tranYKeys + ".useCurveColor") 0;
+				setAttr ($tranYKeys + ".curveColor") -type double3 0 0 0 ;
+			}
+		}
+	}
+
+
+	$tranZChan = ($selected + ".translate.translateZ");
+	if (`connectionInfo -id $tranZChan`) {
+		$tranZExpr = (`connectionInfo -sfd $tranZChan`);
+		$tranZExpr = `plugNode $tranZExpr`;
+		if (`nodeType $tranZExpr` == "expression") {
+			$tranZKeys = (`connectionInfo -sfd ($tranZExpr + ".input[0]")`);
+			if (`nodeType $tranZKeys` == "animCurveTL") {
+				connectAttr -f $tranZKeys $tranZChan;
+				delete $tranZExpr;
+				$tranZKeys = `plugNode $tranZKeys`;
+				setAttr ($tranZKeys + ".useCurveColor") 0;
+				setAttr ($tranZKeys + ".curveColor") -type double3 0 0 0 ;
+			}
+		}
+	}
+
+
+	$rotXChan = ($selected + ".rotate.rotateX");
+	if (`connectionInfo -id $rotXChan`) {
+		$rotXExpr = (`connectionInfo -sfd $rotXChan`);
+		$rotXExpr = `plugNode $rotXExpr`;
+		if (`nodeType $rotXExpr` == "expression") {
+			$rotXKeys = (`connectionInfo -sfd ($rotXExpr + ".input[0]")`);
+			if (`nodeType $rotXKeys` == "animCurveTA") {
+				connectAttr -f $rotXKeys $rotXChan;
+				delete $rotXExpr;
+				$rotXKeys = `plugNode $rotXKeys`;
+				setAttr ($rotXKeys + ".useCurveColor") 0;
+				setAttr ($rotXKeys + ".curveColor") -type double3 0 0 0 ;
+			}
+		}
+	}
+
+
+	$rotYChan = ($selected + ".rotate.rotateY");
+	if (`connectionInfo -id $rotYChan`) {
+		$rotYExpr = (`connectionInfo -sfd $rotYChan`);
+		$rotYExpr = `plugNode $rotYExpr`;
+		if (`nodeType $rotYExpr` == "expression") {
+			$rotYKeys = (`connectionInfo -sfd ($rotYExpr + ".input[0]")`);
+			if (`nodeType $rotYKeys` == "animCurveTA") {
+				connectAttr -f $rotYKeys $rotYChan;
+				delete $rotYExpr;
+				$rotYKeys = `plugNode $rotYKeys`;
+				setAttr ($rotYKeys + ".useCurveColor") 0;
+				setAttr ($rotYKeys + ".curveColor") -type double3 0 0 0 ;
+			}
+		}
+	}
+
+
+	$rotZChan = ($selected + ".rotate.rotateZ");
+	if (`connectionInfo -id $rotZChan`) {
+		$rotZExpr = (`connectionInfo -sfd $rotZChan`);
+		$rotZExpr = `plugNode $rotZExpr`;
+		if (`nodeType $rotZExpr` == "expression") {
+			$rotZKeys = (`connectionInfo -sfd ($rotZExpr + ".input[0]")`);
+			if (`nodeType $rotZKeys` == "animCurveTA") {
+				connectAttr -f $rotZKeys $rotZChan;
+				delete $rotZExpr;
+				$rotZKeys = `plugNode $rotZKeys`;
+				setAttr ($rotZKeys + ".useCurveColor") 0;
+				setAttr ($rotZKeys + ".curveColor") -type double3 0 0 0 ;
+			}
+		}
+	}
+
+
+	$scalXChan = ($selected + ".scale.scaleX");
+	if (`connectionInfo -id $scalXChan`) {
+		$scalXExpr = (`connectionInfo -sfd $scalXChan`);
+		$scalXExpr = `plugNode $scalXExpr`;
+		if (`nodeType $scalXExpr` == "expression") {
+			$scalXKeys = (`connectionInfo -sfd ($scalXExpr + ".input[0]")`);
+			if (`nodeType $scalXKeys` == "animCurveTU") {
+				connectAttr -f $scalXKeys $scalXChan;
+				delete $scalXExpr;
+				$scalXKeys = `plugNode $scalXKeys`;
+				setAttr ($scalXKeys + ".useCurveColor") 0;
+				setAttr ($scalXKeys + ".curveColor") -type double3 0 0 0 ;
+			}
+		}
+	}
+
+
+	$scalYChan = ($selected + ".scale.scaleY");
+	if (`connectionInfo -id $scalYChan`) {
+		$scalYExpr = (`connectionInfo -sfd $scalYChan`);
+		$scalYExpr = `plugNode $scalYExpr`;
+		if (`nodeType $scalYExpr` == "expression") {
+			$scalYKeys = (`connectionInfo -sfd ($scalYExpr + ".input[0]")`);
+			if (`nodeType $scalYKeys` == "animCurveTU") {
+				connectAttr -f $scalYKeys $scalYChan;
+				delete $scalYExpr;
+				$scalYKeys = `plugNode $scalYKeys`;
+				setAttr ($scalYKeys + ".useCurveColor") 0;
+				setAttr ($scalYKeys + ".curveColor") -type double3 0 0 0 ;
+			}
+		}
+	}
+
+
+	$scalZChan = ($selected + ".scale.scaleZ");
+	if (`connectionInfo -id $scalZChan`) {
+		$scalZExpr = (`connectionInfo -sfd $scalZChan`);
+		$scalZExpr = `plugNode $scalZExpr`;
+		if (`nodeType $scalZExpr` == "expression") {
+			$scalZKeys = (`connectionInfo -sfd ($scalZExpr + ".input[0]")`);
+			if (`nodeType $scalZKeys` == "animCurveTU") {
+				connectAttr -f $scalZKeys $scalZChan;
+				delete $scalZExpr;
+				$scalZKeys = `plugNode $scalZKeys`;
+				setAttr ($scalZKeys + ".useCurveColor") 0;
+				setAttr ($scalZKeys + ".curveColor") -type double3 0 0 0 ;
+			}
+		}
+	}
+
+
+
+	// Delete Time Remapping Channel
+
+	deleteAttr ($selected + ".TimeRemapping");
+
+
+}
+
+
+
+
+
+// See if Any Transforms Have Animation Curves:
+
+
+proc int seeIfAnim(string $selected) {
+
+	$ifAnim = 0;
+
+	$tranXChan = ($selected + ".translate.translateX");
+	if (`connectionInfo -id $tranXChan`) {
+		$tranXKeys = (`connectionInfo -sfd $tranXChan`);
+		if (`nodeType $tranXKeys` == "animCurveTL") {
+			$ifAnim = 1;
+		}
+	}
+
+
+	$tranYChan = ($selected + ".translate.translateY");
+	if (`connectionInfo -id $tranYChan`) {
+		$tranYKeys = (`connectionInfo -sfd $tranYChan`);
+		if (`nodeType $tranYKeys` == "animCurveTL") {
+			$ifAnim = 1;
+		}
+	}
+
+
+	$tranZChan = ($selected + ".translate.translateZ");
+	if (`connectionInfo -id $tranZChan`) {
+		$tranZKeys = (`connectionInfo -sfd $tranZChan`);
+		if (`nodeType $tranZKeys` == "animCurveTL") {
+			$ifAnim = 1;
+		}
+	}
+
+
+	$rotXChan = ($selected + ".rotate.rotateX");
+	if (`connectionInfo -id $rotXChan`) {
+		$rotXKeys = (`connectionInfo -sfd $rotXChan`);
+		if (`nodeType $rotXKeys` == "animCurveTA") {
+			$ifAnim = 1;
+		}
+	}
+
+
+
+	$rotYChan = ($selected + ".rotate.rotateY");
+	if (`connectionInfo -id $rotYChan`) {
+		$rotYKeys = (`connectionInfo -sfd $rotYChan`);
+		if (`nodeType $rotYKeys` == "animCurveTA") {
+			$ifAnim = 1;
+		}
+	}
+
+
+	$rotZChan = ($selected + ".rotate.rotateZ");
+	if (`connectionInfo -id $rotZChan`) {
+		$rotZKeys = (`connectionInfo -sfd $rotZChan`);
+		if (`nodeType $rotZKeys` == "animCurveTA") {
+			$ifAnim = 1;
+		}
+	}
+
+
+	$scalXChan = ($selected + ".scale.scaleX");
+	if (`connectionInfo -id $scalXChan`) {
+		$scalXKeys = (`connectionInfo -sfd $scalXChan`);
+		if (`nodeType $scalXKeys` == "animCurveTU") {
+			$ifAnim = 1;
+		}
+	}
+
+
+
+	$scalYChan = ($selected + ".scale.scaleY");
+	if (`connectionInfo -id $scalYChan`) {
+		$scalYKeys = (`connectionInfo -sfd $scalYChan`);
+		if (`nodeType $scalYKeys` == "animCurveTU") {
+			$ifAnim = 1;
+		}
+	}
+
+
+	$scalZChan = ($selected + ".scale.scaleZ");
+	if (`connectionInfo -id $scalZChan`) {
+		$scalZKeys = (`connectionInfo -sfd $scalZChan`);
+		if (`nodeType $scalZKeys` == "animCurveTU") {
+			$ifAnim = 1;
+		}
+	}
+
+
+	return $ifAnim;
+
+}
+
+
+
+
+
+// Toggle Time Remapping On or Off:
+
+
+string $selectedL[] = `ls -sl`;        // Get list of selected objects
+
+if (size($selectedL) > 0) {
+
+	string $nonTransformsL[];
+	clear $nonTransformsL;
+
+	string $noAnimsL[];
+	clear $noAnimsL;
+
+	for ($currentObj in $selectedL) {
+
+		if (`nodeType $currentObj` == "transform") {
+
+			if (`attributeExists "TimeRemapping" $currentObj`) {
+				remTR($currentObj);
+			} else if (seeIfAnim($currentObj)){
+				addTR($currentObj);
+			} else {
+				$noAnimsL[size($noAnimsL)] = $currentObj;
+			}
+
+		} else {
+			$nonTransformsL[size($nonTransformsL)] = $currentObj; 
+		}
+
+	}
+
+
+	if (size($noAnimsL) > 0) {
+		$warning = ("The following items do not " 
+			+ "have any Transform Keyframes and were not modified: ");
+		for ($noAnim in $noAnimsL) {
+			$warning = ($warning + $noAnim + " ");
+		}
+		warning $warning;
+	}
+
+
+	if (size($nonTransformsL) > 0) {
+		$warning = ("The following items are not " 
+			+ "Transform Nodes and were not modified: ");
+		for ($nonTransform in $nonTransformsL) {
+			$warning = ($warning + $nonTransform + " ");
+		}
+		warning $warning;
+	}
+	
+
+} else {
+
+	warning "Nothing is selected.";
+
+}
+

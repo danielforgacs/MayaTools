@@ -1,0 +1,88 @@
+
+All scripts will work out of the box and only 2 need additional editing. They are noted below.  
+Currently the folder directories are pointing at my osx user folder.
+All you have to do is follow the following to change the folder directory paths.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This is how to get the shelf working on Windows 7 and up.
+
+create a folder called matchmove in:
+
+\Users\<username>\Documents\maya\scripts\
+
+copy the mel and python folders to:
+\Users\<username>\Documents\maya\scripts\matchmove\
+
+
+open up shelf_Matchmove.mel in a text editor
+
+use find an replace to rename /Users/chrishardman/Library/Preferences/Autodesk/ 
+\Users\<username>\Documents\
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+This is how to get the shelf working on osx. 
+
+
+create a folder called matchmove in:
+/Users/<name>/Library/Preferences/Autodesk/maya/scripts/
+
+copy the mel and python folders to:
+/Users/<name>/Library/Preferences/Autodesk/maya/scripts/matchmove/
+
+copy shelf_Matchmove.mel to: 
+/Users/<name>/Library/Preferences/Autodesk/maya/2014-x64/prefs/shelves/
+
+
+open up shelf_Matchmove.mel in a text editor
+
+use find an replace to rename /Users/chris.hardman/ to what every your username is.
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This is how to get the shelf working on linux.
+
+create a folder called matchmove in:
+~<username>/maya/scripts/
+
+copy the mel and python folders to:
+~<username>/maya/scripts/matchmove/
+
+copy shelf_Matchmove.mel to: 
+~<username>/maya/prefs/shelves/
+
+
+open up shelf_Matchmove.mel in a text editor
+
+use find and replace to rename /Users/chrishardman/Library/Preferences/Autodesk/ 
+to ~<username>/maya/
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Additional
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MM2MAYA
+you will have to edit the mm2MayaUI.mel and change the following code: 
+
+source "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/MM2Maya/mm2Maya.mel";
+
+change this to the correct directory path.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+StereoCam
+You will have to edit the stereoCamera.mel and change the following code:
+
+file -import -type "mayaBinary" ("/" + "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/stereoCam/stereoCamera.mb");
+
+change this to your directory path.
+
+
+

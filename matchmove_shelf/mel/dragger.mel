@@ -1,0 +1,404 @@
+
+global float $pressPosition[];
+global float $dragPosition[];
+global float $lastDragPosition[];
+global string $dragger_camera;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////// MATHS TO PIN THE LOCATOR TO THE CENTER //////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+global proc startPointBlaster()
+    {
+    if (!`objExists "lockToSet"`)
+        { 
+        sets -name "lockToSet";
+        scriptNode -st 7 -bs "getGUIoptionsAndRun()" -n "blah";
+        getGUIoptionsAndRun;
+        }
+        
+    else
+        {
+        delete "blah"; delete "lockToSet";    
+      	 string $modelPanel = getModelPanel();
+    	 $dragger_camera = `modelEditor -q -camera $modelPanel`;      
+        string $camName = getCameraShape($dragger_camera); 
+         setAttr ($camName +".horizontalPan") 0; 
+         setAttr ($camName +".verticalPan") 0; 
+        }   
+    draggerGUI;
+    }
+
+
+
+proc matrix screenSpaceGetMatrix(string $attr)
+    {
+    float $v[]=`getAttr $attr`;
+    matrix $mat[4][4]=<<$v[0], $v[1], $v[2], $v[3]; 
+                 $v[4], $v[5], $v[6], $v[7];
+                 $v[8], $v[9], $v[10], $v[11];
+                 $v[12], $v[13], $v[14], $v[15]>>;
+    return $mat;
+    }
+
+
+proc vector screenSpaceVecMult(vector $v, matrix $m)
+    {
+    matrix $v1[1][4]=<<$v.x, $v.y, $v.z, 1>>;
+    matrix $v2[1][4]=$v1*$m;
+    return <<$v2[0][0], $v2[0][1],  $v2[0][2]>>;
+    }
+
+
+global proc float[] screenSpace( string $camName, float $xPos, float $yPos , float $zPos)
+    {
+    float $ptPosWs[] = { $xPos, $yPos, $zPos };
+    vector $ptVecWs = <<$ptPosWs[0],$ptPosWs[1],$ptPosWs[2]>>;
+    matrix $cam_mat[4][4] = screenSpaceGetMatrix($camName+".worldInverseMatrix");
+    vector $ptVecCs = screenSpaceVecMult($ptVecWs,$cam_mat);
+    float $hfv = `camera -q -hfv $camName`;
+    float $ptx = (($ptVecCs.x/(-$ptVecCs.z))/tand($hfv/2))/2.0+.5;
+    float $vfv = `camera -q -vfv $camName`;
+    float $pty = (($ptVecCs.y/(-$ptVecCs.z))/tand($vfv/2))/2.0+.5;
+    float $ptz = $ptVecCs.z;
+
+    $sourceCamShape = `listRelatives -s $camName`;
+
+    float $sourceCamFBwidth = `getAttr ($sourceCamShape[0] + ".horizontalFilmAperture")`;
+    float $sourceCamFBheight = `getAttr ($sourceCamShape[0] + ".verticalFilmAperture")`;
+
+    float $ptXcalc = ($sourceCamFBwidth/(1/($ptx*2-1)))/2;
+    print ("\nrotohelper width offset is "+$ptXcalc+"\n");
+            
+    
+    setAttr ($sourceCamShape[0] + ".panZoomEnabled") 1;
+    setAttr ($sourceCamShape[0] +".horizontalPan") $ptXcalc;
+    float $ptYcalc = ($sourceCamFBheight/(1/($pty*2-1)))/2;
+    print ("\nroto helper height offset is "+$ptYcalc+"\n");
+    setAttr ($sourceCamShape[0] +".verticalPan") $ptYcalc;
+    // first line returns lower left at 00 top right at 11
+    //second line returns centre of image as 00 lower left -1-1 top right 11
+    return { $ptx*2-1, $pty*2-1, $ptz };
+    }
+
+
+
+global proc getGUIoptionsAndRun()
+    {
+    string $modelPanel = getModelPanel();
+	$camera = `modelEditor -q -camera $modelPanel`;
+	$camera = getCameraTransform($camera);
+	
+	
+	string $currentObject[] = `sets -q "lockToSet"`;
+	string $currentObj = $currentObject[0];
+  
+    float $cObjT[] = `xform -q -t -ws $currentObj`;
+    print ($cObjT[0]+"\n");
+    print ($cObjT[1]+"\n");
+    print ($cObjT[2]+"\n");
+    
+    // feed in camera name and tracking points X Y Z co ordinates
+    // and it returns screen space value from -1 to 1 in X Y Z
+    screenSpace $camera $cObjT[0] $cObjT[1] $cObjT[2];
+    }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////// GET CAMERA INFORMATION /////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+global proc string getModelPanel()
+    {   	
+	string $modelPanel;
+	if (`modelEditor -q -activeView modelPanel1`) $modelPanel = "modelPanel1";
+	if (`modelEditor -q -activeView modelPanel2`) $modelPanel = "modelPanel2";
+	if (`modelEditor -q -activeView modelPanel3`) $modelPanel = "modelPanel3";
+	if (`modelEditor -q -activeView modelPanel4`) $modelPanel = "modelPanel4";
+
+	
+	// again a little fix from Martin Kulig
+	// dragger works now for up to 10 tear off panels
+	// if you need more, add more lines and increase the numbers...
+	if (`modelEditor -exists modelPanel5`) if (`modelEditor -q -activeView modelPanel5`) $modelPanel = "modelPanel5";	
+	if (`modelEditor -exists modelPanel6`) if (`modelEditor -q -activeView modelPanel6`) $modelPanel = "modelPanel6";
+	if (`modelEditor -exists modelPanel7`) if (`modelEditor -q -activeView modelPanel7`) $modelPanel = "modelPanel7";
+	if (`modelEditor -exists modelPanel8`) if (`modelEditor -q -activeView modelPanel8`) $modelPanel = "modelPanel8";
+	if (`modelEditor -exists modelPanel9`) if (`modelEditor -q -activeView modelPanel9`) $modelPanel = "modelPanel9";
+	if (`modelEditor -exists modelPanel10`) if (`modelEditor -q -activeView modelPanel10`) $modelPanel = "modelPanel10";
+	if (`modelEditor -exists modelPanel11`) if (`modelEditor -q -activeView modelPanel11`) $modelPanel = "modelPanel11";
+	if (`modelEditor -exists modelPanel12`) if (`modelEditor -q -activeView modelPanel12`) $modelPanel = "modelPanel12";
+	if (`modelEditor -exists modelPanel13`) if (`modelEditor -q -activeView modelPanel13`) $modelPanel = "modelPanel13";
+	if (`modelEditor -exists modelPanel14`) if (`modelEditor -q -activeView modelPanel14`) $modelPanel = "modelPanel14";
+	if (`modelEditor -exists modelPanel15`) if (`modelEditor -q -activeView modelPanel15`) $modelPanel = "modelPanel15"; 
+    return $modelPanel;
+    }
+    
+    
+////////////////// create camera set /////////////////////////////
+
+global proc createCameraSet()
+{
+    global string $testArray[]; 
+    select -cl;
+    string $lightNum[] = `listCameras -p`;
+    for ($o=0; $o<size($lightNum); $o++)
+        {
+        string $camName = getCameraTransform($lightNum[$o]);       
+        int $value = `checkBox -q -v ($camName +"Chk")`;
+        if ($value == 1)
+            {    
+            select -add $lightNum[$o];
+            }
+        }
+    if( `objExists  "draggerCameraSets"` ) {
+    delete  "draggerCameraSets";}    
+    $createSetResult = `sets -name "draggerCameraSets"`;
+    select -cl;    
+    if(`window -q -ex draggerGUI`)
+    {deleteUI draggerGUI;}
+          	
+setToolTo sampleContext;
+print "drag now active!"; 
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+    
+///////////////////////////////////////////////////////////////////////////////////////
+/////////////// get camera shape if transform selected ////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+
+ 
+global proc string getCameraShape(string $dragger_camera)
+    {
+    string $objectType = `objectType $dragger_camera`;
+    if (!`gmatch $objectType "camera"`)
+        {
+        string $camera[] = `listRelatives -s $dragger_camera`;
+        $dragger_camera = $camera[0];
+        } 
+    return $dragger_camera;  
+    }
+/////////////// get camera transform if shape selected /////////////////////////////
+ 
+global proc string getCameraTransform(string $dragger_camera)
+    {
+    string $objectType = `objectType $dragger_camera`;
+    if (!`gmatch $objectType "transform"`)
+        {
+        string $camera[] = `listRelatives -p $dragger_camera`;
+        $dragger_camera = $camera[0];
+        } 
+    return $dragger_camera;  
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+if (`draggerContext -ex sampleContext`)
+    {
+	draggerContext
+	-e 
+	-pressCommand "sampleContextPress"
+	-dragCommand  "sampleContextDrag"
+	-cursor       "crossHair"
+	-pr 	      "viewingPlane"
+	-sp           "screen"
+	sampleContext;
+    }    
+    else
+    {
+	draggerContext
+	-pressCommand "sampleContextPress"
+	-dragCommand  "sampleContextDrag"
+	-cursor       "crossHair"
+	sampleContext;
+    }
+
+ 		
+global proc sampleContextPress()
+    {
+	global float $pressPosition[];
+	global float $dragPosition[];
+	global float $lastDragPosition[];
+	global string $dragger_camera;
+	
+	$pressPosition = `draggerContext -query -anchorPoint sampleContext`;
+    string $dragger_cameras[] = `sets -q "draggerCameraSets"`; 
+    for ($i=0; $i<size($dragger_cameras); $i++)
+        {
+        $dragger_camera = getCameraShape($dragger_cameras[$i]);
+    	 string $modifier   = `draggerContext -query -modifier sampleContext`;
+    	 if ($modifier == "ctrl")
+       	{
+    		setAttr ($dragger_camera + ".horizontalPan") 0;
+    		setAttr ($dragger_camera + ".verticalPan") 0;
+    		setAttr ($dragger_camera + ".zoom") 1;
+    	//	setAttr ($dragger_camera + ".panZoomEnabled") 0;
+    	    }
+    	refresh -cv; 	
+    	$lastDragPosition = $pressPosition;
+        }
+    }
+    
+///////////////////////////////////////////////////////////////////////////////////
+  
+
+  
+  
+    
+////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////// dragger main //////////////////////////////////////////
+
+global proc sampleContextDrag()
+{
+	global float $pressPosition[];
+	global float $dragPosition[];
+	global float $lastDragPosition[];
+	global string $dragger_camera;
+
+	$dragPosition = `draggerContext -query -dragPoint sampleContext`;
+	int    $button     = `draggerContext -query -button sampleContext`;
+	string $modifier   = `draggerContext -query -modifier sampleContext`;
+ 					
+	float $changeX = ($lastDragPosition[0] - $dragPosition[0]);
+	float $changeY = ($lastDragPosition[1] - $dragPosition[1]);
+	 			
+	string $message = ($dragPosition[0] + ", " + $dragPosition[1]);
+	draggerContext -edit -drawString $message sampleContext;
+	
+    string $dragger_cameras[] = `sets -q "draggerCameraSets"`; 
+    for ($i=0; $i<size($dragger_cameras); $i++)
+        {
+        $dragger_camera = getCameraShape($dragger_cameras[$i]);
+    	setAttr ($dragger_camera + ".panZoomEnabled") 1;
+    	if ($button == 1)
+    	{
+    		float $scale = 300; float $clampValue = 2.5;
+    		if ($changeX > $clampValue)
+    		    {
+    		    $changeX = $clampValue;
+    		    }
+           if ($changeX < ($clampValue * -1))
+    		    {
+    		    $changeX =($clampValue * -1);
+    		    }        		        		    
+    		  if ($changeY < ($clampValue * -1))
+    		    {
+    		    $changeY = ($clampValue * -1);
+    		    }    
+    		  if ($changeY > 2)
+    		    {
+    		    $changeY = $clampValue;
+    		    }    
+    		    
+    		    
+    		setAttr ($dragger_camera + ".horizontalPan") (`getAttr ($dragger_camera + ".horizontalPan")` + ($changeX/$scale));
+    		setAttr ($dragger_camera + ".verticalPan") (`getAttr ($dragger_camera + ".verticalPan")` + ($changeY/$scale));
+    	}
+    	else
+    	{	float $scale = 300;
+    		setAttr ($dragger_camera + ".zoom") (`getAttr ($dragger_camera + ".zoom")` + ($changeX/$scale));
+    	}
+    
+    	refresh -cv;
+    	
+    	$lastDragPosition = $dragPosition;
+    	}
+}
+
+//////////////////////////////////////////////////////////////////////////////////// 
+////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+    
+////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////// DRAGGER GUI ///////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+
+global proc draggerGUI()
+ {
+  if(`window -q -ex draggerGUI`)
+  {deleteUI draggerGUI;}
+  
+   
+  	string $modelPanel = getModelPanel();
+	$dragger_camera = `modelEditor -q -camera $modelPanel`;
+   window -title "Dragger" draggerGUI;
+   
+   frameLayout -label "Apply Dragger to checked cameras" -borderStyle "out" -bgc 0.642 0 0 ;
+   columnLayout -adjustableColumn true;
+
+    string $cameras[] = `listCameras -p`;
+    for ($o=0; $o<size($cameras); $o++)
+        {
+        string $camName = getCameraTransform($cameras[$o]);
+        rowLayout -numberOfColumns 2 -cw2 50 1 ;
+        text -l "   ";
+        checkBox -label $camName ($camName +"Chk");
+        setParent..;
+        }        
+    
+    frameLayout -label "Lock On To Track" -borderStyle "out" -bgc 0.327 0.248 0.7 ;
+    columnLayout;  
+    text -l "   ";
+    rowLayout -numberOfColumns 2 -cw2 60 1 ; 
+    text -l "      ";
+    if (`objExists "lockToSet"`)
+        {
+        string $currentObject[] = `sets -q "lockToSet"`;
+        button -l ("Locked To " + $currentObject[0]) -w 185 -bgc 0 0.8 0 -c startPointBlaster;
+        }
+    if (!`objExists "lockToSet"`)
+        {
+        button -l "Lock Selected Track" -w 185  -c startPointBlaster;
+        }
+    setParent..;
+    
+    
+    columnLayout -adjustableColumn true;
+    text -l "   ";
+    button -l "Run Dragger"-w 325  -c createCameraSet;
+    showWindow draggerGUI;
+    
+    
+    
+    string $camName = getCameraTransform($dragger_camera);
+    checkBox -e -v 1 ($camName +"Chk");
+    }  
+draggerGUI;
+
+////////////////////////////////////////////////////////////////////////////////////
+
+
+

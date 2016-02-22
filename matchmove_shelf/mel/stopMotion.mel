@@ -1,0 +1,97 @@
+ 
+ /////////////////////////////////////////////////////////////;
+global proc win()
+    {
+    string $windo = `window -t createStopFrame`;
+     columnLayout ;
+
+    rowLayout -numberOfColumns 2 -cw2 80 1 ;
+     text -l "  Select Folder:";
+    textFieldButtonGrp -bl "Find Directory" -bc setFilePath "filePath";
+    setParent..;
+    rowLayout -numberOfColumns 2 -cw2 80 1 ;
+    text -l " File Contains:"; 
+    textFieldGrp -cc updateFileList "prefix";
+    setParent..;
+    
+    string $fn = "boldLabelFont";
+    
+    string $d = "==========================";
+    text -l ($d + $d) -fn $fn;
+    text -l "  First Frame:" -fn $fn "firstFrame";
+    text -l "  Last Frame:" -fn $fn "LastFrame";
+    text -l "  Frame Count:" -fn $fn  "frameCount";
+    
+    button -l "Create Stop Motion" -w 410 -c createStopMotion;
+    showWindow $windo;
+    
+    }
+win;
+
+
+
+global proc updateFileList()
+    {
+    string $dirpat = `textFieldButtonGrp -q -text "filePath"`;
+    string $type = "Best Guess";
+    Ok($dirpat, $type) ;
+    }
+
+//////////////////////////////////////////////////////////////
+
+global proc Ok(string $dirpat, string $type) 
+    {
+    textFieldButtonGrp -e -text $dirpat "filePath";
+    string $filespec = `textFieldGrp -q -text "prefix"`;
+    string $fileList[] = `getFileList -folder ($dirpat + "/") -filespec ("*" + $filespec + "*")`;
+    
+    text -e -l ("  First Frame:        " + $fileList[0]) "firstFrame";
+    text -e -l ("  Last Frame:        " + $fileList[(size($fileList)-1)]) "LastFrame";
+    text -e -l ("  Frame Count:     " + size($fileList)) "frameCount";
+    }
+    
+global proc setFilePath()
+    {
+    string $un = fileBrowser( "Ok", "Text", "", 4 );
+    }
+/////////////////////////////////////////////////////////////;
+
+
+
+
+
+global proc createStopMotion()
+    {
+    string $dirpat = `textFieldButtonGrp -q -text "filePath"`;
+    string $filespec = `textFieldGrp -q -text "prefix"`;
+    
+    string $fileList[] = `getFileList -folder ($dirpat + "/") -filespec ("*" + $filespec + "*")`;
+
+    string $sceneBefor[] = `ls`;
+    
+
+
+
+    int $time = `playbackOptions -q -minTime`;
+    for ($w=0; $w<size($fileList); $w++)
+        {
+        print (($time + $w) + "\n");
+        setAttr "defaultRenderGlobals.startFrame" ($time + $w);
+        setAttr "defaultRenderGlobals.endFrame" ($time + $w);
+        
+        file -i ($dirpat +"/" + $fileList[$w]);
+        currentTime -e ($time + $w);
+        render -b;
+        string $sceneAfter[] =`ls`;
+        string $remove[] =  stringArrayRemove($sceneBefor, $sceneAfter);
+        delete $remove;
+        }
+    }
+
+
+
+
+
+
+
+

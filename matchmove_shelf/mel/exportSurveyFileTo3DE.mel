@@ -1,0 +1,51 @@
+global proc surveyLocsTo3de() {
+
+	//vars
+	string $myeFileName = ("/images/tmp/Maya_locators_to_3DE.txt");
+	string $ThisLn = "export failed";
+	string $Totaltext = "";
+	string $MyWarn = "";
+	float $vposArray[];
+
+	//main loop
+	string $selelNew[] = `ls -sl`;
+
+	for ($item in $selelNew) {
+		//get xform worldspace position
+		select -r $item;
+		float $vposArray[] = `xform -q -t -ws`;
+		$ThisLn = ($item+" "+$vposArray[0]+" "+$vposArray[1]+" "+$vposArray[2]+"\n");
+
+		//check for a letter p in the start of the point name 
+		if (startsWith($ThisLn, "p")){
+			$myStrSize=size($ThisLn);
+			string $newUnPname=`substring $ThisLn 2 $myStrSize`;
+			$MyWarn = $MyWarn+("\n Warning: "+$item+" was renamed to: "+$newUnPname);
+			$ThisLn = $newUnPname;
+		}
+
+		//stick it all in this varible
+		$Totaltext = ($Totaltext+$ThisLn);
+	}
+
+
+	//print out to scriptEditor
+	print ("\n___________________________________________________\n");
+	print ($MyWarn);//prints warnings
+	print ("\n___________________________________________________\n\n");
+	print ($Totaltext);//prints export text
+	print ("\n___________________________________________________\n");
+
+
+	//write out the file
+	$myeFileName = `fileDialog -directoryMask "*.txt" -m 1`;
+	$Totaltext = ($Totaltext+"\n");
+	$fileId=`fopen $myeFileName "w"`;
+	fwrite $fileId $Totaltext;
+	fclose $fileId; 
+	print ("\n  file exported to: "+$myeFileName);
+	print ("\n__________________________________ Export completed");
+
+}
+
+surveyLocsTo3de;

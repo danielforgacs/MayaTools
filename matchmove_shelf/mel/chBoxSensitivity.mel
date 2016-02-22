@@ -1,0 +1,42 @@
+
+
+global proc chBoxSensitivity()
+    {
+    global string $gChannelBoxName;
+    float $speed = `floatSliderGrp -q -v "newSpeed"`;
+    channelBox -e -spd $speed $gChannelBoxName;
+    float $newSpeed = `channelBox -q -spd $gChannelBoxName`;
+    if(`window -q -ex chBoxGUI`)
+    {deleteUI chBoxGUI;}
+
+    }
+
+
+
+
+
+
+
+global proc chBoxSensitivityGUI()
+    {
+    global string $gChannelBoxName;
+  //creates window
+    if(`window -q -ex chBoxGUI`)
+    {deleteUI chBoxGUI;}
+
+    window -title "Channel Box Sensitivity" chBoxGUI;     
+       frameLayout -lv 0 -marginWidth 15 -marginHeight 5;
+       columnLayout -adjustableColumn true;
+       text -label "Change Channel Sensitivity";
+
+        float $newSpeed = `channelBox -q -spd $gChannelBoxName`;
+        floatSliderGrp -l "New Speed" -field true -min 0 -max 0.1 -pre 6 -v $newSpeed "newSpeed";
+        button -label "OK" -command chBoxSensitivity;
+        
+    showWindow chBoxGUI;
+    }
+    
+chBoxSensitivityGUI;
+ 
+ 
+ 

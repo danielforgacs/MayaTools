@@ -1,0 +1,62 @@
+// Performs parenting on each object n the childArray;
+// keeps old transforms intact
+
+global proc reparent(string $childArray[], string $parent) {
+    
+    string $child = "";
+    for ($child in $childArray) {
+    
+        string $loc[] = `spaceLocator`;
+        pointConstraint $child $loc[0];
+        orientConstraint $child $loc[0];
+        scaleConstraint $child $loc[0];
+
+        int $startTime = `playbackOptions -q -min`;
+        int $endTime = `playbackOptions -q -max`;
+        bakeResults  -t ($startTime + ":" + $endTime) 
+            -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys true
+            -sparseAnimCurveBake true -controlPoints true -shape true
+            {$loc[0]};
+
+        delete -cn $loc[0];
+
+        cutKey -time ":" -attribute translateX $child;
+        cutKey -time ":" -attribute translateY $child;
+        cutKey -time ":" -attribute translateZ $child;
+
+        cutKey -time ":" -attribute rotateX $child;
+        cutKey -time ":" -attribute rotateY $child;
+        cutKey -time ":" -attribute rotateZ $child;
+
+        cutKey -time ":" -attribute scaleX $child;
+        cutKey -time ":" -attribute scaleY $child;
+        cutKey -time ":" -attribute scaleZ $child;
+        
+        string $newChild[] = {};
+        if ($parent != "") {
+            pointConstraint $parent $child;
+            orientConstraint $parent $child;
+            scaleConstraint $parent $child;
+
+            delete -cn $child;
+
+            $newChild = `parent $child $parent`;
+        }
+        else {
+            $newChild = `parent -w $child`;
+        }
+
+        pointConstraint $loc[0] $newChild[0];
+        orientConstraint $loc[0] $newChild[0];
+        scaleConstraint $loc[0] $newChild[0];
+
+        bakeResults -t ($startTime + ":" + $endTime) 
+            -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys true
+            -sparseAnimCurveBake true -controlPoints true -shape true
+            {$newChild[0]};
+        delete -cn $newChild[0];
+        delete $loc[0];
+    }  
+
+}
+ 

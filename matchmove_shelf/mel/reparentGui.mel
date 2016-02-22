@@ -1,0 +1,126 @@
+global proc populateChildField(string $childField) {
+
+    string $selArray[] = `ls -sn -sl`;
+    string $childFieldString = "{";
+    int $i = 0;
+    for ($i = 0; $i < (size($selArray) - 1); $i++) {
+        $childFieldString = ($childFieldString + "\"" + $selArray[$i] + "\", ");
+    }    
+    $childFieldString = ($childFieldString + "\"" + $selArray[$i] +"\"}");
+    
+    print(">>>" + $childFieldString + "<<<\n");
+    textField -e -tx $childFieldString $childField;
+}
+
+global proc populateParentField(string $parentField) {
+
+    string $selArray[] = `ls -sn -sl`;
+    if (size($selArray) == 0) {
+        return;
+    }
+    if (size($selArray) > 1) {
+        confirmDialog -title "Pick one..." -message
+        "Please choose only one new parent object." -button "Ok" -defaultButton "Ok"
+        -cancelButton "Ok";
+        return;
+    }
+    
+    textField -e -tx ("\"" + $selArray[0] + "\"") $parentField;
+}
+
+global proc reparentReset() {
+    
+    reparentGui;
+}
+
+global proc reparentDoIt(string $childField, string $parentField) {
+    
+    string $child = `textField -q -tx $childField`;
+    if ($child == "") {
+        confirmDialog -title "No children?" -message
+        "Please choose a child object(s)." -button "Ok" -defaultButton "Ok"
+        -cancelButton "Ok";
+    }
+    string $parent = `textField -q -tx $parentField`;
+    if ($parent == "<World> (i.e., unparent)") {
+        $parent = "\"\"";
+    }
+    string $cmdStr = ("reparent(" + $child + ", " + $parent + ")");
+    
+    print($cmdStr + "\n");
+    eval $cmdStr;
+}
+
+global proc reparentGui() {
+
+    if ( `window -exists reparentGui` ) {
+        deleteUI -window reparentGui;
+    }
+    
+    window -rtf 1 -t "Reparent, baking transforms" -s true reparentGui;
+    string $form = `formLayout`;
+        string $applyButton = `button -l "Reparent"`;
+        string $resetButton = `button -l "Reset"`;
+        
+        string $childText = `text -label "Child object(s):"`;
+        string $childField = `textField -tx ""`;
+        string $childButton = `button -l "< currentSel"`;
+        string $parentText = `text -label "(New) Parent object:"`;
+        string $parentField = `textField -tx "<World> (i.e., unparent)"`;
+        string $parentButton = `button -l "< currentSel"`;
+    setParent ..;
+    
+    button -e -c (
+        "reparentReset"
+        ) $resetButton;
+
+    button -e -c (
+        "reparentDoIt(\"" + $childField + "\", \"" + $parentField + "\")"
+        ) $applyButton;
+
+    button -e -c (
+        "populateChildField(\"" + $childField + "\")"
+        ) $childButton;
+        
+    button -e -c (
+        "populateParentField(\"" + $parentField + "\")"
+        ) $parentButton;
+        
+    ////////
+    
+    formLayout -edit
+        -attachForm $childText top 4
+        -attachForm $childText left 4
+        -attachControl $childField left 34 $childText
+        -attachControl $childField right 4 $childButton
+        -attachForm $childField top 4
+        -attachForm $childButton right 4
+        -attachForm $childButton top 2
+        
+        -attachControl $parentText top 4 $childText
+        -attachForm $parentText left 4
+        -attachControl $parentField left 4 $parentText
+        -attachControl $parentField right 4 $parentButton
+        -attachControl $parentField top 4 $childText
+        -attachForm $parentButton right 4
+        -attachControl $parentButton top 2 $childText
+        
+        -attachForm $applyButton right 4
+        -attachForm $applyButton bottom 4
+        
+        -attachControl $resetButton right 4 $applyButton
+        -attachForm $resetButton bottom 4
+        
+        $form;
+
+    
+    showWindow;
+
+}
+
+
+
+
+
+
+

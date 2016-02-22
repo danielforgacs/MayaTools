@@ -1,0 +1,71 @@
+// UI to set up resolution for mm2Maya script
+
+
+global proc doMakeTracks (string $camName)
+{
+int $Xres = `textField -q -text Xres`;
+int $Yres = `textField -q -text Yres`;
+int $keepNames = `checkBox -q -value keepName`;
+
+source "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/MM2Maya/mm2Maya.mel";
+importTracks $Xres $Yres $camName $keepNames;
+deleteUI -window mm2MayaWin;
+}
+
+
+
+global proc mm2MayaUI ()
+{
+string $camNames[] = `ls -sl`;
+string $camName = $camNames[0];
+
+if (`window -q -ex mm2MayaWin`)
+deleteUI mm2MayaWin;
+
+window -t mm2maya mm2MayaWin;
+
+string $form = `formLayout "form1"`;
+
+//columnLayout -adjustableColumn true;
+//frameLayout  -lv 0 -marginWidth 5 -marginHeight 5;
+//columnLayout -adjustableColumn true;
+
+string $indicator = "make tracks on " + $camName;
+string $titleLabel = `text -label $indicator -font boldLabelFont -align left`;
+
+string $resLabel = `text -label "Resolution:"`;
+string $xTextField = `textField -text "1024" -width 50 "Xres"`;
+string $separator = `text -label "/"`;
+string $yTextField = `textField-text "778" -width 50 "Yres"`;
+string $keepName = `checkBox -label "Keep locator names" "keepName"`;
+checkBox -e -value true $keepName;
+//rowLayout -edit -columnAttach $resText;
+/*menuItem -label "1024/778";
+menuItem -label "2048/1556";
+menuItem -label "720/576";*/
+
+//rowColumnLayout -numberOfColumns 3;
+string $command = "doMakeTracks " + $camName;
+string $okButton = `button -label "OK" -command $command`;
+string $cancelButton = `button -label "Cancel" -command ("deleteUI -window mm2MayaWin")`;
+
+//Attach to form layout
+formLayout -edit -attachForm $titleLabel "top" 5
+				-attachForm $resLabel "top" 27
+				-attachForm $xTextField "top" 25
+				-attachControl $xTextField "left" 2 $resLabel
+				-attachForm $separator "top" 27
+				-attachControl $separator "left" 2 $xTextField
+				-attachForm $yTextField "top" 25
+				-attachControl $yTextField "left" 2 $separator
+				-attachForm $keepName "top" 50
+				-attachForm $okButton "top" 75
+				-attachPosition $okButton "left" 60 0
+				-attachForm $cancelButton "top" 75
+				-attachControl $cancelButton "left" 10 $okButton
+				$form;
+
+showWindow;
+window -e -w 200 -h 110 mm2MayaWin;
+}
+mm2MayaUI;

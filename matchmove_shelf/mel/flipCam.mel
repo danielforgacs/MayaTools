@@ -1,0 +1,42 @@
+global proc LRcamToggle()
+    {	
+	string $modelPanel;
+	if (`modelEditor -q -activeView modelPanel1`) $modelPanel = "modelPanel1";
+	if (`modelEditor -q -activeView modelPanel2`) $modelPanel = "modelPanel2";
+	if (`modelEditor -q -activeView modelPanel3`) $modelPanel = "modelPanel3";
+	if (`modelEditor -q -activeView modelPanel4`) $modelPanel = "modelPanel4";
+
+	
+	// again a little fix from Martin Kulig
+	// dragger works now for up to 10 tear off panels
+	// if you need more, add more lines and increase the numbers...
+	if (`modelEditor -exists modelPanel5`) if (`modelEditor -q -activeView modelPanel5`) $modelPanel = "modelPanel5";	
+	if (`modelEditor -exists modelPanel6`) if (`modelEditor -q -activeView modelPanel6`) $modelPanel = "modelPanel6";
+	if (`modelEditor -exists modelPanel7`) if (`modelEditor -q -activeView modelPanel7`) $modelPanel = "modelPanel7";
+	if (`modelEditor -exists modelPanel8`) if (`modelEditor -q -activeView modelPanel8`) $modelPanel = "modelPanel8";
+	if (`modelEditor -exists modelPanel9`) if (`modelEditor -q -activeView modelPanel9`) $modelPanel = "modelPanel9";
+	if (`modelEditor -exists modelPanel10`) if (`modelEditor -q -activeView modelPanel10`) $modelPanel = "modelPanel10";
+	if (`modelEditor -exists modelPanel11`) if (`modelEditor -q -activeView modelPanel11`) $modelPanel = "modelPanel11";
+	if (`modelEditor -exists modelPanel12`) if (`modelEditor -q -activeView modelPanel12`) $modelPanel = "modelPanel12";
+	if (`modelEditor -exists modelPanel13`) if (`modelEditor -q -activeView modelPanel13`) $modelPanel = "modelPanel13";
+	if (`modelEditor -exists modelPanel14`) if (`modelEditor -q -activeView modelPanel14`) $modelPanel = "modelPanel14";
+	if (`modelEditor -exists modelPanel15`) if (`modelEditor -q -activeView modelPanel15`) $modelPanel = "modelPanel15";
+	string $currentCamera = `modelEditor -q -camera $modelPanel`;
+	        
+
+	if ($currentCamera == "left_track")
+	    {
+	    lookThroughModelPanel "right_track" $modelPanel;
+	    }
+    if ($currentCamera == "right_track")
+	    {
+	    lookThroughModelPanel "left_track" $modelPanel;
+	    }
+	
+    if ($currentCamera == "persp")
+        {
+		print ("\n\n Error! Select a camera view panel (perspective view is selected)\n");
+	    } 	
+}
+
+LRcamToggle;	

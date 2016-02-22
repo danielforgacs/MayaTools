@@ -1,0 +1,11 @@
+string $dlwImagePlane[] = `ls -typ imagePlane` ;
+
+if (`getAttr ($dlwImagePlane[0] + ".displayMode")` == 0) {
+for ($imageNo in $dlwImagePlane) {
+setAttr ($imageNo + ".displayMode") 2;
+}
+} else {
+for ($imageNo in $dlwImagePlane) {
+setAttr ($imageNo + ".displayMode") 0;
+}
+} 
