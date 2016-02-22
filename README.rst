@@ -20,7 +20,27 @@ RiggingAid
 Utils
 
 todo:
-    - stabilizer hardcoded nodes clean
     - prerender scripts
 
     (- overscan setter)
+    (- stabilizer hardcoded nodes clean)
+
+
+Install:
+---------
+updated userSetup.py in preferences:
+
+import sys
+import maya.cmds as cmds
+import pymel.core as pm
+
+
+cmds.commandPort(name=':6005')
+
+mayatools_path = '<PATH TO CONTAINING FOLDER>'
+
+if mayatools_path not in sys.path:
+    sys.path.append(mayatools_path)
+
+
+import MayaTools
