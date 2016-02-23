@@ -29,11 +29,15 @@ def constrain_loc_to_vtx():
     locator = pymel.core.spaceLocator()
     locator = locator.rename('locator_vertexConstrained')
     expression = (
-            """float $BBoxSize = {mesh}.boundingBoxMinX;"""
-            """\n\n$vertexWorldPos = `pointPosition -world {vtx}`;"""
-            """\n{locator}.translateX = $vertexWorldPos[0];"""
-            """\n{locator}.translateY = $vertexWorldPos[1];"""
-            """\n{locator}.translateZ = $vertexWorldPos[2];"""
+            """// Next line is old code. some attribute enquery\n"""
+            """// should be put there what evaluates constantly\n"""
+            """// so the expression refreshes on transforming\n"""
+            """// the object and not only on frame change\n"""
+            """float $BBoxSize = `getAttr {mesh}.boundingBoxMinX`;\n\n"""
+            """$vertexWorldPos = `pointPosition -world {vtx}`;\n\n"""
+            """setAttr {locator}.translateX $vertexWorldPos[0];\n"""
+            """setAttr {locator}.translateY $vertexWorldPos[1];\n"""
+            """setAttr {locator}.translateZ $vertexWorldPos[2];"""
         )
     expression = expression.format(mesh=mesh, vtx=str(vtx), locator=locator)
     pymel.core.expression(name=locator.name(), string=expression)
