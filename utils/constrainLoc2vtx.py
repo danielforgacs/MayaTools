@@ -25,6 +25,7 @@ def constrain_loc_to_vtx():
         )
     vtx = selection.pop(0)
     mesh = pymel.core.PyNode(vtx).getParent()
+    # mesh = pymel.core.PyNode(vtx).getParent().getTransform()
     locator = pymel.core.spaceLocator()
     locator = locator.rename('locator_vertexConstrained')
     expression = (
