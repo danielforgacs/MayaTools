@@ -7,30 +7,28 @@ global proc shelf_ford () {
     shelfButton
         -enableCommandRepeat 0
         -enable 1
-        -width 34
-        -height 34
+        -width 33
+        -height 33
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "cam stab"
+        -annotation "cam stab" 
         -enableBackground 0
-        -align "center"
-        -label "User Script"
+        -align "center" 
         -labelOffset 0
-        -font "plainLabelFont"
-        -imageOverlayLabel "stab"
-        -overlayLabelColor 0.8 0.8 0.8
-        -overlayLabelBackColor 0 0 0 0.2
-        -image "stabilize.png"
-        -image1 "stabilize.png"
-        -style "iconOnly"
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.25 
+        -image "stabilize.png" 
+        -image1 "stabilize.png" 
+        -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "reload(MayaTools)\n\nMayaTools.tools.camstabilizer.main(task='stabilize')"
-        -sourceType "python"
-        -doubleClickCommand "reload(MayaTools)\n\nMayaTools.tools.camstabilizer.main(task='clear')"
+        -command "reload(MayaTools)\n\nMayaTools.tools.camstabilizer.main(task='stabilize')" 
+        -sourceType "python" 
+        -doubleClickCommand "reload(MayaTools)\n\nMayaTools.tools.camstabilizer.main(task='clear')" 
         -commandRepeatable 0
         -flat 1
     ;
 
-}
+} 
