@@ -2,41 +2,6 @@
 Maya-tools - Python modules for Autodesk Maya
 ==================================================
 
-
-install:
-----------
-
-setup MayaTools:
-prefs script folder: add to userSetup.py:
-###
-import sys
-
-cmds.commandPort(name=':6005')
-
-mayatools_path = '<PATH>\Maya-tools-env'
-
-if mayatools_path not in sys.path:
-    sys.path.append(mayatools_path)
-
-
-import MayaTools
-###
-
-
-setup matchmove shelf:
-MAYA_SHELF_PATH=<PATH>\MayaTools\matchmove_shelf
-
-copy matchmove_shelf_icons folder
-in prefs/icons
-
-
-2a) import MayaTools
-    MayaTools.CamStabilizer.camstabilizer.main(task='')
-
-2b) from MayaTools.CamStabilizer import camstabilizer
-    camstabilizer.main(task='')
-
-
 modules
 ---------
 
@@ -51,3 +16,28 @@ todo:
     - overscan setter
 
     (- stabilizer hardcoded nodes clean)
+
+install:
+----------
+add to Maya.env:
+(on linux %% = $)
+
+// --> maya tools
+mayatoolspath=c:\_store\dev\Maya-tools-env
+
+PYTHONPATH=%mayatoolspath%
+MAYA_SHELF_PATH=%mayatoolspath%\MayaTools\shelfs
+MAYA_SCRIPT_PATH=%mayatoolspath%\MayaTools\matchmove_shelf\mel
+// --> maya tools end
+
+copy matchmove_shelf_icons folder
+in prefs/icons
+
+prefs script folder: add to userSetup.py:
+
+# --> Maya Tools setup
+import MayaTools
+import maya.cmds as cmds
+
+cmds.commandPort(name=':6005')
+# --> Maya Tools setup end...
