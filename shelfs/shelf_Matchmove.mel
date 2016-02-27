@@ -70,7 +70,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/stopMotion.mel\";" 
+        -command "source \"stopMotion\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -120,7 +120,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/rename_mult_objs.mel\";" 
+        -command "source \"rename_mult_objs\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -191,7 +191,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/exportSurveyFileTo3DE.mel\";" 
+        -command "source \"exportSurveyFileTo3DE\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -216,7 +216,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/MM2Maya/mm2MayaUI.mel\";" 
+        -command "source \"MM2Maya/mm2MayaUI\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -308,7 +308,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/setClippingPlanes.mel\";" 
+        -command "source \"setClippingPlanes\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -333,7 +333,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/imageToggle.mel\";" 
+        -command "source \"imageToggle\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -410,7 +410,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/reflectionCamera.mel\";" 
+        -command "source \"reflectionCamera\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -435,7 +435,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/rotoView.mel\";" 
+        -command "source \"rotoView\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -481,7 +481,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/flipCam.mel\";" 
+        -command "source \"flipCam\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -506,7 +506,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/stereoCamera.mel\";" 
+        -command "source \"stereoCamera\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -552,7 +552,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/parentMultiple.mel\";" 
+        -command "source \"parentMultiple\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -577,7 +577,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/rivet.mel\";" 
+        -command "source \"rivet\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -602,7 +602,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/smoothcurve.mel\";" 
+        -command "source \"smoothcurve\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -627,7 +627,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/Toggle_Time_Remapping_0.9.mel\";" 
+        -command "source \"Toggle_Time_Remapping_0.9\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -652,7 +652,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/objectRetimer.mel\";" 
+        -command "source \"objectRetimer\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -671,13 +671,13 @@ global proc shelf_Matchmove () {
         -labelOffset 0
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
+        -overlayLabelBackColor 0 0 0 0.2 
         -image "matchmove_shelf_icons/chnelBox.jpg" 
         -image1 "matchmove_shelf_icons/chnelBox.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/chBoxSensitivity.mel\";" 
+        -command "// source \"chBoxSensitivity\";\n// c:\\_store\\dev\\Maya-tools-env\\MayaTools\\matchmove_shelf\\mel\\chBoxSensitivity.mel\nsource \"chBoxSensitivity\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -749,7 +749,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/createWireframeLayer.mel\";" 
+        -command "source \"createWireframeLayer\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -774,7 +774,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/createCones.mel\";" 
+        -command "source \"createCones\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -821,7 +821,7 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/reparentGui.mel\";reparentGui();" 
+        -command "source \"reparentGui\";reparentGui();" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
