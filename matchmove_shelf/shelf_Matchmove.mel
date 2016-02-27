@@ -19,8 +19,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/unknown_nodes.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/unknown_nodes.jpg" 
+        -image "matchmove_shelf_icons/unknown_nodes.jpg" 
+        -image1 "matchmove_shelf_icons/unknown_nodes.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -65,8 +65,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "mmshelf_icons/stop_motion.jpg" 
-        -image1 "mmshelf_icons/stop_motion.jpg" 
+        -image "matchmove_shelf_icons/stop_motion.jpg" 
+        -image1 "matchmove_shelf_icons/stop_motion.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -91,8 +91,8 @@ global proc shelf_Matchmove () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/rename_files.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/rename_files.jpg" 
+        -image "matchmove_shelf_icons/rename_files.jpg" 
+        -image1 "matchmove_shelf_icons/rename_files.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -115,8 +115,8 @@ global proc shelf_Matchmove () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/multi_rename_objs.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/multi_rename_objs.jpg" 
+        -image "matchmove_shelf_icons/multi_rename_objs.jpg" 
+        -image1 "matchmove_shelf_icons/multi_rename_objs.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -161,8 +161,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/convert_survey.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/convert_survey.jpg" 
+        -image "matchmove_shelf_icons/convert_survey.jpg" 
+        -image1 "matchmove_shelf_icons/convert_survey.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -186,8 +186,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/xportloc.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/xportloc.jpg" 
+        -image "matchmove_shelf_icons/xportloc.jpg" 
+        -image1 "matchmove_shelf_icons/xportloc.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -211,8 +211,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/mm2maya.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/mm2maya.jpg" 
+        -image "matchmove_shelf_icons/mm2maya.jpg" 
+        -image1 "matchmove_shelf_icons/mm2maya.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -278,8 +278,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/3de4Cams.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/3de4Cams.jpg" 
+        -image "matchmove_shelf_icons/3de4Cams.jpg" 
+        -image1 "matchmove_shelf_icons/3de4Cams.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -303,8 +303,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/clipPlane.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/clipPlane.jpg" 
+        -image "matchmove_shelf_icons/clipPlane.jpg" 
+        -image1 "matchmove_shelf_icons/clipPlane.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -328,8 +328,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/bgToggle.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/bgToggle.jpg" 
+        -image "matchmove_shelf_icons/bgToggle.jpg" 
+        -image1 "matchmove_shelf_icons/bgToggle.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -354,8 +354,8 @@ global proc shelf_Matchmove () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/f_stab.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/f_stab.jpg" 
+        -image "matchmove_shelf_icons/f_stab.jpg" 
+        -image1 "matchmove_shelf_icons/f_stab.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -380,8 +380,8 @@ global proc shelf_Matchmove () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/fstab_Stereo.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/fstab_Stereo.jpg" 
+        -image "matchmove_shelf_icons/fstab_Stereo.jpg" 
+        -image1 "matchmove_shelf_icons/fstab_Stereo.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -405,8 +405,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/cam_reflect.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/cam_reflect.jpg" 
+        -image "matchmove_shelf_icons/cam_reflect.jpg" 
+        -image1 "matchmove_shelf_icons/cam_reflect.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -430,8 +430,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/roto_view.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/roto_view.jpg" 
+        -image "matchmove_shelf_icons/roto_view.jpg" 
+        -image1 "matchmove_shelf_icons/roto_view.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -476,8 +476,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/flipcam.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/flipcam.jpg" 
+        -image "matchmove_shelf_icons/flipcam.jpg" 
+        -image1 "matchmove_shelf_icons/flipcam.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -501,8 +501,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/stereoViewer.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/stereoViewer.jpg" 
+        -image "matchmove_shelf_icons/stereoViewer.jpg" 
+        -image1 "matchmove_shelf_icons/stereoViewer.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -547,8 +547,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/parentMultipleObject.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/parentMultipleObject.jpg" 
+        -image "matchmove_shelf_icons/parentMultipleObject.jpg" 
+        -image1 "matchmove_shelf_icons/parentMultipleObject.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -572,8 +572,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/loconloc.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/loconloc.jpg" 
+        -image "matchmove_shelf_icons/loconloc.jpg" 
+        -image1 "matchmove_shelf_icons/loconloc.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -597,8 +597,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/smooth_curve.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/smooth_curve.jpg" 
+        -image "matchmove_shelf_icons/smooth_curve.jpg" 
+        -image1 "matchmove_shelf_icons/smooth_curve.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -622,8 +622,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/time_remap.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/time_remap.jpg" 
+        -image "matchmove_shelf_icons/time_remap.jpg" 
+        -image1 "matchmove_shelf_icons/time_remap.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -647,8 +647,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/nuke_retime.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/nuke_retime.jpg" 
+        -image "matchmove_shelf_icons/nuke_retime.jpg" 
+        -image1 "matchmove_shelf_icons/nuke_retime.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -672,8 +672,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/chnelBox.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/chnelBox.jpg" 
+        -image "matchmove_shelf_icons/chnelBox.jpg" 
+        -image1 "matchmove_shelf_icons/chnelBox.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -719,8 +719,8 @@ global proc shelf_Matchmove () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/uv_render_head.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/uv_render_head.jpg" 
+        -image "matchmove_shelf_icons/uv_render_head.jpg" 
+        -image1 "matchmove_shelf_icons/uv_render_head.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -744,8 +744,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/wireShader.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/wireShader.jpg" 
+        -image "matchmove_shelf_icons/wireShader.jpg" 
+        -image1 "matchmove_shelf_icons/wireShader.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -769,8 +769,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/cones.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/cones.jpg" 
+        -image "matchmove_shelf_icons/cones.jpg" 
+        -image1 "matchmove_shelf_icons/cones.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -816,8 +816,8 @@ global proc shelf_Matchmove () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/reparent.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/reparent.jpg" 
+        -image "matchmove_shelf_icons/reparent.jpg" 
+        -image1 "matchmove_shelf_icons/reparent.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -842,8 +842,8 @@ global proc shelf_Matchmove () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/proj_loc.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/proj_loc.jpg" 
+        -image "matchmove_shelf_icons/proj_loc.jpg" 
+        -image1 "matchmove_shelf_icons/proj_loc.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
