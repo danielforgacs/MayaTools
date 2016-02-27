@@ -7,31 +7,49 @@ global proc shelf_Matchmove () {
     shelfButton
         -enableCommandRepeat 1
         -enable 1
-        -width 34
-        -height 34
+        -width 35
+        -height 35
         -manage 1
         -visible 1
         -preventOverride 0
-        -align "center"
+        -annotation "Deletes Unknown Nodes" 
+        -enableBackground 0
+        -align "center" 
         -labelOffset 0
-        -font "tinyBoldLabelFont"
-	-image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/unknown_nodes.jpg"
-	-image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/unknown_nodes.jpg"
-        -style "iconOnly"
+        -font "tinyBoldLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.25 
+        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/unknown_nodes.jpg" 
+        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/unknown_nodes.jpg" 
+        -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "delete `ls -type unknown`"
-	-sourceType "mel"
-        -actionIsSubstitute 0
+        -command "delete `ls -type unknown`" 
+        -sourceType "mel" 
         -commandRepeatable 1
-	-annotation "Deletes Unknown Nodes"
-
+        -flat 1
     ;
-
     shelfButton
-	-width 3
+        -enableCommandRepeat 1
+        -enable 1
+        -width 8
+        -height 16
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -align "center" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.25 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -47,8 +65,8 @@ global proc shelf_Matchmove () {
         -font "tinyBoldLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.25 
-        -image "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/stop_motion.jpg" 
-        -image1 "/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/jpg/stop_motion.jpg" 
+        -image "mmshelf_icons/stop_motion.jpg" 
+        -image1 "mmshelf_icons/stop_motion.jpg" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -57,7 +75,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -84,7 +101,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -92,9 +108,9 @@ global proc shelf_Matchmove () {
         -height 35
         -manage 1
         -visible 1
-        -preventOverride 0 
+        -preventOverride 0
         -enableBackground 0
-        -align "center"
+        -align "center" 
         -labelOffset 0
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
@@ -104,16 +120,32 @@ global proc shelf_Matchmove () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/rename_mult_objs.mel\";"
+        -command "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/mel/rename_mult_objs.mel\";" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
-	-width 3
+        -enableCommandRepeat 1
+        -enable 1
+        -width 8
+        -height 16
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -align "center" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.25 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -139,7 +171,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -165,7 +196,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -191,11 +221,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
-    shelfButton
-	-width 3
-    ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -217,7 +242,27 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 8
+        -height 16
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -align "center" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.25 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -243,7 +288,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -269,7 +313,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -295,7 +338,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -322,7 +364,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -349,7 +390,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -400,11 +440,27 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
-	-width 3
+        -enableCommandRepeat 1
+        -enable 1
+        -width 8
+        -height 16
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -align "center" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.25 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -430,7 +486,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -456,11 +511,27 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
-	-width 3
+        -enableCommandRepeat 1
+        -enable 1
+        -width 8
+        -height 16
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -align "center" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.25 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -486,7 +557,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -512,7 +582,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -538,7 +607,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -564,7 +632,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -590,7 +657,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -616,11 +682,27 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
-	-width 3
+        -enableCommandRepeat 1
+        -enable 1
+        -width 8
+        -height 16
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -align "center" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.25 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -647,7 +729,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -673,7 +754,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -699,11 +779,27 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
-	-width 3
+        -enableCommandRepeat 1
+        -enable 1
+        -width 8
+        -height 16
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -align "center" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.25 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -730,7 +826,6 @@ global proc shelf_Matchmove () {
         -commandRepeatable 1
         -flat 1
     ;
-
     shelfButton
         -enableCommandRepeat 1
         -enable 1
