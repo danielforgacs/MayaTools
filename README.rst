@@ -13,7 +13,7 @@ import sys
 
 cmds.commandPort(name=':6005')
 
-mayatools_path = 'c:\_store\dev\Maya-tools-env'
+mayatools_path = '<PATH>\Maya-tools-env'
 
 if mayatools_path not in sys.path:
     sys.path.append(mayatools_path)
@@ -25,6 +25,9 @@ import MayaTools
 
 setup matchmove shelf:
 MAYA_SHELF_PATH=<PATH>\MayaTools\matchmove_shelf
+
+copy matchmove_shelf_icons folder
+in prefs/icons
 
 
 2a) import MayaTools
