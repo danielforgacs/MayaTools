@@ -19,8 +19,7 @@ todo:
 
 install:
 ----------
-1) add to Maya.env:
-(on linux %% = $)
+1) add to Maya.env (on linux %% = $):
 
 // --> maya tools
 mayatoolspath=c:\_store\dev\Maya-tools-env

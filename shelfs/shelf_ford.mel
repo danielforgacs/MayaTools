@@ -33,8 +33,8 @@ global proc shelf_ford () {
     shelfButton
         -enableCommandRepeat 0
         -enable 1
-        -width 35
-        -height 35
+        -width 33
+        -height 33
         -manage 1
         -visible 1
         -preventOverride 0
