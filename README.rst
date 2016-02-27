@@ -2,8 +2,30 @@
 Maya-tools - Python modules for Autodesk Maya
 ==================================================
 
-setup:
-1) add project root folder to python access path
+
+install:
+----------
+
+setup MayaTools:
+prefs script folder: add to userSetup.py:
+###
+import sys
+
+cmds.commandPort(name=':6005')
+
+mayatools_path = 'c:\_store\dev\Maya-tools-env'
+
+if mayatools_path not in sys.path:
+    sys.path.append(mayatools_path)
+
+
+import MayaTools
+###
+
+
+setup matchmove shelf:
+MAYA_SHELF_PATH=<PATH>\MayaTools\matchmove_shelf
+
 
 2a) import MayaTools
     MayaTools.CamStabilizer.camstabilizer.main(task='')
@@ -18,29 +40,11 @@ modules
 CamStabilizer
 RiggingAid
 Utils
+matchmove_shelf
 
 todo:
     - prerender scripts
+    - camera init
+    - overscan setter
 
-    (- overscan setter)
     (- stabilizer hardcoded nodes clean)
-
-
-Install:
----------
-updated userSetup.py in preferences:
-
-import sys
-import maya.cmds as cmds
-import pymel.core as pm
-
-
-cmds.commandPort(name=':6005')
-
-mayatools_path = '<PATH TO CONTAINING FOLDER>'
-
-if mayatools_path not in sys.path:
-    sys.path.append(mayatools_path)
-
-
-import MayaTools
