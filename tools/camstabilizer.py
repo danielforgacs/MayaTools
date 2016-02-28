@@ -130,23 +130,32 @@ def get_position_object():
     return transform
 
 
-def create_expression(cam, pos):
+def create_expression(cam, pos, pan=True):
     expression = """
 // {camshape}
 // {pos}
+// {parm_h}
+// {parm_v}
 python "import maya.cmds as cmds";
 python "from {module_} import get_screen_pos";
 // python "reload(get_screen_pos)";
+setAttr "{camshape}.panZoomEnabled" 1;
 python "fov_h = cmds.camera ('{camshape}', query = True, horizontalFieldOfView = True)";
 python "fov_v = cmds.camera ('{camshape}', query = True, verticalFieldOfView = True)";
 python "aperture_h = cmds.camera ('{camshape}', query = True, horizontalFilmAperture = True)";
 python "aperture_v = cmds.camera ('{camshape}', query = True, verticalFilmAperture = True)";
 $pos =`python "get_screen_pos('{pos}','{camtransform}',fov_h, fov_v,aperture_h,aperture_v)"`;
-setAttr "{camshape}.horizontalFilmOffset" $pos[2];
-setAttr "{camshape}.verticalFilmOffset" $pos[3];
+setAttr "{camshape}.{parm_h}" $pos[2];
+setAttr "{camshape}.{parm_v}" $pos[3];
 """
+
+    camparm_h = 'horizontalPan' if pan else 'horizontalFilmOffset'
+    camparm_v = 'verticalPan' if pan else 'verticalFilmOffset'
+
     expression = expression.format(
             camshape=cam.fullPathName(),
+            parm_h=camparm_h,
+            parm_v=camparm_v,
             pos=pos,
             camtransform=cam,
             module_=__name__
@@ -249,11 +258,14 @@ def clear_stabilizer():
     for node in stabexpression:
         exprstring = node.expression.get()
         camname = exprstring.splitlines()[0][3:]
+        camparm_h = exprstring.splitlines()[2][3:]
+        camparm_v = exprstring.splitlines()[3][3:]
         cam = pymel.core.PyNode(camname)
         pymel.core.delete(node)
-        cam.horizontalFilmOffset.set(0)
-        cam.verticalFilmOffset.set(0)
-
+        # cam.horizontalFilmOffset.set(0)
+        # cam.verticalFilmOffset.set(0)
+        cam.setAttr(camparm_h, 0)
+        cam.setAttr(camparm_v, 0)
 
 
 def main(**kwargs):
