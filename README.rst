@@ -5,17 +5,20 @@ Maya-tools - Python modules for Autodesk Maya
 modules
 ---------
 
-CamStabilizer
-RiggingAid
-Utils
+camstabilizer (fstab)
+constrain locator to vertex
+set overscan
 matchmove_shelf
+RiggingAid
 
 todo:
     - prerender scripts
     - camera init
     - overscan setter
+    - node defaults
+    - test render setups
+    - precomp setup
 
-    (- stabilizer hardcoded nodes clean)
 
 install:
 ----------
