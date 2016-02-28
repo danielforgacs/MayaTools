@@ -1,0 +1,61 @@
+<html>
+<head>
+  <title>LocalTool Online Documentation</title>
+
+  <link rel="stylesheet" type="text/css" href="LocalTool Online Documentation_files/LTDocSty.css"/> 
+  <script type="text/javascript"><!--
+//<![CDATA[
+document.write('<scr'+'ipt type="text/javascript" src="/twatch/jslogger.php?ref='+( document["referrer"]==null?'':escape(document.referrer))+'&pg='+escape(window.location)+'"></scr'+'ipt>');
+//]]>
+//--></script>
+
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-2">
+</head>
+
+<body>
+   <h1 align="center" >Local Tools Online Documentation</h1>
+   <table width="100%" bgcolor="#6B8AAD" border="0"  align="center" cellpadding="0" cellspacing="0"><tr> <td height="1"></td></tr></table>
+  <table width="100%" border="0"  align="center" cellpadding="0" cellspacing="1">
+      <tr class="menu">
+	     <td width="20%" align="center"> <a class="menuActiveItem" href="">Introduction </a> </td>
+         <td width="20%" align="center"> <a class="menuItem" href="http://www.henrykorol.com/Scripts/LocalTools/LTDocFeatures.htm">Features </a> </td>
+         <td width="20%" align="center"> <a class="menuItem" href="http://www.henrykorol.com/Scripts/LocalTools/LTDocInstallation.htm">Installation </a> </td>
+         <td width="20%" align="center"> <a class="menuItem" href="http://www.henrykorol.com/Scripts/LocalTools/LTDocCustomization.htm">Customization </a> </td>
+         <td width="20%" align="center"> <a class="menuItem" href="http://www.henrykorol.com/Scripts/LocalTools/LTDocDownload.htm">Download</a> </td>
+     </tr>
+</table>
+   <table width="100%" bgcolor="#202839" border="0"  align="center" cellpadding="0" cellspacing="0"><tr> <td height="2"></td></tr></table>
+<div align="center" class="margin">
+  <table width="98%"bgcolor="#2B354A" border="0"  align="center" cellpadding="0" cellspacing="0">
+         <tr> <td height="1"></td> </tr>
+  </table>
+   <table width="98%" border="0" align="center" cellpadding="0" cellspacing="1">
+     <tr class="board">
+       <td >
+	    <div class="format" align="justify">
+	      <h2> Introduction:</h2>   
+	        <p class="text"><img src="LocalTool Online Documentation_files/KatanaLT.jpg" hspace="16" vspace="0" border="1" align="right">&nbsp; This tool was designed to allow transformation of objects/components in various local axes. You can, for example, rotate around an edge or vertex normal/position, move in the plane of the face, scale to its normal, use other objects local space as a reference for the transformation, align pivot between two points/objects, etc. The tool automatically changes tool settings for move and rotate tool for it to work properly. On the tool finish it sets the tool settings back to what they were before.	</p>         
+   			<p class="text">&nbsp; The tool allows you to select polygon, subdivision surface, nurbs (surface and curve) components, transforms (object) references for the local space. You can use mayas sacret (move/rotate/scale) tools for further transforming the object/component. You can still use snapping and change the position of the pivot using the d or ins key. 
+   			<p class="text">&nbsp; You can add/remove components from the current transformed list while the tool is active. Like if you tweaked something, rotated the camera and noticed that youve selected some unwanted components (or didn't select some wanted ones), you can add/remove those using shift/ctrl key while the tool is active.</p>
+			<br>
+			<p class="text"><img src="LocalTool Online Documentation_files/LTUI0000.gif" hspace="16" vspace="0" border="1" align="right">&nbsp; While the tool is active, it will give you the HUD display on the right (the height is customizable) to tell in which mode you're currently working. In version&nbsp;7 it's a HUD button that toggles pivot lock while clicking on it and shows tools option box when ctrl + left mouse button clicking on it and it will exit the tool by shift clicking.
+			<p class="text">&nbsp; The <strong>Use Pivot Orientation Only</strong> positions the transform pivot to the center of the selection instead of the center of the reference. It's useful in cases when you have long distance between the transformed comps/objects and the reference, or when you're working close to the object, with this on - only reference orientation will be applied to the pivot. 
+			<p class="text">&nbsp; The <strong>Pivot lock</strong> feature locks the pivot, so when the selection changes the tool will remain active and will reconstrain itself on the new selection. The tool also reacts on the tool switch from non sacret to sacret tool (while active) to provide the needed interactivity. When Lock pivot is turned off, the tool will finish its work right after the first selection change (that's what you will want in most cases). Unfortunately it was impossible to make this work with click drag.
+			<p class="text">&nbsp; The tool also provides the preferred selection type setup for picking the reference. Like if you, for example, used to move your vertexes along edges, faces along vertexes, transforms along other transforms - you will be able to setup that. Next time when you enter the tool, it will switch to your preferred selection mode. I.e. for faces - vertexes, for vertexes - edges and for transforms another transform for instance. This will hopefully save you a couple of clicks.
+			<p class="text">&nbsp; The tool also comes with <strong>Bake To Object</strong> feature, that "bakes" current local tool axes (local space) to the currently selected/hilited object/s. This command preserves complex hierarchies, parent order, cluster deformations, etc, so basically the only thing that's changed is the target object's local orientation, except for lights, gizmos and locators (though the hierarchy transformation is preserved).
+			<p class="text">&nbsp; The setup of the tool is very simple. I've also included a couple of files to add the local tool menu item to the Modify --> Transformation tools mayas menu. Needed command names are given to customize the HUD, assign tool to a hotkey, shelf, marking menu or whatever :). </p>
+      </div></td>
+     </tr>
+  </table>
+</div>
+    <table width="100%" height="5" bgcolor="#2B354A" border="0"  align="center" cellpadding="0" cellspacing="0"><tr> <td></td> </tr> </table>
+	<table width="100%" height="1" bgcolor="#1A202D" border="0"  align="center" cellpadding="0" cellspacing="0"> <tr> <td></td> </tr></table>
+    <table width="100%" height="2" bgcolor="#2B354A" border="0"  align="center" cellpadding="0" cellspacing="0"><tr> <td></td> </tr></table>
+	<table width="100%" height="1" bgcolor="#1A202D" border="0"  align="center" cellpadding="0" cellspacing="0"> <tr> <td></td> </tr> </table>
+	<p align="center" class="smallText">  Copyrigt &copy;2005, Henry Korol<br> Last updated: 04.09.05 </p>
+	   
+	
+</body>
+</html>
+ 
+<!-- This document saved from http://www.henrykorol.com/Scripts/LocalTools/LTDocIntroduction.htm -->

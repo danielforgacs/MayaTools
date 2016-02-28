@@ -1,0 +1,72 @@
+
+#tertiary {
+	background: url(metaGuiT.htm) no-repeat 0 21px;
+	margin-bottom: 0px;
+	padding: 0;
+	font-weight: bold;
+	height: 22px
+	}
+
+	#tertiary ul,
+		#tertiary ul li {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			}
+
+	#tertiary ul {
+		padding: 5px 0 1px 5px;
+		text-align: center;
+		}
+
+		#tertiary ul li {
+			display: inline
+			}
+
+			#tertiary ul li a {
+				background: url(tertLeft.gif) no-repeat left top;
+				color: #fff;
+				text-decoration: none;
+				padding: 3px 0 3px 0;
+				color: #666;
+				font-size: 11px !important
+				}
+
+			#tertiary ul li span {
+				background: url(tertRigh.gif) no-repeat right top;
+				padding: 3px 10px 3px 5px;
+				margin: 3px 0 0 6px;
+				}
+
+				#tertiary ul li a:hover span {
+					text-decoration: none;
+					background-position: 100% -150px
+					}
+/* Begin Stokely Hack http://www.stormdetector.com/hacks/safarihack.html */
+	/*\ Begin Commented Backslash Hack http://www.sam-i-am.com/work/sandbox/css/mac_ie5_hack.html */
+				html*#tertiary ul li a:hover span {
+				[color: #3c4e5a;
+				border-bottom: solid 1px #fff;
+				]color: #3c4e5a;
+				_border-bottom: 0 none !important
+				} /* End Commented Backslash Hack */
+
+.identifier[id]{clear: both }
+/* End Stokely Hack */
+
+#tertiary ul li a:hover {
+	background-position: 0 -150px;
+	color: #3c4e5a;
+	border-bottom: solid 1px #fff;
+	}
+
+		#tertiary #current a {
+			background-position: 0 -150px;
+			color: #3c4e5a;
+			border-bottom: solid 1px #fff;
+			}
+
+			#tertiary #current a span {
+				background-position: 100% -150px;
+				border-bottom: solid 1px #fff;
+				}

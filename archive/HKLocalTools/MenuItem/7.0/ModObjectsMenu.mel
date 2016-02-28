@@ -1,0 +1,625 @@
+/* This file downloaded from Highend3d.com
+''  
+''  Highend3d.com File Information:
+''  
+''    Script Name: Local Tools
+''    Author:  
+''    Last Updated: Sep 20, 2007
+''    Update/Change this file at:
+''    http://Highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/3717.html
+''  
+''  Please do not alter any information above this line
+''  it is generated dynamically by Highend3d.com and will
+''  be changed automatically on any updates.
+*/
+// Copyright (C) 1997-2004 Alias Systems Corp.
+// 
+// The information in this file is provided for the exclusive use of the
+// licensees of Alias.  Such users have the right to use, modify,
+// and incorporate this code into other products for purposes authorized
+// by the Alias license agreement, without fee.
+// 
+// ALIAS DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE,
+// INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, IN NO
+// EVENT SHALL ALIAS BE LIABLE FOR ANY SPECIAL, INDIRECT OR
+// CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE,
+// DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+// TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+// PERFORMANCE OF THIS SOFTWARE.
+
+//
+// Alias Script File
+// MODIFY THIS AT YOUR OWN RISK
+//
+// Creation Date:  13 April 1997
+//
+//  Procedure Name:
+//      ModObjectsMenu
+//
+//  Description:
+//		Create the MODELLING->Objects menu
+//
+//  Input Arguments:
+//      parent to parent the menu to.
+//
+//  Return Value:
+//      None.
+//
+// MODIFIED: Henry Korol. Adding Local Tools menu item to the menu.   14.08.05
+
+//   Mod for maya version 7.0 and higher :-). 
+
+global proc updateModObjectsMenu ( string $parent )
+{
+	setParent -m $parent;
+
+	string $lsObjs[] = `ls -geometry`;
+	string $lslive[] = `ls -live`;
+	
+	if (size($lsObjs) == 0 || size($lslive) == 0) {
+		menuItem -edit -l "Make Live"
+			-annotation "Make Live: Select a surface" liveItem;
+	} else {
+  		string $lsSel[] = `ls -sl`; 
+		if (size($lsSel) == 0) {
+			menuItem -edit -l "Make Not Live" 
+			-annotation "Make Not Live: Revert live surface" liveItem;
+		} else {
+			menuItem -edit -l "Make Live" 
+				-annotation "Make Live: Select a surface" liveItem;
+		}
+	}
+
+	menuItem -e -cb `ikSystem -q -sol` iksolverOnOff;
+}
+
+global proc ModObjectsMenu( string $parent )
+{
+    int $dimWhenNoSelect = 0;
+	setParent -m $parent;
+
+	if( `menu -q -ni $parent` != 0 ) {
+		//
+		//	Menu is built already
+		//
+  		updateModObjectsMenu ($parent);
+		return;
+	}
+
+	//	Transforms
+	//
+	menuItem -l "Transformation Tools" -sm true -to true -aob true transHierItem;
+		menuItem 
+			-label "Move Tool" 
+			-annotation (getRunTimeCommandAnnotation("MoveTool"))
+			-image "move_M.xpm"
+			-command "MoveTool"
+			-dragDoubleClickCommand "MoveToolOptions"
+			;
+
+		menuItem -optionBox true
+			-label "Move Tool Option Box"
+			-annotation (getRunTimeCommandAnnotation("MoveToolOptions"))
+			-image "move_M.xpm" 
+			-command "MoveToolOptions"
+			;
+
+		menuItem 
+			-label "Rotate Tool" 
+			-annotation (getRunTimeCommandAnnotation("RotateTool"))
+			-image "rotate_M.xpm"
+			-command "RotateTool"
+			-dragDoubleClickCommand "RotateToolOptions"
+			;
+
+		menuItem -optionBox true
+			-label "Rotate Tool Option Box"
+			-annotation (getRunTimeCommandAnnotation("RotateToolOptions"))
+			-image "rotate_M.xpm" 
+			-command "RotateToolOptions"
+			;
+
+		menuItem 
+			-label "Scale Tool" 
+			-annotation (getRunTimeCommandAnnotation("ScaleTool"))
+			-image "scale_M.xpm"
+			-command "ScaleTool"
+			-dragDoubleClickCommand "ScaleToolOptions"
+			;
+
+		menuItem -optionBox true
+			-label "Scale Tool Option Box"
+			-annotation (getRunTimeCommandAnnotation("ScaleToolOptions"))
+			-image "scale_M.xpm" 
+			-command "ScaleToolOptions"
+			;
+
+		menuItem 
+			-label "Universal Manipulator" 
+			-annotation (getRunTimeCommandAnnotation("UniversalManip"))
+			-image "globalManip.xpm"
+			-command "UniversalManip"
+			-dragDoubleClickCommand "UniversalManipOptions"
+			;
+
+		menuItem -optionBox true
+			-label "Universal Manipulator Option Box"
+			-annotation (getRunTimeCommandAnnotation("UniversalManipOptions"))
+			-image "globalManip.xpm" 
+			-command "UniversalManipOptions"
+			;
+
+		menuItem 
+			-label "Move Normal Tool" 
+			-annotation (getRunTimeCommandAnnotation("MoveNormalTool"))
+			-image "moveNormal.xpm"
+			-command "MoveNormalTool"
+			-dragDoubleClickCommand "MoveNormalToolOptions"
+			;
+
+		menuItem -optionBox true
+			-label "Move Normal Tool Option Box"
+			-annotation (getRunTimeCommandAnnotation("MoveNormalToolOptions"))
+			-image "moveNormal.xpm" 
+			-command "MoveNormalToolOptions"
+			;
+           menuItem 
+                 -l "Local Tools"
+		     -annotation ("Local Tools")
+		     -c "HKLocalToolsAction();" localToolItem;
+            
+           menuItem -optionBox true
+		     -label "Local Tools Option Box"
+		     -command "HKLTOptionBox();" localToolItemOB;
+
+		menuItem -d true;
+
+		menuItem -l "Move/Rotate/Scale Tool" 
+			-annotation "Move/Rotate/Scale Tool: Select any object(s) or component(s)"
+			-image "srt.xpm"
+			-c "MoveRotateScaleTool";
+		menuItem -l "Show Manipulator Tool" 
+			-annotation "Show Manipulator Tool: Select any node"
+			-image "showManip.xpm"
+			-c "ShowManipulatorTool";
+
+		// Default Manipulators
+		//
+		menuItem -l "Default Object Manipulator" -sm true -to true defManipItem;
+			menuItem -l "None" 
+				-annotation "Remove Default Manipulator: Select any object"
+				-c "setDefaultManip 0" noneManipItem;
+			menuItem -d true;
+			menuItem -l "Move" 
+				-annotation "Set Default Manipulator to Move: Select any object"
+				-c "setDefaultManip 1" transManipItem;
+			menuItem -l "Rotate" 
+				-annotation "Set Default Manipulator to Rotate: Select any object"
+				-c "setDefaultManip 2" rotateManipItem;
+			menuItem -l "Scale" 
+				-annotation "Set Default Manipulator to Scale: Select any object"
+				-c "setDefaultManip 3" scaleManipItem;
+		setParent -m ..;
+    	if( $dimWhenNoSelect )
+			dimWhen -f "SomethingSelected" ($parent+"|transHierItem|defManipItem");
+
+		menuItem -d true;
+
+		menuItem -l "Proportional Modification Tool"
+			-annotation "Proportional Modification Tool: Select objects or components to modify proportionally"
+			-image "propMod.xpm"
+			-c "ProportionalModificationTool" propModItem;
+       			menuItem -optionBox  true -image "propMod.xpm"
+				-annotation "Proportional Modification Tool Option Box"
+				-l "Proportional Modification Tool Option Box"
+				-c "setToolTo $gPropMod; toolPropertyWindow" 
+				propModDialogItem;
+
+		menuItem -l "Soft Modification Tool"
+			-annotation (`runTimeCommand -query -annotation SoftModTool`)
+			-image "softMod.xpm"
+			-c "SoftModTool" softModItem;
+       			menuItem -optionBox  true -image "softMod.xpm"
+				-annotation "Soft Modification Tool Option Box"
+				-l "Soft Modification Tool Option Box"
+				-c "SoftModToolOptions" 
+				softModDialogItem;
+
+	setParent -m ..;
+
+	// Limits
+	//
+	setParent -m ..;
+
+	menuItem -l "Reset Transformations" 
+		-annotation "Reset Transformation: Select an object(s)"
+		-c "ResetTransformations" identityResetItem;
+    if( $dimWhenNoSelect )	
+		dimWhen -f "SomethingSelected" ($parent+"|identityResetItem");
+	menuItem -optionBox true
+		-annotation "Reset Transformations Option Box"
+		-l "Reset Transformations Option Box"
+		-c "ResetTransformationsOptions"
+		identityResetItemOption;
+
+	menuItem -l "Freeze Transformations" 
+		-annotation "Freeze Transformation: Select an object(s)"
+		-c "FreezeTransformations" 
+		identityApplyItem;
+    if( $dimWhenNoSelect )
+		dimWhen -f "SomethingSelected" ($parent+"|identityApplyItem");
+	menuItem -optionBox true
+		-annotation "Freeze Transformations Option Box"
+		-l "Freeze Transformations Option Box"
+		-c "FreezeTransformationsOptions"
+		identityApplyItemOption;
+
+	menuItem -l "Snap Align Objects" -subMenu true -aob true -to true 
+		graspItem;
+
+		string $g1Item = `menuItem -l "Point to Point" 
+			-annotation "Snap Point to Point: Select any type of point object or component" 
+			-image "pointToPoint.xpm"
+			-c "SnapPointToPoint" snap1PointItem`;
+   		if( $dimWhenNoSelect )
+			dimWhen -f "SomethingSelected" $g1Item;
+		menuItem -optionBox true
+			-annotation "Snap Point Option Box"
+			-image "pointToPoint.xpm"
+			-l "Snap Point to Point Option Box"
+			-c "SnapPointToPointOptions"
+			snapPointItemOption;
+
+		string $g2Item = `menuItem -l "2 Points to 2 Points"
+			-annotation "Snap 2 Points to 2 Points: Select any type of point object or component" 
+			-image "twoPointToPoint.xpm"
+			-c "Snap2PointsTo2Points" snap2PointsItem`;
+   		if( $dimWhenNoSelect )
+			dimWhen -f "SomethingSelected" $g2Item;
+		menuItem -optionBox true
+			-annotation "Snap 2 Points Option Box"
+			-image "twoPointToPoint.xpm"
+			-l "Snap 2 Points to 2 Points Option Box"
+			-c "Snap2PointsTo2PointsOptions"
+			snap2PointsItemOption;
+
+		string $g3Item = `menuItem -l "3 Points to 3 Points"
+			-annotation "Snap 3 Points to 3 Points: Select any type of point object or component" 
+			-image "threePointToPoint.xpm"
+			-dmc "performSnap3PtTo3Pt 2"
+			-c "Snap3PointsTo3Points" snap3PointsItem`;
+   		if( $dimWhenNoSelect )
+			dimWhen -f "SomethingSelected" $g3Item;
+		menuItem -optionBox true
+			-annotation "Snap 3 Points Option Box"
+			-image "threePointToPoint.xpm"
+			-l "Snap 3 Points to 3 Points Option Box"
+			-c "Snap3PointsTo3PointsOptions"
+			snap3PointsItemOption;
+
+		menuItem -l "Align Objects"
+			-ann "Align Objects: Align the selected objects."
+			-c "performAlignObjects 0" -i "alignObjects.xpm" ;
+
+		menuItem -optionBox 1 -l "Align Objects Option Box" 
+			-ann "Align Objects Option Box"
+			-c "performAlignObjects 1" -ecr false -i "alignObjects.xpm" ;
+
+		menuItem -divider true;
+
+		menuItem -label "Align Tool"
+			-annotation "Align Tool: Align the selection to the last selected object"
+			-image "alignTool.xpm"
+			-command "setToolTo alignToolCtx"
+			alignToolItem;
+
+		menuItem -label "Snap Together Tool"
+			-annotation "Snap Together Tool: Snap two objects together"
+			-image "snapTogetherTool.xpm"
+			-command "setToolTo snapTogetherToolCtx"
+			snapTogetherToolItem;
+
+			menuItem -optionBox true
+				-label "Snap Together Tool Option Box"
+				-annotation "Snap Together Tool Option Box"
+				-command "setToolTo snapTogetherToolCtx; toolPropertyWindow"
+				snapTogetherToolDialogItem;
+
+	setParent -m ..;
+
+	menuItem -divider true;
+
+	menuItem -label "Evaluate Nodes" -subMenu true -tearOff true;
+		menuItem -label "Evaluate All" 
+			-annotation "Evaluate All: Enable evaluation of all nodes"
+			-c "EnableAll";
+		menuItem -label "Ignore All" 
+			-annotation "Ignore All: Ignore evaluation of all nodes"
+			-c "DisableAll";
+		menuItem -d true;
+		menuItem -l "IK Solvers" 
+			-annotation "Enable IK Solvers: Enable/Disable evaluation of all IK solvers"
+			-cb on
+			-c "EnableIKSolvers"
+			iksolverOnOff;
+		menuItem -l "Constraints" 
+			-annotation "Enable Constraints: Enable/Disable evaluation of all Constraints"
+			-cb on
+			-c "EnableConstraints"
+			constraintOnOff;
+		menuItem -l "Expressions" 
+			-annotation "Enable Expressions: Enable/Disable evaluation of all Expressions"
+			-cb on
+			-c "EnableExpressions"
+			expressionOnOff;
+		if( fluidEditLicenseFound() ) {
+			menuItem -l "Fluids" 
+				-annotation (getRunTimeCommandAnnotation("EnableFluids"))
+				-cb on
+				-c "EnableFluids"
+				fluidOnOff;
+		}
+		menuItem -l "Global Stitch" 
+			-annotation "Enable Global Stitch: Enable/Disable evaluation of all Global Stitch nodes"
+			-cb on
+			-c "EnableGlobalStitch"
+			globalstitchOnOff;
+		menuItem -l "Particles" 
+			-annotation "Enable Particles: Enable/Disable evaluation of all Particles"
+			-cb on
+			-c "EnableParticles"
+			particleOnOff;
+		menuItem -l "Rigid Bodies" 
+			-annotation "Enable Rigid Bodies: Enable/Disable evaluation of all Rigid Bodies"
+			-cb on
+			-c "EnableRigidBodies"
+			rigidbodyOnOff;
+		menuItem -l "Snapshots" 
+			-annotation "Enable Snapshots: Enable/Disable evaluation of all Snapshot nodes"
+			-cb on
+			-c "EnableSnapshots"
+			snapshotOnOff;
+
+		// If no fx license, grey out the entries for those nodes.
+		//
+		if (!`licenseCheck -mode edit -type fx`)
+		{
+			menuItem -e -enable false particleOnOff;
+		}
+		if (!`licenseCheck -mode edit -type complete`)
+		{
+			menuItem -e -enable false rigidbodyOnOff;
+		}
+	setParent -m ..;
+
+	menuItem -divider true;
+
+	menuItem -l "Make Live" 
+		-image "makeLive.xpm"
+		-ec true
+		-c "MakeLive" liveItem;
+
+	string $cpItem = `menuItem -l "Center Pivot" 
+		-annotation "Center Pivot: Select an object(s)" 
+		-c "CenterPivot" centrePivotItem`;
+   	if( $dimWhenNoSelect )
+		dimWhen -f "SomethingSelected" $cpItem;
+
+	string $prefItem = `menuItem -l "Prefix Hierarchy Names..."
+		-annotation "Prefix Hierarchy Names: Add a prefix to all hierarchy names" 
+		-c "PrefixHierarchyNames" prefixHierarchyItem`;
+   	if( $dimWhenNoSelect )
+		dimWhen -f "SomethingSelected" $prefItem;
+
+	string $searchItem = `menuItem -l "Search and Replace Names..."
+		-annotation "Search / Replace Names: Rename objects in scene."
+		-c "performSearchReplaceNames 1" searchRepItem`;
+	
+	menuItem -divider true;
+
+	string $addItem = `menuItem -l "Add Attribute..." 
+		-annotation "Add Attribute: Add dynamic attributes to the selected object(s)" 
+		-c "AddAttribute" addAttrItem`;
+   	if( $dimWhenNoSelect )
+		dimWhen -f "SomethingSelected" $addItem;
+
+	string $renameItem = `menuItem -l "Edit Attribute..." 
+		-annotation "Edit Attribute: Change properties of dynamic attributes of the selected object(s)" 
+		-c "RenameAttribute" renameAttrItem`;
+   	if( $dimWhenNoSelect )
+		dimWhen -f "SomethingSelected" $renameItem;
+
+	string $deleteItem = `menuItem -l "Delete Attribute..." 
+		-annotation "Delete Attribute: Delete dynamic attributes from the selected object(s)"
+		-c "DeleteAttribute" deleteAttrItem`;
+   	if( $dimWhenNoSelect )
+		dimWhen -f "SomethingSelected" $deleteItem;
+
+	menuItem -divider true;
+
+	// conversion operations
+	menuItem -l "Convert" -sm true -to true -aob true surfConvItem;
+
+	
+	// NURBS to Polygons
+	if( `isTrue SurfaceUIExists` ) {
+		menuItem -l "NURBS to Polygons"
+			-c "NURBSToPolygons"
+			-dmc "performnurbsToPoly 2"
+			-annotation "NURBS to Polygons: Select NURBS surface(s)"
+			-image "nurbsToPolygons.xpm"
+			nurbsToPolyItem;
+		menuItem -optionBox true 
+			-annotation "NURBS to Polygons Option Box"
+			-l "NURBS to Polygons Option Box"
+			-image "nurbsToPolygons.xpm" 
+			-c "NURBSToPolygonsOptions"
+			nurbsToPolyDialogItem;
+	}
+
+	// NURBS to Subdivs
+	if( `isTrue SubdivUIExists` ) {
+		menuItem -l "NURBS to Subdiv" -ecr true 
+			-command "CreateSubdivSurface"
+			-annotation "NURBS to Subdiv: Select NURBS surface(s)"
+//			-image ""  // An icon needs to be created
+			-dragMenuCommand "performSubdivCreate 2"
+			subdivCreateItem;
+		menuItem -optionBox 1 
+			-command "CreateSubdivSurfaceOptions"
+			-annotation "Subdiv Create Option Box" 
+//			-image ""  // An icon needs to be created
+			-l "Subdiv Create Option Box" -ecr false 
+			subdivCreateOptionItem;
+	}
+	
+	// Poly to Subdivs (same as NURBS to Subdiv)
+	if( `isTrue SubdivUIExists` ) {
+		menuItem -l "Polygons to Subdiv" -ecr true 
+			-command "CreateSubdivSurface"
+			-annotation "Polygons to Subdiv: Select polygon surface(s)"
+			-image subdivCreate.xpm
+			-dragMenuCommand "performSubdivCreate 2"
+			subdivCreateItem2;
+		menuItem -optionBox 1 
+			-command "CreateSubdivSurfaceOptions"
+			-annotation "Subdiv Create Option Box" 
+			-image subdivCreate.xpm
+			-l "Subdiv Create Option Box" -ecr false 
+			subdivCreateOptionItem2;
+	}
+		
+	// Subdivs to Poly
+	if( `isTrue SubdivUIExists` ) {
+		menuItem -l "Subdiv to Polygons" -ecr true 
+			-ann "Subdiv to Polygons: Select subdivision surface(s)"
+			-image subdivTessellate.xpm
+			-c "TesselateSubdivSurface" 	
+			subdivTessellateItem;
+		menuItem -optionBox 1 
+			// need to add -i option
+			-annotation "Subdiv to Polygons Option Box" 
+			-image subdivTessellate.xpm
+			-l "Subdiv Tessellate Option Box" -ecr false 
+			-c "TesselateSubdivSurfaceOptions" 
+			subdivTessellateOptionItem;
+	}
+
+	// Subdivs to NURBS
+	if( `isTrue SubdivUIExists` ) {
+		menuItem -l "Subdiv to NURBS" -ecr true 
+			-command "SubdivToNURBS"
+			-ann "Subdiv to NURBS: Select subdivision surface(s)"
+			-image subdivToNurbs.xpm
+			-dragMenuCommand "performSubdToNurbs 2"
+			subdivCreateItem3;
+		menuItem -optionBox 1 
+			// need to add -i option
+			-annotation "Subdiv to NURBS Option Box" 
+			-image subdivToNurbs.xpm
+			-l "Subdiv to NURBS Option Box" -ecr false 
+			-c "SubdivToNURBSOptions" 
+			subdivToNurbsOptionItem;
+	}
+
+	// Paint Effects to Poly
+	if( `isTrue "MayaCreatorExists"` ) {
+		menuItem -l "Paint Effects to Polygons" -ecr true 
+			-ann "Paint Effects to Polygons: Select paint effects stroke(s)"
+			-image paintFXtoPoly.xpm
+			-c "PaintEffectsToPoly" 	
+			paintEffectsToPolyItem;
+		menuItem -optionBox 1 
+			-annotation "Paint Effects to Polygons Option Box" 
+			-image paintFXtoPoly.xpm
+			-l "Paint Effects to Poly Option Box" -ecr false 
+			-c "PaintEffectsToPolyOptions" 
+			paintEffectsToPolyOptionItem;
+
+		menuItem -l "Paint Effects to NURBS" -ecr true 
+			-ann "Paint Effects to NURBS: Select paint effects stroke(s)"
+			-image paintFXtoNurbs.xpm
+			-c "PaintEffectsToNurbs " 	
+			paintEffectsToNurbsItem;
+		menuItem -optionBox 1 
+			-annotation "Paint Effects to Nurbs Option Box" 
+			-image paintFXtoNurbs.xpm
+			-l "Paint Effects to Nurbs Option Box" -ecr false 
+			-c "PaintEffectsToNurbsOptions" 
+			paintEffectsToNurbsOptionItem;
+
+		menuItem -l "Paint Effects to Curves" -ecr true 
+			-ann "Paint Effects to Curves: Select paint effects stroke(s)"
+			-image paintFXtoCurve.xpm
+			-c "PaintEffectsToCurve" 	
+			paintEffectsToCurveItem;
+		menuItem -optionBox 1 
+			-annotation "Paint Effects to Curves Option Box" 
+			-image paintFXtoCurve.xpm
+			-l "Paint Effects to Curves Option Box" -ecr false 
+			-c "PaintEffectsToCurveOptions" 
+			paintEffectsToCurveOptionItem;
+	}
+	
+	menuItem 
+		-l "Texture to Geometry"
+		-ann "Segments a texture file into polygonal geometry."
+		-c "performTextureToGeom 0"; 
+	menuItem -optionBox true 
+		-l "Texture to Geometry Option Box" 
+		-ann "Convert Texture To Geometry Option Box" 
+		-c "performTextureToGeom 1"; 		
+
+	// Displacement to Poly
+    menuItem -l "Displacement to Polygons"
+        -annotation "Displacement to Polygons: Select displacement mapped object(s)"
+        -c "DisplacementToPolygon"
+        dispPolyItem;
+
+	if( fluidEditLicenseFound() )
+		{
+			menuItem -l "Fluid to Polygons"
+				-annotation "Fluid to Polygons: Select fluid to convert"
+				-image "fluidtoPoly.xpm" 
+				-c "performFluids 1 FluidToPoly 0"
+				fluidToPolygonsItem;
+		}
+			
+	setParent -m ..;
+
+	menuItem -divider true;
+
+	// surface sampler operations
+	menuItem -l "Surface Sampler..." 
+			-annotation "Surface Sampler: Transfer surface detail from one set of surfaces to another"
+			-c "performSurfaceSampling 1" surfaceSamplerItem;
+
+
+	if (true || `licenseCheck -m "edit" -typ "artisan"` ) {
+		menuItem -d true;
+
+ 		menuItem -l "Paint Scripts Tool"
+ 			-image "userPaint.xpm" 
+ 			-annotation "Paint Scripts Tool: Paint custom effects defined in a MEL script on a surface"
+ 			-c "ScriptPaintTool" userPaintItem;
+ 			menuItem -optionBox true -image "userPaint.xpm" 
+ 				-annotation "Paint Scripts Tool Option Box"
+ 				-l "Paint Scripts Tool Option Box"
+ 				-c "ScriptPaintToolOptions" 
+ 				userPaintDialogItem;
+		
+		// Attribute Paint Tool
+		menuItem -l "Paint Attributes Tool"
+            -image "artAttr.xpm"
+            -annotation "Paint Attributes Tool: Paint paintable attributes."
+            -c "ArtPaintAttrTool" artisanPaintAttrItem;
+            menuItem -optionBox true -image "artAttr.xpm"
+                -annotation "Artisan Paint Attributes  Tool Option Box"
+                -l "Artisan Paint Attributes Tool Option Box"
+                -c "ArtPaintAttrToolOptions"
+                artisanPaintAttrDialogItem;
+
+	}
+	
+	updateModObjectsMenu ($parent);
+}

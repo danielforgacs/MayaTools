@@ -1,0 +1,158 @@
+#metaGui { 
+	height: 100%;
+	width: 595px; 
+	margin-bottom: 20px;
+}
+
+#metaGuiContent {
+	min-height: 100%;
+	background: url(metaGuiC.gif) no-repeat;
+}
+
+/* Begin Commented Backslash Hack - Begin Holly hack \*/
+* html #metaGuiContent { height: 100% }
+/* End Holly Hack - End Commented Backslash Hack  */
+
+#optionsView {
+	position: relative;
+	top: 17px;
+	height: 204px;
+	background: url(metaGuiB.gif)
+}
+
+	#optionsView .optionsViewHeader {
+		width: 594px;
+		margin: 0;
+		height: 16px;
+		padding: 3px 0 0 0;
+		text-align: center;
+		font: 12px Lucida Sans,Tahoma,Arial,Helvetica,Sans-Serif;
+		font-weight: bold;
+		background: url(optionsV.gif);
+		color: #fff
+		}
+
+	#optionsView #metaInfo {
+		float: left;
+		width: 250px;
+		}
+		
+		#optionsView #metaInfo h1,
+		#optionsView #metaInfo h2 {
+			float: left;
+			height: 10px;
+			width: 250px;
+			margin: 0 0 0 3px;
+			font-family: Tahoma,Arial,Helvetica,Sans-Serif;
+			font-weight: normal;
+			font-size: 11px;
+			color: #393939;
+			letter-spacing: .01em
+			}
+
+		#optionsView #metaInfo h1 { margin: 15px 0 3px 3px }
+
+		#metaInfo h1 span,
+		#optionsView h2 span {
+			letter-spacing: 1px
+			}
+
+	#optionsView h3 {
+		clear: left;
+		padding: 0;
+		padding: 15px 0 0 3px;
+		margin: 0;
+		font: 12px Lucida Sans,Tahoma,Arial,Helvetica,Sans-Serif
+		}
+
+		#optionsView dl#metaControls {
+			width: 203px;
+			margin: 9px 0 0 0;
+			padding: 0;
+			float: right
+			}
+
+		#optionsView #metaControls dt,
+		#optionsView #metaControls dd {
+			float: left;
+			margin: 0;
+			padding: 0
+			}
+
+		#optionsView #metaControls #priority { padding: 3px 7px 0 0 }
+
+		#optionsView #metaControls a,
+		#optionsView #metaControls a:hover {
+			display: block;
+			height: 18px;
+			padding-top: 3px;
+			text-align: center; color: #4f4f4f; }
+		
+		#optionsView #metaControls a:hover { color: #fff }
+
+		#optionsView #metaControls #small { width: 45px; background: url(tertSmal.gif) }
+			#optionsView #metaControls #small a { width: 45px; }
+			#optionsView #metaControls #small a:hover { width: 45px;  background: url(tertSmal.gif) 0 -21px }
+
+		#optionsView #metaControls #medium { width: 52px; background: url(tertMed0.gif) }
+			#optionsView #metaControls #medium a { width: 52px; }
+			#optionsView #metaControls #medium a:hover { width: 52px; background: url(tertMed0.gif) 0 -21px }
+
+		#optionsView #metaControls #high { width: 44px; background: url(tertHigh.gif) }
+			#optionsView #metaControls #high a { width: 44px }
+			#optionsView #metaControls #high a:hover { width: 44px; background: url(tertHigh.gif) 0 -21px; color: #fff }
+
+		#optionsView #metaControls #status { padding: 3px 9px 0 0; margin: 7px 0 0 0 }
+
+		#optionsView #metaControls #notFixed { width: 70px; margin: 7px 0 0 0; background: url(tertNotF.gif) no-repeat }
+			#optionsView #metaControls #notFixed a { width: 70px }
+			#optionsView #metaControls #notFixed a:hover { width: 70px; background: url(tertNotF.gif) no-repeat 0 -21px }
+
+		#optionsView #metaControls #fixed { width: 43px; margin: 7px 0 0 0; background: url(tertFixe.gif) }
+		#optionsView #metaControls #fixed a { width: 43px }
+		#optionsView #metaControls #fixed a:hover { width: 43px; background: url(tertFixe.gif) 0 -21px }
+
+	#optionsView textarea {
+		float: left;
+		border: solid 1px #bcbcbc;
+		padding: 0;
+		margin: 0 0 0 3px;
+		overflow: auto;
+		width: 589px;
+		height: 110px;
+		}
+	
+#metaGuiFooter {
+	height: 31px;
+	padding: 0;
+	margin: 0;
+	background: url(metaGuiF.gif);
+	position: relative;
+	margin-top: -31px
+	}
+
+	#metaGuiFooter ul#cancelSave {
+		float: right;
+		width: 159px;
+		padding: 0;
+		margin: 5px 0 0 0;
+		list-style: none
+		}
+
+		#metaGuiFooter ul#cancelSave li { float: left }
+
+			#metaGuiFooter ul#cancelSave li a {
+				display: block;
+				height: 18px;
+				padding: 3px 0 0 0;
+				margin: 0;
+				text-align: center;
+				}
+
+			#metaGuiFooter ul#cancelSave li a#cancel { width: 75px; margin: 0 7px 0 0; background: url(tertCanc.gif) }
+				
+				#metaGuiFooter ul#cancelSave li a#cancel:hover { background: url(tertCanc.gif) 0 -21px; color: #fff }
+
+			#metaGuiFooter ul#cancelSave li a#save { width: 60px; background: url(tertSave.gif) }
+				
+				#metaGuiFooter ul#cancelSave li a#save:hover { background: url(tertSave.gif) 0 -21px; color: #fff }

@@ -1,0 +1,1065 @@
+<html>
+<head>
+<title>Local Tools - Curve Tools Modeling Mel Scripts for Maya</title>
+<link href="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/styleshe.css" rel="stylesheet" type="text/css" />
+<link href="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/styleshf.css" rel="stylesheet" type="text/css" />
+<style type="text/css" media="all">
+@import url(Local\ Tools\ -\ Curve\ Tools\ Modeling\ Mel\ Scripts\ for\ Maya_files/h3d_boxe.css);
+</style>
+<meta name="description" content="Local Tools - curve tools mel scripts for modeling in maya" />
+<meta name="keywords" content="Local Tools, curve tools mel scripts for modeling in maya 3d" />
+<META name="author" content="Will McCullough" />
+<META Name="ROBOTS" Content="ALL" />
+<META Name="revisit-after" Content="7 days" />
+<LINK REL="SHORTCUT ICON" HREF="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/favicon0.ico" />
+<script language="javascript" src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/browser_.js" type="text/javascript"></script>                              
+<script type="text/javascript" src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/highend3.js"></script> 
+<script type="text/javascript" src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/prototyp.js"></script> 
+<link rel="stylesheet" type="text/css" href="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/tertiary.css" />
+<link rel="stylesheet" type="text/css" href="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/metaGui0.css" />
+<!--[if IE]>
+<style type="text/css">
+  
+/*\*// Begin Commented Backslash and IE */
+#tertiary ul li a {
+    display: inline-block;
+    white-space: nowrap;
+    width: 1px;
+}
+
+#tertiary ul {
+    padding-bottom: 0;
+    margin-bottom: -1px;
+}
+/* End Commented Backslash Hack */
+
+html #tertiary ul li a {
+    padding: 0;
+}
+
+#metaGui { height: 252px;}
+#optionsView #metaControls a,
+#optionsView #metaControls a:hover,
+#metaGuiFooter ul#cancelSave li a,
+#metaGuiFooter ul#cancelSave li a:hover { height: 21px }
+#optionsView .optionsViewHeader { height: 20px }
+
+</style>
+<! [endif]-->
+
+<!-- <script language="javascript" src="/browser_detect.js" type="text/javascript"></script> -->
+<script language="javascript" src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/opacity0.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript">
+    <!--
+    function submitloginform()
+    {
+        document.LOGIN.submit();
+    }
+     -->
+ </script>
+<script language="Javascript" type="text/javascript">
+    var fieldstocheck = new Array();
+    fieldnames = new Array();
+        function checkform() {
+            for (i=0;i<fieldstocheck.length;i++) {
+                if (eval("document.subscribeform.elements['"+fieldstocheck[i]+"'].value") == "") {
+                alert("Please enter your "+fieldnames[i]);
+                eval("document.subscribeform.elements['"+fieldstocheck[i]+"'].focus()");
+                return false;
+                }
+            }
+        return true;
+        }
+    function addFieldToCheck(value,name) {
+    fieldstocheck[fieldstocheck.length] = value;
+    fieldnames[fieldnames.length] = name;
+    }
+</script>
+	<link rel="alternate" 
+ 			type="application/rss+xml" 
+			title="Highend3d maya" 
+			href="http://www.highend3d.com/rss/maya"></link>
+
+
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1252">
+</head>
+<body marginwidth="0" marginheight="0" leftmargin="0" topmargin="0" bgcolor="#BEBEBE" >
+<style>
+.form { margin: 0;}
+
+.masked { visibility: hidden; }
+
+#searchForm { float: right; margin: 0; padding-top: 2px; padding-right: 3px; padding-left: 3px; }
+#searchForm input { font-size: 10px; }
+
+/* Internet Explorer: */
+#searchForm input.searchFill {color: #80808c; height: 12px; width: 95px; border: 0; background: white url(Local\ Tools\ -\ Curve\ Tools\ Modeling\ Mel\ Scripts\ for\ Maya_files/grey_bac.gif) repeat-x left top; padding: 3px;}
+/* End Internet Explorer*/
+
+/* FireFox: */
+#searchForm input.searchFill {color: #80808c; height: 18px; width: 95px; border: 0px solid red; background: #FFFFFF url(Local\ Tools\ -\ Curve\ Tools\ Modeling\ Mel\ Scripts\ for\ Maya_files/grey_bac.gif) repeat-x left top; padding: 3px;}
+/* End FireFox*/
+
+#searchForm select {font-size: 10px; width: 122px; margin-top: 5px;}
+
+#searchForm .imageSearch {margin-bottom: 1px;}
+html>body #searchForm .imageSearch {margin-bottom: 0;}
+/*\*/
+html>body*#searchForm input {font-size: 12px;}
+html>body*#searchForm .imageSearch {display: none;}
+html>body*#searchForm input.searchFill {width: 121px;}
+/**/
+</style>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" background="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/grey_hig.gif" height="24">
+				<tr>
+				
+				<td width="130"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/grey_hih.gif" alt="" width="130" height="24" border="0" /></td>
+				<td>
+					<div class="masked">
+						f</div>
+				</td>
+				<td width="195"></td>
+				<td width="140">
+					<form id="FormName" class="form" action="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/(EmptyReference!)" method="get" name="FormName">
+						<img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/grey_hii.gif" alt="" width="18" height="24" align="top" border="0" /><select name="selectName" id="sectionSelectorHighend" onchange="send_to_section('highend3d',getSelectedValue('sectionSelectorHighend'));" size="1">
+								<option value="">Highend3D</option>
+								<option value="homepage">Homepage</option>
+							<optgroup label="-- Software --">
+															<option value="3dsmax">3dsmax</option>
+															<option value="Maya">Maya</option>
+															<option value="Renderman">Renderman</option>
+															<option value="Shake">Shake</option>
+															<option value="XSI">XSI</option>
+															<option value="Zbrush">Zbrush</option>
+														</optgroup>
+							
+							<optgroup label="-- Global --">
+						    								<option value="Articles">Articles</option>                            
+															<option value="Books">Books</option>                            
+															<option value="Dictionary">Dictionary</option>                            
+															<option value="Downloads">Downloads</option>                            
+															<option value="DVD">DVD</option>                            
+															<option value="Events">Events</option>                            
+															<option value="Forums">Forums</option>                            
+															<option value="Gallery">Gallery</option>                            
+															<option value="News">News</option>                            
+															<option value="Newsletters">Newsletters</option>                            
+															<option value="Schools">Schools</option>                            
+														</optgroup>  
+							
+							<optgroup label="-- Site --">
+															<option value="Contact">Contact</option>                            
+															<option value="Advertise">Advertise</option>                            
+														</optgroup> 
+							</select>
+					</form>
+				</td>
+				<td width="142">
+					<form id="FormName" class="form" action="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/(EmptyReference!)" method="get" name="FormName">
+						<img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/grey_hij.gif" alt="" width="22" height="24" align="top" border="0" /><select name="selectName" id="sectionSelectorFX" onchange="send_to_section('fxshare',getSelectedValue('sectionSelectorFX'));" size="1">
+							<option value="">FXShare</option>
+							<option value="homepage">Homepage</option>
+                            <optgroup label="-- Software --">
+						    							<option value="After Effects">After Effects</option>
+														<option value="DVD Studio">DVD Studio</option>
+														<option value="Final Cut">Final Cut</option>
+														<option value="Motion">Motion</option>
+														<option value="Nuke">Nuke</option>
+														<option value="Shake">Shake</option>
+														<option value="Soundtrack">Soundtrack</option>
+														</optgroup>
+
+							<optgroup label="-- Global --">
+														<option value="Articles">Articles</option>
+														<option value="Books">Books</option>
+														<option value="Dictionary">Dictionary</option>
+														<option value="Downloads">Downloads</option>
+														<option value="DVD">DVD</option>
+														<option value="Events">Events</option>
+														<option value="Forums">Forums</option>
+														<option value="Gallery">Gallery</option>
+														<option value="News">News</option>
+														<option value="Newsletters">Newsletters</option>
+														<option value="Schools">Schools</option>
+														</optgroup>  
+							<optgroup label="-- Site --">
+														<option value="Contact">Contact</option>
+														<option value="Advertise">Advertise</option>
+														</optgroup> 
+						</select>
+					</form>
+				</td>
+				<td width="168">
+					<form id="FormName" class="form" action="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/(EmptyReference!)" method="get" name="FormName">
+						<img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/grey_hik.gif" alt="" width="22" height="24" align="top" border="0" />
+						<select name="selectName" id="sectionSelectorHC" id="sectionSelectorFX" onchange="send_to_section('highendcareers',getSelectedValue('sectionSelectorHC'));" size="1">
+							<option value="">Highend Careers</option>
+							<option value="/">Homepage</option>
+							<option value="/search.aspx">Search Jobs</option>
+							<option value="/employers.aspx">For Employers</option>
+						</select>
+					</form>
+				</td>
+				<td>
+					<div class="masked">
+						f</div>
+				</td>
+				<td valign="middle" width="166">
+										<form id="searchForm" class="form" action="http://highend3d.com/search/search_filter.php" method="GET">
+					<img class="imageSearch" src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/grey_sea.gif" alt="" height="18" width="16" align="absbottom" border="0" /><input class="searchFill" type="search" placeholder="Search" autosave="Highend3D" results="5" size="17" name="searchtext" onfocus="this.value=''" value="Search Site" /><img class="imageSearch" src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/grey_seb.gif" alt="" height="18" width="9" align="absbottom" border="0" />
+					</form>
+									</td>
+			</tr>
+		</table>
+		
+		<script language="Javascript">
+			// send use over to the right place..
+			function send_to_section(site,name) {
+				if(name.match(/^--/)) return;
+				if(name.length == 0) return;
+				name = name.toLowerCase();
+				name = name.replace(/ /,"_");
+				loc = "http://www."+site+".com/"; 
+				link = "";
+				trailer = "/";
+				switch(name) {
+					case "books":
+						link = "bookstore";
+						break;
+					case "dvd":
+						link = "dvd_store";
+						break;
+					case "jobs":
+						loc = "http://www.highendcareers.com";
+						link = "";
+						trailer = "";
+						break;
+					case "homepage":
+						link = "";
+						trailer = "";
+						break;
+					default:
+						link = name;
+						break;
+				}
+				url = link+trailer;
+				url = url.replace(/\/{2,}/g,"/");
+				
+				if(loc == 'http://www.highendcareers.com/') {
+					url = url.replace(/\/$/g,"");
+				}
+				
+				window.location = loc + url;
+			}
+
+			if(!window.getSelectedValue) {
+				function getSelectedValue(dom_id) {
+					select = document.getElementById(dom_id);
+					opt = select.options[select.selectedIndex];
+					return opt.value;
+				}
+			}
+		</script>
+
+
+
+
+<div align="center">
+  <table cellspacing="0" cellpadding="0" border="0" width="999">
+    <tr>
+      <td width="209"><a href="http://highend3d.com/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/logo_bg1.gif" title="Highend3d HomePage" width="183" height="192" border="0"></a> </td>
+      <td valign="top">
+      <table cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+        <td width="12" valign="top"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/hdr_mnu_.gif" width="12" height="154" border="0"></td>
+        <td valign="top" background="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/hdr_bnr_.gif" align="center">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td valign="top"><!--banner-->
+              <table cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td width="25"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/hdr_bnr0.gif" width="26" height="107" border="0"></td>
+                  <td width="100%"valign="top"><table cellspacing="0" cellpadding="0" border="0" background="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/hdr_bnr_.jpg">
+                      <tr>
+                        <td><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="3" alt=""></td>
+                      </tr>
+                      <tr>
+                        <td width="728"><iframe src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/01000000.htm" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0" allowtransparency="true" width="728" height="90">
+<script language="JavaScript" type="text/javascript">
+document.write('<a href="http://clk.atdmt.com/TSF/go/109392386/direct/01/" target="_blank"><img src="http://view.atdmt.com/TSF/view/109392386/direct/01/"/></a>');
+</script><noscript><a href="http://clk.atdmt.com/TSF/go/109392386/direct/01/" target="_blank"><img border="0" src="http://view.atdmt.com/TSF/view/109392386/direct/01/" /></a></noscript></iframe><div id="beacon_134" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src='http://highend3d.com/ads/adlog.php?bannerid=134&amp;clientid=107&amp;zoneid=1&amp;source=&amp;block=0&amp;capping=0&amp;cb=5a4f3097d140725f082caf0b190e3356' width='0' height='0' alt='' style='width: 0px; height: 0px;' /></div>                        </td>
+                      </tr>
+                      <tr>
+                        <td><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="12" alt=""></td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td width="25"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/hdr_bnr1.gif" width="26" height="107" border="0"></td>
+                </tr>
+                <tr>
+                  <td colspan="3"><!-- global menu -->
+                    <table cellspacing="0" cellpadding="0" border="0" width="99%" align="center">
+                      <tr>
+                        <td align="center"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/hdr_glob.gif" width="48" height="24" border="0" alt="Global Section" title="Global Section : Non Software Specific" style="margin-right: 10px;"><a href="http://highend3d.com/articles/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/gm_artic.gif" hsrc="http://static.highend3d.com/gm_articles_on.gif" alt="Articles" border="0" title="Interviews, Reviews, Case Studies, White Papers, Features, and more" style="margin-right: 10px;" width="49" height="24"></a><a href="http://highend3d.com/bookstore/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/gm_books.gif" hsrc="http://static.highend3d.com/gm_bookstore2_on.gif"  alt="Bookstore" border="0" title="3D book listings with rating and reviews" style="margin-right: 10px;" width="41" height="24"></a><a href="http://highend3d.com/dictionary/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/gm_dicti.gif" hsrc="http://static.highend3d.com/gm_dictionary_on.gif" width="66" height="24" border="0" alt="Dictionary" title="Worlds largest digital dictionary" style="margin-right: 10px;"></a><a href="http://highend3d.com/downloads/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/gm_downl.gif" hsrc="http://static.highend3d.com/gm_downloads_on.gif" width="69" height="24" border="0" alt="Downloads" title="Download Tools and models that work for any app" style="margin-right: 10px;"></a><a href="http://highend3d.com/dvd_store/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/gm_dvdst.gif" hsrc="http://static.highend3d.com/gm_dvdstore_on.gif" alt="DVDs" border="0" width="37" height="24" title="Browse, Search, Review, latest 3D DVDs" style="margin-right: 10px;"></a><a href="http://highend3d.com/events/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/gm_event.gif" hsrc="http://static.highend3d.com/gm_events_on.gif" alt="Events" border="0" width="41" height="24" title="Latest Events Listings sorted by region" style="margin-right: 10px;"></a><a href="http://highend3d.com/boards/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/gm_forum.gif" hsrc="http://static.highend3d.com/gm_forums_on.gif" width="47" height="24" border="0" alt="Forums" title="Top Forums for all cg applications" style="margin-right: 10px;"></a><a href="http://highend3d.com/gallery/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/gm_galle.gif" hsrc="http://static.highend3d.com/gm_gallery_on.gif" width="47" height="24" border="0" alt="Gallery" title="Top Artist Image Gallery" style="margin-right: 10px;"></a><a href="http://www.highendcareers.com/" target="_blank"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/gm_jobs0.gif" hsrc="http://static.highend3d.com/gm_jobs_on.gif" width="34" height="24" border="0" alt="Job Listings" title="Job Listings" style="margin-right: 10px;"></a><a href="http://highend3d.com/news/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/gm_news0.gif" hsrc="http://static.highend3d.com/gm_news_on.gif" width="37" height="24" border="0" alt="News" title="Latest 3D News and press releases" style="margin-right: 10px;"></a><a href="http://highend3d.com/newsletters/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/gm_newsl.gif" hsrc="http://static.highend3d.com/gm_newsletters_on.gif" width="76" height="24" border="0" alt="Newsletters" title="Subscribe to update lists and opt in newsletters" style="margin-right: 10px;"></a><a href="http://highend3d.com/schools/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/gm_schoo.gif" hsrc="http://static.highend3d.com/gm_schools_on.gif" width="51" height="24" border="0" alt="Schools" title="Top Schools and Training center listings"></a></td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table></td>
+          </tr>
+          <!--menu-->
+          <tr>
+          <td>
+          <table cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tr>
+              <td valign="top" align="center">
+              <table cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="1" alt=""></td>
+                </tr>
+              </table>
+              <div id="menu">
+                <table cellspacing="0" cellpadding="0" border="0">
+                  <tr>
+                    <td><a href="http://highend3d.com/3dsmax/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/3dsmax_o.gif" id="3dsmax" width="77" height="22" alt="" border="0" style="margin-right: 8px;"></a></td>
+                                        <td><a href="http://highend3d.com/maya/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/maya_on0.gif" id="maya" alt="" width="62" height="22" border="0" style="margin-right: 8px;"></a></td>
+                    <td><a href="http://highend3d.com/renderman/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/renderma.gif" alt="" width="98" height="22" border="0" style="margin-right: 8px;" id="renderman"></a></td>
+                    <td><a href="http://highend3d.com/shake/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shake_of.gif" alt="" width="67" height="22" border="0" style="margin-right: 8px;" id="shake"></a></td>
+                                        <td><a href="http://highend3d.com/xsi/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/xsi_off0.gif" alt="" width="49" height="22" border="0" style="margin-right: 8px;" id="xsi"></a></td>
+                    <td><a href="http://highend3d.com/zbrush/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/zbrush_o.gif" alt="" width="72" height="22" border="0" style="margin-right: 8px;" id="zbrush"></a></td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+            </tr>
+          </table>
+          </td>
+          </tr>
+        </table>
+        </td>
+        <td width="12" valign="top"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/hdr_mnu0.gif" width="12" height="154" border="0"></td>
+        </tr>
+        <!--SEARCH | LOGIN-->
+        <tr>
+          <td colspan="3"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td colspan="2"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="10" alt=""></td>
+              </tr>
+              <tr>
+                <!--SEARCH-->
+                <td valign="bottom">
+                                <table cellspacing="0" cellpadding="0" border="0">
+                    <form name="searchform" action="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/search.php" method="GET" AUTOCOMPLETE="OFF">
+                      <tr>
+                        <td>
+                          <input type="text" name="searchtext" AUTOCOMPLETE="OFF" value="" style="margin: 0 0 0 5px;">
+                        </td>
+                        <td><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="5" height="1" alt=""></td>
+                        <td>
+                          <select name="filter" style="z-index: 0;">
+                            <option value="5|57">Within Curve Tools</option><option value="4|379">Within Modeling</option><option value="3|11">Within Mel Scripts</option><option value="2|60">Within Downloads</option>                            <!-- <option value="Entire Site">Within Entire Site</option> -->
+                          </select>
+                        </td>
+                        <td>
+                          <input type=image name=search src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/icon_sea.gif" alt="search" border="0" style="margin: 0px 8px 0px 8px;" border="0" title="Search">
+                        </td>
+                        <td class="smlgry">&nbsp;<a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/advanced_search.php">Advanced Search</a></td>                      </tr>
+                    </form>
+                  </table>
+                                  </td>
+                                <!--LOGIN--><a name="loginform"></a>
+                <td align="right" valign="bottom"><table cellspacing="0" cellpadding="0" border="0">
+                    <form action="http://highend3d.com/boards/index.php" method="post" name='LOGIN'>
+                      <input type="hidden" name="act" value="Login">
+                      <input type="hidden" name="referer" value="/maya/downloads/mel_scripts/modeling/curve_tools/Local-Tools-3717.html?id=3717">
+                      <tr>
+                                                <input type="hidden" name="CODE" value="03">
+                        <td class="ud"><strong>Logged in as: &nbsp; <a href="http://highend3d.com/users/">
+                          ford77                          </a></strong>&nbsp;&nbsp;<span class="smlgry">(<!--<a onClick="javascript:submitloginform();" style="cursor: pointer; text-decoration:none;" title="logout">Log Out</a>--><a href="http://highend3d.com/boards/index.php?act=Login&amp;CODE=03&k=3e5e200eed55c7b467048699515cf9b4">Log Out</a>)</span>&nbsp;&middot;&nbsp;</td>
+                        <td><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/icon_mem.gif" wdith="16" height="16" alt="Profile" /></td>
+                        <td>&nbsp;<a href="http://highend3d.com/users/" title="Edit subscriptions, bookmarks, your submissions and more...">My Settings</a>&nbsp;&middot;&nbsp;</td>
+                        <td><a href="http://highend3d.com/boards/index.php?act=Msg&CODE=01" title="Check your private messages">
+                                                    New Messages</a>&nbsp;</td>                          
+                        <td><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="8" height="1" alt=""></td>
+                                              </tr>
+                    </form>
+                                      </table></td>
+              </tr>
+            </table></td>
+        </tr>
+      </table>
+    </td>
+    <td width="5"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="5" height="1" alt=""></td>
+    </tr>
+  </table>
+
+  <table cellspacing="0" cellpadding="0" border="0" width="1000">
+    <tr>
+      <!--MENU-->
+      <td valign="top"><table cellspacing="0" cellpadding="0" border="0" width="190">
+	<tr>
+		<td width="5"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="5" height="1" alt=""></td>
+		<td>
+				
+	<div id="navigation">
+		<a href='http://highend3d.com/maya/'><h1 id="maya">Maya</h1></a>
+		<ul>
+			
+			<li class=""><a href="http://highend3d.com/bookstore/maya/">Books</a></li>
+<li class="children_closed"><a href="http://highend3d.com/maya/downloads/">Downloads</a></li>
+<li class="level_2"><a href="http://highend3d.com/maya/downloads/character_rigs/">Character Rigs</a></li>
+<li class="children_closed level_2"><a href="http://highend3d.com/maya/downloads/mel_scripts/">Mel Scripts</a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/3rd_party_apps/">3rd party apps&nbsp;&nbsp;<span>13</span></a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/animation/">Animation&nbsp;&nbsp;<span>609</span></a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/artisan/">Artisan&nbsp;&nbsp;<span>11</span></a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/character/">Character&nbsp;&nbsp;<span>128</span></a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/clipfx/">Clipfx&nbsp;&nbsp;<span>3</span></a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/cloth/">Cloth&nbsp;&nbsp;<span>17</span></a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/data_management/">Data Management&nbsp;&nbsp;<span>106</span></a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/dynamics/">Dynamics&nbsp;&nbsp;<span>133</span></a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/feedback/">Feedback&nbsp;&nbsp;<span>6</span></a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/fur/">Fur&nbsp;&nbsp;<span>6</span></a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/games/">Games&nbsp;&nbsp;<span>22</span></a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/interface_display/">Interface / Display&nbsp;&nbsp;<span>448</span></a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/lighting/">Lighting&nbsp;&nbsp;<span>32</span></a></li>
+<li class="children_closed level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/">Modeling&nbsp;&nbsp;<span>499</span></a></li>
+<li class="selected level_4"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/">Curve Tools&nbsp;&nbsp;<span>30</span></a></li>
+<li class="level_4"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/misc/">Misc&nbsp;&nbsp;<span>395</span></a></li>
+<li class="level_4"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/poly_tools/">Poly Tools&nbsp;&nbsp;<span>109</span></a></li>
+<li class="level_4"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/surface_tools/">Surface Tools&nbsp;&nbsp;<span>23</span></a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/paint_fx/">Paint FX&nbsp;&nbsp;<span>22</span></a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/polygon/">Polygon&nbsp;&nbsp;<span>198</span></a></li>
+<li class="children_closed level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/rendering/">Rendering&nbsp;&nbsp;<span>331</span></a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/texturing/">Texturing&nbsp;&nbsp;<span>35</span></a></li>
+<li class="children_closed level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/utility_external/">Utility / External&nbsp;&nbsp;<span>323</span></a></li>
+<li class="level_3"><a href="http://highend3d.com/maya/downloads/mel_scripts/web_related/">Web Related&nbsp;&nbsp;<span>1</span></a></li>
+<li class="level_2"><a href="http://highend3d.com/maya/downloads/paint_fx_brushes/">Paint FX Brushes</a></li>
+<li class="children_closed level_2"><a href="http://highend3d.com/maya/downloads/plugins/">Plugins</a></li>
+<li class="level_2"><a href="http://highend3d.com/maya/downloads/scene_files/">Scene Files</a></li>
+<li class="level_2"><a href="http://highend3d.com/maya/downloads/shaders/">Shaders</a></li>
+<li class="children_closed level_2"><a href="http://highend3d.com/maya/downloads/tools/">Tools</a></li>
+<li class=""><a href="http://highend3d.com/dvd_store/maya/">DVDs</a></li>
+<li class="children_closed"><a href="http://highend3d.com/maya/faqs/">FAQs</a></li>
+<li class=""><a href="http://highend3d.com/boards/index.php?showforum=291">Forums</a></li>
+<li class=""><a href="http://highend3d.com/gallery/">Gallery</a></li>
+<li class=""><a href="http://highend3d.com/boards/index.php?showforum=287">Jobs</a></li>
+<li class="children_closed"><a href="http://highend3d.com/maya/list_servers/">List Servers</a></li>
+<li class=""><a href="http://highend3d.com/newsletters/">Newsletters</a></li>
+<li class=""><a href="http://highend3d.com/maya/render_tests/">Render Tests</a></li>
+<li class=""><a href="http://highend3d.com/schools/">Schools</a></li>
+<li class="children_closed"><a href="http://highend3d.com/maya/tips/">Tips</a></li>
+<li class="children_closed"><a href="http://highend3d.com/maya/tutorials/">Tutorials</a></li>
+		</ul>
+	</div>
+	
+		</td>
+		<td width="10"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="10" height="1" alt="" /></td>
+	</tr>
+		<tr>
+	 <td width="5"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="5" height="1" alt=""></td>
+        <td  align="center">                                                        		<br /> 
+			<div style="background-image: url(http://static.highend3d.com/download_back.gif); text-align: center; height: 20px; width: 176px; position: relative; top: 0; left: 0; visibility: visible; padding-top: 24px;">
+		<img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/number_6.gif" alt="" width="9" /><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/number_1.gif" alt="" width="4" /><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/number_c.gif" alt="" width="3" /><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/number_1.gif" alt="" width="4" /><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/number_8.gif" alt="" width="9" /><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/number_0.gif" alt="" width="9" /><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/number_c.gif" alt="" width="3" /><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/number_9.gif" alt="" width="9" /><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/number_3.gif" alt="" width="7" /><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/number_9.gif" alt="" width="9" />	</div>		</td>
+		<td width="10"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="10" height="1" alt="" /></td>
+	</tr> 
+
+
+
+	<tr><td colspan="3"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="10" alt=""></td></tr>
+	 <tr>
+	   <td width="5"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="5" height="1" alt=""></td>
+	 <td align="center">
+		      <a href="http://highend3d.com/newsletters/"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/subscric.gif" width="172" height="47" border="0" alt="Subscribe" style="margin-bottom: 10px;"></a>
+
+   		<div class="rmlinksh172"><a href="http://highend3d.com/news/">Latest Industry News</a></div>
+      	<div class="rmlinks172">
+        <div style="width: 168; text-align: left; padding-left: 4px;">
+        <div style="width: 162;">
+        <ul style="margin-top:0; margin-bottom:0;">
+
+          <li class="list2"><a href="http://highend3d.com/news/books/456.html">3ds Max 2009 Architectural Visualization Intermediate to Advanced, book, now shipping</a></li>  <li class="list2"><a href="http://highend3d.com/news/dvds/455.html">Designing in Digital Clay with Cesar Dacol Jr. on Gnomonology</a></li>  <li class="list2"><a href="http://highend3d.com/news/software/454.html">Maxon delivers Cinema 4D R11</a></li>  <li class="list2"><a href="http://highend3d.com/news/software/453.html">Autodesk Announces Maya 2009 - updated with full features list</a></li>  <li class="list2"><a href="http://highend3d.com/news/software/452.html">Autodesk Announces Stitcher Unlimited 2009 and ImageModeler 2009</a></li>  <li class="list2"><a href="http://highend3d.com/news/software/451.html">Autodesk Announces MotionBuilder 2009 3D Character Animation Software</a></li>  <li class="list2"><a href="http://highend3d.com/news/software/450.html">Autodesk Launches Toxik 2009 Visual Effects Software</a></li>  <li class="list2"><a href="http://highend3d.com/news/software/449.html">Autodesk Launches Animation Academy 2009 for Secondary Schools</a></li>    	    
+        </ul><br>
+        <div align="center" id="ul"><a href="http://highend3d.com/news/">More News...</a></div>
+        </div>
+        </div>
+      </div>	
+      <div class="rmlinksf172" style="margin-bottom: 10px;"></div>
+      
+      
+		<div class="rmlinksh172"><a href="http://www.highendcareers.com/">Latest Maya jobs (HC)</a></div>
+		<div class="rmlinks172">
+		<div style="width: 168; text-align: left; padding-left: 4px;">
+		<div style="width: 162;">
+		<ul style="margin-top:0; margin-bottom:0;">
+							<li class="list2"><a target="_blank" href="http://www.highendcareers.com/jobdetails.aspx?jobid=6779&hesearch=7170">Enviromnent Artist  - Insomniac Games</a></li>
+								<li class="list2"><a target="_blank" href="http://www.highendcareers.com/jobdetails.aspx?jobid=6778&hesearch=7170">Digital Environment Matte Painter - Rhythm & Hues Studios</a></li>
+								<li class="list2"><a target="_blank" href="http://www.highendcareers.com/jobdetails.aspx?jobid=2647&hesearch=7170">Animator - ESPN, Inc.</a></li>
+								<li class="list2"><a target="_blank" href="http://www.highendcareers.com/jobdetails.aspx?jobid=6770&hesearch=7170">Starz AnimationLead Lighter - Starz Animation</a></li>
+								<li class="list2"><a target="_blank" href="http://www.highendcareers.com/jobdetails.aspx?jobid=6769&hesearch=7170">Rigging Tools Programmer - Anzovin Studio</a></li>
+								<li class="list2"><a target="_blank" href="http://www.highendcareers.com/jobdetails.aspx?jobid=6749&hesearch=7170">Matte Painter - Photon Australia & Photon New Zealand</a></li>
+								<li class="list2"><a target="_blank" href="http://www.highendcareers.com/jobdetails.aspx?jobid=6741&hesearch=7170">Matte Painter - Slash FX</a></li>
+								<li class="list2"><a target="_blank" href="http://www.highendcareers.com/jobdetails.aspx?jobid=2640&hesearch=7170">Level Designer - Virtual Heroes Inc.</a></li>
+								<li class="list2"><a target="_blank" href="http://www.highendcareers.com/jobdetails.aspx?jobid=6321&hesearch=7170">Designer  NC  - Insomniac Games</a></li>
+								<li class="list2"><a target="_blank" href="http://www.highendcareers.com/jobdetails.aspx?jobid=6734&hesearch=7170">Motion Graphics Artist - Digital Domain</a></li>
+								<li class="list2"><a target="_blank" href="http://www.highendcareers.com/jobdetails.aspx?jobid=6731&hesearch=7170">Art Pipeline Programmer - Eidos, Inc./Crystal Dynamics</a></li>
+								<li class="list2"><a target="_blank" href="http://www.highendcareers.com/jobdetails.aspx?jobid=6254&hesearch=7170">Technical Artist - Midway Amusement Games, LLC</a></li>
+								<li class="list2"><a target="_blank" href="http://www.highendcareers.com/jobdetails.aspx?jobid=6727&hesearch=7170">Lead Technical Designer - Midway Amusement Games, LLC</a></li>
+								<li class="list2"><a target="_blank" href="http://www.highendcareers.com/jobdetails.aspx?jobid=6289&hesearch=7170">ENVIROMENT ARTIST NC - Insomniac Games</a></li>
+								<li class="list2"><a target="_blank" href="http://www.highendcareers.com/jobdetails.aspx?jobid=6287&hesearch=7170">Animator NC  - Insomniac Games</a></li>
+						</ul><br />
+		<div align="center" id="ul"><a target="_blank" href="http://www.highendcareers.com/">More Jobs at HighendCareers</a></div>
+		</div>
+		</div>
+		</div>	
+		<div class="rmlinksf172" style="margin-bottom: 10px;"></div>    
+
+      
+         		<div class="rmlinksh172"><a href="http://highend3d.com/news/">Latest Blog Posts</a></div>
+      	<div class="rmlinks172">
+        <div style="width: 168; text-align: left; padding-left: 4px;">
+        <div style="width: 162;">
+        <ul style="margin-top:0; margin-bottom:0;">
+
+       <li class="list2"><a href="http://nikopol.highend3d.com/2008/05/26/????????????-?????????-??????????-?/" target="">Динамиче�?кое изменение интерфей�?а шейдера</a><p>in <a href="http://nikopol.highend3d.com/" target="_blank">Max Kuzubov</a></p><p></p></li><li class="list2"><a href="opera:illegal-url-25" target="">mapy is Available for Linux and Windows.</a><p>in <a href="http://mapy.highend3d.com/" target="_blank">mapy\'s Discusion Blog</a></p><p></p></li><li class="list2"><a href="http://dshowgirl.highend3d.com/2008/01/09/know-linux/" target="">Know Linux</a><p>in <a href="http://dshowgirl.highend3d.com/" target="_blank">oppertunity land</a></p><p></p></li><li class="list2"><a href="opera:illegal-url-26" target="">Nuke®: Weapons of Mass Creation</a><p>in <a href="http://megatonnage.highend3d.com/" target="_blank">megatonnage</a></p><p></p></li><li class="list2"><a href="http://3dimensia.highend3d.com/2007/08/22/me-myself-no-one-else/" target="">Me, Myself &amp; No One Else ...</a><p>in <a href="http://3dimensia.highend3d.com/" target="_blank">Co-ordinates of 3Dimensional chimera</a></p><p></p></li><li class="list2"><a href="opera:illegal-url-27" target="">Looking for photoshop alternatives?</a><p>in <a href="http://will.highend3d.com/" target="_blank">Stuff will does</a></p><p></p></li><li class="list2"><a href="http://noodleheadstudios.highend3d.com/2007/08/08/siggraph-day-1-pixar-part-1/" target="">SIGGRAPH - Day 1 - Pixar Part 1</a><p>in <a href="http://noodleheadstudios.highend3d.com/" target="_blank">Noodlehead Studios</a></p><p></p></li><li class="list2"><a href="http://isabellachen.highend3d.com/2007/08/07/the-uncanny-valley-of-the-senses/" target="">The Uncanny Valley of the senses.</a><p>in <a href="http://isabellachen.highend3d.com/" target="_blank">Chick Click CG</a></p><p></p></li><li class="list2"><a href="http://thedreamhive.highend3d.com/2007/08/06/course-6-anyone-can-cook-�-inside-ratatouille�s-kitchen-852007-830a-1215p/" target="">Course 6: Anyone Can Cook – Inside Ratatouille’s Kitchen (8/5/2007) 8:30a-12:15p</a><p>in <a href="http://thedreamhive.highend3d.com/" target="_blank">The Dreamhive Studio Blog</a></p><p></p></li><li class="list2"><a href="http://ilusiondigital.highend3d.com/2007/08/08/its-only-a-boy-mutant-boy/" target="">It's only a boy (Mutant boy)</a><p>in <a href="http://ilusiondigital.highend3d.com/" target="_blank">IlusionDigital Art Studio</a></p><p></p></li><li class="list2"><a href="http://rmcad.highend3d.com/2007/08/28/jonathans-siggraph-experience/" target="">Jonathan's SIGGRAPH Experience</a><p>in <a href="http://rmcad.highend3d.com/" target="_blank">The RMCAD Students Siggraph Adventure</a></p><p></p></li><li class="list2"><a href="http://chriswhite.highend3d.com/2007/08/14/siggraph/" target="">SIGGRAPH</a><p>in <a href="http://chriswhite.highend3d.com/" target="_blank">Chris White</a></p><p></p></li><li class="list2"><a href="http://leelanier.highend3d.com/2008/08/23/psisf-day-2/" target="">PSISF 2008: Day 2</a><p>in <a href="http://leelanier.highend3d.com/" target="_blank">Lee Lanier's Beezle Blog</a></p><p></p></li><li class="list2"><a href="http://sergey.highend3d.com/2007/08/03/my-latest-work/" target="">My Latest works</a><p>in <a href="http://sergey.highend3d.com/" target="_blank">Sergey Popov - CG Artist</a></p><p></p></li><li class="list2"><a href="http://ninjacrayon.highend3d.com/2007/08/13/siggraph-news-autodesk-acquires-skymatter/" target="">SIGGRAPH: News Autodesk Acquires Skymatter</a><p>in <a href="http://ninjacrayon.highend3d.com/" target="_blank">NinjaCrayon : Scribbles and Slashes</a></p><p></p></li><li class="list2"><a href="http://stinkinmink.highend3d.com/2007/05/17/compositing-clouds-what-not-to-do/" target="">Compositing Clouds - What not to do.</a><p>in <a href="http://stinkinmink.highend3d.com/" target="_blank">Journey into a digital realm</a></p><p></p></li><li class="list2"><a href="http://docaj.highend3d.com/2007/10/06/i-have-to-go-on/" target="">i have to go on</a><p>in <a href="http://docaj.highend3d.com/" target="_blank">aj's testblg</a></p><p></p></li><li class="list2"><a href="http://blogs.highend3d.com/2008/02/18/added-tools-to-help-stop-spam-comments/" target="">Added tools to help stop spam comments</a><p>in <a href="http://blogs.highend3d.com/" target="_blank">Highend3D/FXshare Blogs</a></p><p></p></li>        </ul><br>
+        <div align="center" id="ul"><a href="http://blogs.highend3d.com/">More Blogs...</a></div>
+        </div>
+        </div>
+      </div>	
+      <div class="rmlinksf172" style="margin-bottom: 10px;"></div>     
+             
+		<div class="rmlinksh172">Site Links</div>
+		<div class="rmlinks172">
+		<div style="width: 168;" align="center">
+		  		  <a href="http://highend3d.com/contact/">Contact Us</a><br>
+		  <a href="http://highend3d.com/advertise/">Advertise</a><br> 
+		  
+		  			<br />
+			 <a href="http://highend3d.com/alias/">Alias PA Archives</a><br>
+			 <a href="http://highend3d.com/softimage/">Softimage 3D Archives</a><br>
+					  <br><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/add.php">Submit your Mel Scripts</a><br>		  <!-- About Us -->
+		</div>
+		</div>	
+		<div class="rmlinksf172" style="margin-bottom: 5px;"></div>
+		
+
+
+		</td>
+		<td width="10"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="10" height="1" alt=""></td>
+
+	</tr>
+</table>
+      </td>
+      <!--CONTENT-->
+      <td valign="top" width="100%"><!--TOP-->
+        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td valign="top"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td width="12"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/content_.gif" width="12" height="23" alt=""></td>
+                <td background="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/content0.gif" width="99%" class="sml"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                                            <td class="smlgry"><A HREF="http://highend3d.com/" class="breadcrumb">Home</A> &gt; <A HREF="http://highend3d.com/maya/" class="breadcrumb">Maya</a> &gt; <A HREF="http://highend3d.com/maya/downloads/" class="breadcrumb">Downloads</a> &gt; <A HREF="http://highend3d.com/maya/downloads/mel_scripts/" class="breadcrumb">Mel Scripts</a> &gt; <A HREF="http://highend3d.com/maya/downloads/mel_scripts/modeling/" class="breadcrumb">Modeling</a> &gt; <A HREF="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/" class="breadcrumb">Curve Tools</a> &gt; <A HREF="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/3717.html" class="breadcrumb">Local Tools</A>                      </td>
+                      <td align="right"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/Local-Tools-3717.html?sheet=bg1"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/bgball10.gif" width="22" height="21" border="0" alt="Change background color"></a><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/Local-Tools-3717.html?sheet=bg2"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/bgball20.gif" width="22" height="21" border="0" alt="Change background color"></a><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/Local-Tools-3717.html?sheet=bg3"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/bgball30.gif" width="22" height="21" border="0" alt="Change background color"></a><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/Local-Tools-3717.html?sheet=bg4"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/bgball40.gif" width="22" height="21" border="0" alt="Change background color"></a></td>
+                    </tr>
+                  </table></td>
+                <td width="12"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/content1.gif" width="12" height="23" alt=""></td>
+              </tr>
+            </table></td>
+        </tr>
+        <!--CONTENT-->
+        <tr>
+          <td valign="top"><table width="100%" bgcolor="#FFFFFF" cellspacing="1" cellpadding="3" border="0">
+            <tr bgcolor="#E1E4E5">
+              <td><table width="100%" cellspacing="0" cellpadding="5" border="0">
+                <tr>
+                  <td valign="top">                  <span class="bookmark">QuickNav:</span> You came from <a href="http://highend3d.com/maya/" id="ud">Page 1 of Maya</a><br><br>                                      
+<script language="Javascript">
+function processReqChange() {
+	// only if req shows "loaded"
+	if (req.readyState == 4) {
+		// only if "OK"
+		if (req.status == 200) {
+			// ...processing statements go here...
+		} 
+		else {
+			// alert("There was a problem retrieving the XML data:\n" +
+			//req.statusText);
+		}
+	}
+}
+var req;
+
+function increment_download(file_id) {
+	req = false;
+    // branch for native XMLHttpRequest object
+	if(window.XMLHttpRequest) {
+	    try {
+			req = new XMLHttpRequest();
+		} 
+		catch(e) {
+			req = false;
+		}
+		// branch for IE/Windows ActiveX version
+	} 
+	else if(window.ActiveXObject) {
+		try {
+			req = new ActiveXObject("Msxml2.XMLHTTP");
+		} 
+		catch(e) {
+			try {
+				req = new ActiveXObject("Microsoft.XMLHTTP");
+			} 
+			catch(e) {
+		         req = false;
+            }
+		} 
+	 }
+    if(req) {
+         //req.onreadystatechange = processReqChange;
+	     req.open("GET", "http://highend3d.com/ajax.php?action=increment_download&id=" + file_id, false);
+	     str = req.send("");
+    }
+}
+</script>
+<table width="595" cellspacing="1" cellpadding="0" border="0">
+  <tr>
+   	<td colspan="3" class="pghd">Local Tools&nbsp;1.0.0</td></tr>
+  <tr>
+   	<td valign="top" colspan="3"><span class="sml">
+   	rotate around edges, move along them, etc...   	
+   	</span></td>
+  </tr>
+  <tr>
+   	<td align="left" style="padding-top: 4px;padding-bottom: 4px">
+		  </td>
+	<td align="right" style="padding-top: 4px;padding-bottom: 4px">
+		</td>
+  </tr>
+</table>
+<!-- TABLE: File Detail Table -->
+
+<!-- TABLE: File Detail Table -->
+<table width="595" cellspacing="0" cellpadding="0" border="0">
+	<tr height="25">
+		<td height="25" colspan="3"></td>
+	</tr>
+
+	<tr>
+		<td class="b2tlc" width="13"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="13" height="11" alt="" /></td>
+
+		<td class="b2hdr">
+			<style>
+            #tertiary {
+                    position: relative;
+                    z-index: 999 !important;
+                    margin-top: -26;
+			}
+			#tertiary ul {
+				border:0px solid red;
+			}
+			</style>
+			<div id="tertiary">
+					<ul><li id="current"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/Local-Tools-3717.html?tab=Description&&id=3717"><span>Description</span></a></li>
+<li ><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/Local-Tools-3717.html?tab=Version%20History&&id=3717"><span>Version History</span></a></li>
+<li ><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/Local-Tools-3717.html?tab=Author%20Files&&id=3717"><span>Author Files</span></a></li></ul>
+					</div><!-- end tertiary -->		</td>
+
+		<td class="b2trc" width="13"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="13" height="11" alt="" /></td>
+	</tr><!-- bg belowis grey border -->
+
+	<tr>
+		<td colspan="3" style="border-left: 1px solid #9B9B9B;border-right: 1px solid #9B9B9B;background-color:#FFFFFF;">
+			<!--INSIDE TABLE-->
+			
+	<!-- 593 --><table width="593" height="" cellspacing="2" cellpadding="1" border="0" bgcolor="#FFFFFF" style="" align="center">
+			<tr>
+		<td colspan="2">
+	 	<!--BUTTONS-->
+	      <table width="570" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+							  <td><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/download-3717.html?loc=HKLocalTools.zip" target="_self" onMouseOver="window.status='Click Here to Download this file'; return true; " onMouseOut="window.status=''; return true;"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/bt_downl.gif" width="95" height="23" border="0" title="Download this file"></a></td>
+              <td><a href=""><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="20" height="1" border="0" alt=""></a></td>
+              <td width="56"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/send.php?id=3717"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/bt_send0.gif" width="56" height="23" border="0" title="Send link to a friend"></a></td>
+                            <form method="post" action="">
+              <input type="hidden" name="add_bookmark" value="true">
+              <input type="hidden" name="bookmark_title" value="Maya Downloads: Local Tools v1.0.0">
+              <input type="hidden" name="bookmark_link" value="/maya/downloads/mel_scripts/modeling/curve_tools/Local-Tools-3717.html">
+              <td width="94"><input type=image src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/bt_bookm.gif" width="94" height="23" border="0" alt="" value="Bookmark" title="Add to your personal bookmarks"></td>
+              </form>                            <td width="66"><a href="http://highend3d.com/boards/index.php?showforum=817"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/bt_forum.gif" width="82" height="23" border="0" alt="Local Tools Support Forum" title="Local Tools Support Forum"></a></td>
+                            <td><a href=""><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="20" height="1" border="0" alt=""></a></td>
+              <td align="right"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/comment_form.php?id=3717" title="Click here to rate"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/rating00.gif" width="62" height="23" border="0"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/50000000.gif" width="76" height="23" border="0" alt="10 votes for an average rating of 4.80"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/end_cap0.gif" width="10" height="23" border="0"></a></td>
+			</tr>
+          </table>
+		</td>
+      </tr>
+		<tr><td colspan="3"><p style="height:8px;">&nbsp;</p></td></tr>
+		<tr>
+			<!--LEFT CONTENT-->
+			<!-- 390 --><td width="350" valign="top" class="leftrightpad">
+				<a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/screen.php?id=3717"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/cropped1.jpg" border="0"></a>					<img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="390" height="5" alt="" /> 
+					<span class="bluBold">UPDATED:</span>&nbsp;&nbsp; 
+					<span class="blu">09/20/07</span>&nbsp;&nbsp;<br />
+					<span class="bluBold">FILE SIZE:</span>&nbsp; 
+					<span class="blu">38 KB</span>&nbsp;&nbsp;<br />
+					<span class="bluBold">DOWNLOADED:</span>&nbsp; <span class="blu">9,712</span>&nbsp;&nbsp;<br />
+					
+								 			<span class="bluBold">HOMEPAGE:</span>&nbsp;&nbsp; 
+						<span class="blu"><a href="http://www.henrykorol.com/Scripts/LocalTools/LTDocIntroduction.htm" target="_blank">http://www.henrykorol.com/Scripts/LocalTools/LTDoc...</a></span><br />
+								 		<span class="bluBold">LICENSE TYPE:</span>&nbsp;&nbsp; 
+					<span class="blu">Freeware</span><br />
+								 				<span class="bluBold">PLATFORMS:</span>&nbsp;&nbsp; 
+							<span class="blu"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/irix-sma.gif" alt=" Irix "><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/windows-.gif" alt=" Windows "><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/linux-sm.gif" alt=" Linux "><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/macos-x-.gif" alt=" MacOS-X "></span><br />
+						 
+							<span class="bluBold">Maya Versions:</span>&nbsp;&nbsp; 
+							<span class="blu">5.x, 6.x, 7.x, 8.x</span><br> 
+						 
+					<span class="bluBold">OWNER:</span>&nbsp;&nbsp; 
+					<span class="blu"><a href="http://highend3d.com/users/47342.html" id="ud">HawK</a></span>&nbsp;
+					<a href="http://www.highend3d.com/boards/index.php?act=Msg&CODE=4&MID=47342"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/sendpm00.gif" border="0" title="Send private mail to the owner of this file" /></a>&nbsp;
+					<span class="bluBold">Author Name:</span><span class="blu">&nbsp;&nbsp;Henry Korol</span><br>			 						<!-- </span> -->
+			</td><!--RIGHT CONTENT-->
+			<td width="182" valign="top" border="0">		<!--USER COMMENTS-->
+
+      <table width="180" cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <td class="b3tlc" width="13"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="21" height="21" alt=""></td>
+			  <td class="b3hdr">User Comments</td>
+			  <td class="b3trc" width="13"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="13" height="21" alt=""></td>
+			</tr>
+			<tr class="listing">
+			  <td colspan="3" class="b3cntnt" valign="top">
+			  <!--CONTENT-->
+				<a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/comments.php?id=3717#2855">1</a>. <a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/comments.php?id=3717#2855">Please read manual carefully.</a><br /><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/comments.php?id=3717#2854">2</a>. <a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/comments.php?id=3717#2854">error</a><br /><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/comments.php?id=3717#2841">3</a>. <a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/comments.php?id=3717#2841">is it really necessary</a><br /><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/comments.php?id=3717#2572">4</a>. <a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/comments.php?id=3717#2572">problems with local tools</a><br /><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/comments.php?id=3717#2515">5</a>. <a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/comments.php?id=3717#2515">Simply the best !</a><br />					<div style="margin: 7px 0px 0px 0px; text-align: center; width: 100%; ">
+						<a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/comments.php?id=3717">(13 Total comments)</a>
+					</div>
+									<br>
+				<a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/comments.php?id=3717"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/uc_read_.gif" width="61" height="15" border="0" alt=""></a>				&nbsp;
+				<a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/comment_form.php?id=3717"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/uc_write.gif" width="87" height="15" border="0" alt=""></a>
+			  </td></tr>
+			<tr>
+				<td class="b3blc"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="21" height="11" alt=""></td>
+				<td class="b3ftr"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="11" alt=""></td>
+				<td class="b3brc"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="13" height="11" alt=""></td>
+			</tr>
+		  </table>
+</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="leftrightpad">
+				<br />
+				<span class="bluBold">DETAILS:</span><br />
+				<br />
+				<div style="width: 570; overflow: auto; overflow-y: visible; padding: 0px 0px 10px 0px;" class="size14">
+					<strong>Update (15.9.07). Supports Maya 2008. Added menu item for Maya version 2008.</strong><br /><p><strong><br /></strong></p><p><strong>Update (23.1.07). Supports Maya 8.5. Added menu items for Maya versions 8.0, 8.5.</strong><br /></p><p><br /></p><p>This tool was designed to allow transformation of objects/components in
+various local axes. You can, for example, rotate around an edge, vertex
+normal/position, move in the plane of the face, scale to its normal.
+You may use any object local space as a reference for the
+transformation, align pivot between two points/objects, and much more.
+You could easily rotate a finger of the character in it's complex axis,
+make it longer, position things along custom lines and many other
+things.<br />
+  You can also bake the orientation to the object, aligning object local axes along edges, etc.<br />
+  <br />
+You can also scale in screen space with this tool. Check &quot;Use
+Orientation Only&quot;. Enter the tool and instead of picking
+compnents/objects go to View --&gt; Select Camera. Now you're able to
+scale in screen space <img border="0" src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/smile000.gif" title="smile" class="inlineimg" /><br />
+  Don't forget to use HUD shortcuts for accessing the Option Box and locking the pivot.<br /><br />
+   <img vspace="0" hspace="10" border="1" src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/LTQuickG.gif" /></p><br /><p><br /></p><p> </p>
+I've made an online documentation for the tool:<br /><br /><p> </p>
+  
+   <p><a href="http://www.henrykorol.com/Scripts/LocalTools/LTDocIntroduction.htm"><strong>http://www.henrykorol.com/Scripts/LocalTools/LTDocIntroduction.htm</strong></a></p><p><a href="http://www.henrykorol.com/Scripts/LocalTools/LTDocIntroduction.htm"><strong><br /></strong></a></p>
+  <p> </p>
+  <p>Please visit the <a href="http://www.henrykorol.com/Scripts/LocalTools/LTDocDownload.htm" title="download"><strong>download</strong></a> page for the video demo of the tool, I recomend to download the high quality version if you can.</p>.
+				</div><br />
+			</td>
+		</tr>
+			<tr>
+		<td colspan="2">
+	 	<!--BUTTONS-->
+	      <table width="570" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+							  <td><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/download-3717.html?loc=HKLocalTools.zip" target="_self" onMouseOver="window.status='Click Here to Download this file'; return true; " onMouseOut="window.status=''; return true;"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/bt_downl.gif" width="95" height="23" border="0" title="Download this file"></a></td>
+              <td><a href=""><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="20" height="1" border="0" alt=""></a></td>
+              <td width="56"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/send.php?id=3717"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/bt_send0.gif" width="56" height="23" border="0" title="Send link to a friend"></a></td>
+                            <form method="post" action="">
+              <input type="hidden" name="add_bookmark" value="true">
+              <input type="hidden" name="bookmark_title" value="Maya Downloads: Local Tools v1.0.0">
+              <input type="hidden" name="bookmark_link" value="/maya/downloads/mel_scripts/modeling/curve_tools/Local-Tools-3717.html">
+              <td width="94"><input type=image src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/bt_bookm.gif" width="94" height="23" border="0" alt="" value="Bookmark" title="Add to your personal bookmarks"></td>
+              </form>                            <td width="66"><a href="http://highend3d.com/boards/index.php?showforum=817"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/bt_forum.gif" width="82" height="23" border="0" alt="Local Tools Support Forum" title="Local Tools Support Forum"></a></td>
+                            <td><a href=""><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="20" height="1" border="0" alt=""></a></td>
+              <td align="right"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/comment_form.php?id=3717" title="Click here to rate"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/rating00.gif" width="62" height="23" border="0"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/50000000.gif" width="76" height="23" border="0" alt="10 votes for an average rating of 4.80"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/end_cap0.gif" width="10" height="23" border="0"></a></td>
+			</tr>
+          </table>
+		</td>
+      </tr>
+		<tr><td colspan="3"><p style="width: 8px;">&nbsp;</p></td></tr>
+		
+	</table>
+						
+		</td>
+	</tr>
+	<tr>
+		<td class="b5blc"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="11" alt="" /></td>
+		<td class="b5ftr"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="11" alt="" /></td>
+		<td class="b5brc"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="11" alt="" /></td>
+	</tr>
+</table>
+<br /><!-- forum for this tutorial -->
+<table width="595" cellspacing="0" cellpadding="0" border="0">
+  <tr>
+	<td valign="top">
+	<table width="595" cellspacing="0" cellpadding="0" border="0">
+      <tr>
+	    <td class="b2tlc" width="13"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="13" height="11" alt=""></td>
+		<td class="b2hdr"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="11" alt=""></td>		
+		<td class="b2trc" width="13"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="13" height="11" alt=""></td>
+	  </tr>
+	  <tr>
+	    <td colspan="3" bgcolor="#9A9B9B">
+		<table width="593" cellspacing="2" cellpadding="1" border="0" bgcolor="FFFFFF" style="margin-left : 1px">
+		  <tr>
+		    <td valign="top" class="leftrightpad">
+		      <div align="center" class="bluBold">Latest Forum posts about this Download</div><br>
+			  <div class="ud">
+			   			   <img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/rt-arrow.gif" border="0">&nbsp;<a href="http://highend3d.com/boards/index.php?showtopic=239662">Download File and File Information Here</a> by <a href="http://highend3d.com/users/1.html">admin</a> (09/20/07)<br>			   </div><br>
+			   <div align="center"><a href="http://highend3d.com/boards/index.php?showforum=817"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/bt_discu.gif" border="0" height="23" alt="Discuss in Forums" title="Discuss in Forums"></a></div
+		    </td>
+		  </tr>
+		</table>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td class="b5blc"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="11" alt=""></td>
+		<td class="b5ftr"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="11" alt=""></td>
+		<td class="b5brc"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="11" alt=""></td>
+	  </tr>
+	</table>
+  </tr>
+</table><br>
+<!-- (SELECT id, title, pathonly FROM dvdstore WHERE rlevel5 LIKE '%57,%' AND visible = 1 and ((sp_start_date < now() and sp_end_date > now()) or (sp_start_date = '0000-00-00' and sp_end_date = '0000-00-00'))   ORDER BY RAND() limit 1) UNION (SELECT id, title, pathonly FROM dvdstore WHERE rlevel4 LIKE '%379,%' AND visible = 1 and ((sp_start_date < now() and sp_end_date > now()) or (sp_start_date = '0000-00-00' and sp_end_date = '0000-00-00'))   ORDER BY RAND() limit 1) UNION (SELECT id, title, pathonly FROM dvdstore WHERE rlevel3 LIKE '%11,%' AND visible = 1 and ((sp_start_date < now() and sp_end_date > now()) or (sp_start_date = '0000-00-00' and sp_end_date = '0000-00-00'))   ORDER BY RAND() limit 1) UNION (SELECT id, title, pathonly FROM dvdstore WHERE rlevel2 LIKE '%60,%' AND visible = 1 and ((sp_start_date < now() and sp_end_date > now()) or (sp_start_date = '0000-00-00' and sp_end_date = '0000-00-00'))   ORDER BY RAND() limit 1) UNION (SELECT id, title, pathonly FROM dvdstore WHERE rlevel1 LIKE '%1,%' AND visible = 1 and ((sp_start_date < now() and sp_end_date > now()) or (sp_start_date = '0000-00-00' and sp_end_date = '0000-00-00'))   ORDER BY RAND() limit 1) limit 1; --><div class="cbxtopblue">Related Learning Tools</div>
+  <div class="cbxmiddledot">
+    <table width="593" cellspacing="0" cellpadding="5" border="0">
+      <tr>
+        <td width="193" valign="top" align="center">
+          <strong>Maya Related DVDs</strong><br><br>
+          <a href="http://highend3d.com/dvd_store/maya/modeling/17.html"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/box00000.jpg" border="0"></a><br><br>Head Modeling for Games         </td>
+        <td width="199" valign="top" align="center">
+          <strong>Maya Related Books</strong><br><br>
+          <a href="http://highend3d.com/bookstore/maya/178.html"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/box00001.jpg" border="0"></a><br><br>MEL Fundamentals        </td>
+        <td width="190" valign="top" align="center">
+          <strong>Global DVDs</strong><br><br>
+          <a href="http://highend3d.com/dvd_store/video_game/134.html"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/box00002.jpg" border="0"></a><br><br>Custom Props & Animation-Source Games & Maya        </td>       
+      </tr>
+    </table>				
+  </div>	
+<div class="cbxbottom"></div>
+<br>
+      <table width="595" cellspacing="0" cellpadding="0" border="0">
+         <tr>
+            <td class="b2tlc" width="13"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="11" alt=""></td>
+            <td class="b2hdr"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="11" alt=""></td>
+            <td class="b2trc" width="13"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="11" alt=""></td>
+         </tr>
+         <tr><td class="b2cntnt" colspan="3" align="center"><span class="bluBold">Curve Tools Modeling Mel Scripts for Maya</span><br><br> </td>
+		 </tr>
+		 <tr>
+            <td colspan="3" class="b2cntnt">
+               <table width="593" cellspacing="0" cellpadding="5" border="0">
+                  <tr class="listing">
+                     <td width="33%" valign="top">
+                       <img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/arrow_dw.gif" width="12" height="12" border="0" alt="" valign="bottom">
+					   &nbsp;&nbsp;<b>Top&nbsp;Rated</b> <br>
+<ol style="list-style-position:outside;"><li style="margin-left:-10px;"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/3842.html">oaSpansMaster</a><li style="margin-left:-10px;"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/3899.html">Context Sensitive Menus Extension</a><li style="margin-left:-10px;"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/4018.html">ds_rigToolsPack_v1_03.zip</a><li style="margin-left:-10px;"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/4097.html">Align Components</a><li style="margin-left:-10px;"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/4337.html">zenTools</a></ol>                     </td>
+                     <td width="5">
+                        <div id="b1vline">
+                        </div>
+                     </td>
+                     <td width="33%" valign="top">
+                       <img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/arrow_dw.gif" width="12" height="12" border="0" alt="" valign="bottom">
+					   &nbsp;&nbsp;<b>Most&nbsp;Downloaded</b> <br>
+<ol style="list-style-position:outside;"><li style="margin-left:-10px;"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/4337.html">zenTools</a><li style="margin-left:-10px;"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/3717.html">Local Tools</a><li style="margin-left:-10px;"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/3958.html">ya_selectionManager</a><li style="margin-left:-10px;"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/3657.html">Duplicate Along</a><li style="margin-left:-10px;"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/4018.html">ds_rigToolsPack_v1_03.zip</a></ol>                     </td>
+                     <td width="5">
+                        <div id="b1vline">
+                        </div>
+                     </td>
+                     <td width="33%" valign="top">
+                       <img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/arrow_dw.gif" width="12" height="12" border="0" alt="" valign="bottom">
+					   &nbsp;&nbsp;<b>
+Top Forum Posts</b> <br><ol style="list-style-position:outside;"><li style="margin-left:-10px;"><a href="http://highend3d.com/boards/index.php?showforum=854">Download File and File Information Here</a></li><li style="margin-left:-10px;"><a href="http://highend3d.com/boards/index.php?showforum=625">Edge Loop Tool</a></li><li style="margin-left:-10px;"><a href="http://highend3d.com/boards/index.php?showforum=848">Download File and File Information Here</a></li><li style="margin-left:-10px;"><a href="http://highend3d.com/boards/index.php?showforum=817">Download File and File Information Here</a></li><li style="margin-left:-10px;"><a href="http://highend3d.com/boards/index.php?showforum=553">Suggestions, Bugs. Post Here :)</a></li></ol>                     </td>
+                  </tr>
+               </table>
+            </td>
+         </tr>
+         <tr>
+            <td><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/b2_blc00.gif" width="13" height="11" alt=""></td>
+            <td background="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/b2_ftr00.gif"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="11" alt=""></td>
+            <td><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/b2_brc00.gif" width="13" height="11" alt=""></td>
+         </tr>
+      </table>
+      <br>
+<table width="595" cellspacing="0" cellpadding="0" border="0">
+	<tr>
+		<td class="b1tlc" width="23"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="21" alt=""></td>
+		<td class="b1hdr" class="b1hdr" width="569">Featured Art</td>
+		<td class="b1trc" width="13"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="21" alt=""></td>
+	</tr>
+	 <tr>
+       <td colspan="3" class="b2cntnt" align="center"><br>
+		<table width="100%" align="center" border="0">
+		  <tr>
+
+         	<td width="33%" align="center">
+				  <a href="http://highend3d.com/gallery/vehicles/320.html">
+				  <img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/cropped2.jpg" width="170" border="1" alt="AM V12 Vanquish" title="AM V12 Vanquish">
+				   </a>
+		    </td>
+         	<td width="33%" align="center">
+				  <a href="http://highend3d.com/gallery/211.html">
+				  <img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/cropped3.jpg" width="170" border="1" alt="Chenille" title="Chenille">
+				   </a>
+		    </td>
+         	<td width="33%" align="center">
+				  <a href="http://highend3d.com/gallery/290.html">
+				  <img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/cropped4.jpg" width="170" border="1" alt="Entry Sign" title="Entry Sign">
+				   </a>
+		    </td>		  </tr>
+		</table>
+      </td>
+   </tr>
+	<tr>
+		<td><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/b1_blc00.gif" width="23" height="11" alt=""></td>
+		<td background="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/b2_ftr00.gif"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0001.gif" width="1" height="11" alt=""></td>
+		<td><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/b2_brc00.gif" width="13" height="11" alt=""></td>
+	</tr>
+</table><br>
+<img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/relateds.gif" border="0" width="593" height="25"><br>
+<div style="width: 593;" align="left"> 
+   <div style="padding: 0 10px 0 10px;">
+  <img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/r-school.gif" border="0" width="11" height="11">
+  <a href="http://highend3d.com/schools/university/3.html"><strong>Full Sail University</strong> - (University) - Winter Park, Florida, East Coast (USA)<br>
+  <img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/r-school.gif" border="0" width="11" height="11">
+  <a href="http://highend3d.com/schools/university/5.html"><strong>Academy of Art University</strong> - (University) - San Francisco, West Coast (USA)<br>
+  <img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/r-school.gif" border="0" width="11" height="11">
+  <a href="http://highend3d.com/schools/training_center/4.html"><strong>The Digital Animation & Visual Effects School (DAVE School)</strong> - (Training Center) - Orlando, Florida, East Coast (USA)<br>
+  <img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/r-school.gif" border="0" width="11" height="11">
+  <a href="http://highend3d.com/schools/training_center/1.html"><strong>Gnomon School of Visual Effects</strong> - (Training Center) - Hollywood, CA, West Coast (USA)<br>
+</div></div><br /><br />												</td>
+											<!--RIGHTMENU-->
+												<td valign="top" width="188" align="right">
+	  <table cellspacing="0" cellpadding="0" border="0" width="172">
+  	
+  		<tr><td><div align="center" id="ud"><a href="http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/add.php"><strong style="font-size: 14px; font-family: arial;">Upload your Mel Scripts</strong></div><br></a></td></tr>      <tr>
+        <td valign="top">
+      		<div class="rmlinksh172">Sponsors</div>
+          <div class="rmlinks172">
+       		  <table width="170">
+              <tr>
+                <td align="center">
+      			<a href="http://ad.doubleclick.net/jump/N636.Highend3D/B2715341.2;dcadv=1576033;sz=160x600;ord=[timestamp]?">
+<img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/B2715341.jpg" width="160" height="600" border="0" alt="Click here!" /></a>
+
+
+<div id="beacon_109" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src='http://highend3d.com/ads/adlog.php?bannerid=109&amp;clientid=55&amp;zoneid=3&amp;source=&amp;block=0&amp;capping=0&amp;cb=478742583ef1e9f066e9d9fe9813690c' width='0' height='0' alt='' style='width: 0px; height: 0px;' /></div>              </td>
+              </tr>
+            </table>						
+        </div>	
+        <div class="rmlinksf172"></div>
+        <br>
+		        <div class="rmlinksh172">Sponsor</div>
+        <div class="rmlinks172">
+      		  <table width="170">
+              <tr>
+                <td align="center">
+      						<script language="JavaScript1.1" src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/9810-583.js">
+</script>
+<noscript>
+  <a href="http://altfarm.mediaplex.com/ad/ck/9810-58350-23369-0?mpt=546721">
+    <img src="http://altfarm.mediaplex.com/ad/bn/9810-58350-23369-0?mpt=546721"
+alt="Click Here" border="0">
+</a>
+</noscript><div id="beacon_132" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src='http://highend3d.com/ads/adlog.php?bannerid=132&amp;clientid=104&amp;zoneid=3&amp;source=&amp;block=0&amp;capping=0&amp;cb=eff935ef5774c7d320765fc0bb0b669f' width='0' height='0' alt='' style='width: 0px; height: 0px;' /></div>      		      </td>
+              </tr>
+            </table>
+        </div>	
+        <div class="rmlinksf172"></div>		
+		<br />
+						
+      </td>
+      </tr>
+    </table>   
+	</td>
+											</tr>
+											<tr><td align="center" colspan="2">
+
+														<object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0' width='728' height='90'><param name='movie' value='http://www.highend3d.com/ads/banners/gno_highend3d_728x902_2.swf?clickTAG=http://highend3d.com/ads/adclick.php%3Fbannerid=104%26zoneid=1%26source=%26dest=http%3A%2F%2Fwww.thegnomonworkshop.com'><param name='quality' value='high'><embed src='Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/adclick0.com' quality=high width='728' height='90' type='application/x-shockwave-flash' pluginspace='http://www.macromedia.com/go/getflashplayer'></embed></object><div id="beacon_104" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src='http://highend3d.com/ads/adlog.php?bannerid=104&amp;clientid=22&amp;zoneid=1&amp;source=&amp;block=0&amp;capping=0&amp;cb=585a64f3bc3fe7763abf58c0f80f89bf' width='0' height='0' alt='' style='width: 0px; height: 0px;' /></div><!-- banner breadcrumb key : -->
+														</td></tr>
+										</table>
+									
+									</td></tr>
+								</table>
+							
+							</td></tr>
+						<!--BOTTOM BANNER-->
+
+
+						<!--BASE-->
+							<tr><td valign="top">
+								<table width="100%" cellspacing="0" cellpadding="0" border="0">
+									<tr>
+										<td width="12"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/content2.gif" width="12" height="23" alt=""></td>
+										<td background="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/content3.gif" width="99%"></td>
+										<td width="12"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/content4.gif" width="12" height="23" alt=""></td>
+									</tr>
+								</table>
+							</td></tr>
+
+						<!--COPYRIGHT NOTICE-->
+							<tr><td>
+								<table width="100%" cellspacing="0" cellpadding="3" border="0">
+									<tr><td><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="10" alt=""></td></tr>
+									<tr><td class="sml" align="center">
+									                    
+                  </td></tr>
+									<tr><td  align="center">
+									
+									<table cellspacing="0" cellpadding="3" border="0">
+										<tr>
+											<td class="ud">
+<a href="http://highend3d.com/contact/">Contact Us</a> |
+<a href="http://highend3d.com/advertise/">Advertise</a> |
+<a href="http://www.highendcareers.com/" target="_blank">Post Jobs</a> |
+<a href="http://highend3d.com/news/add.php">Post News</a> |
+<a href="http://highend3d.com/events/add.php">Post Events</a> |
+<a href="http://highend3d.com/terms/">Terms</a>
+</td>
+										</tr>
+									</table>
+																	
+									</td></tr>
+									<tr><td><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="1" height="30" alt=""></td></tr>
+								</table>
+							</td></tr>
+						</table>
+
+					</td>
+					<td width="5"><img src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/shim0000.gif" width="5" height="1" alt=""></td>
+				</tr>
+			</table>
+
+
+</div>
+<script type="text/javascript" src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/switcher.js"></script>
+<script src="Local Tools - Curve Tools Modeling Mel Scripts for Maya_files/urchin00.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-238675-1";
+urchinTracker();
+</script>
+</body>
+</html>
+              
+
+
+<!-- This document saved from http://highend3d.com/maya/downloads/mel_scripts/modeling/curve_tools/Local-Tools-3717.html -->
