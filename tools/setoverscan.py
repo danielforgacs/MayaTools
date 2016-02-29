@@ -17,6 +17,8 @@ for tests call: tests()
 
 
 from fractions import Fraction
+import decimal
+
 try:
     import pymel.core
 except:
@@ -68,10 +70,12 @@ except:
 
 
 def get_osc_values(resx, resy, pixels):
-    resy_osc = resy + (pixels * 2)
-    osc_scale = resy_osc / resy
+    x = decimal.Decimal(resx)
+    y = decimal.Decimal(resy)
+    resy_osc = y + (pixels * 2)
+    osc_scale = resy_osc / y
     postscale = 1 / osc_scale
-    resx_osc = resx * osc_scale
+    resx_osc = x * osc_scale
 
     return {
             'x_osc': int(round(resx_osc)),
