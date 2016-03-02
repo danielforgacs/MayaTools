@@ -7,20 +7,11 @@ for Maya for matchmovers
 
 refactored code of stabilizer / fstab
 
-select one anything with transform.
-geo, locator, geo components...
-activate pane with camera
+select vertex or locator activate pane with camera
 or add a camera to the selection
 
 >>> get_screen_pos() returns
 geo mormalized screen positions for 2D transforms
-
-Maya version: Maya 2015 Extension 1 + SP5
-
-to do:
-    - HARDCODED NODES: clear_stabilizer()
-    - turn off camera reset
-    - second eye
 """
 
 import logging
@@ -95,7 +86,8 @@ def get_camera():
         camera_shape = None
 
     if not camera_shape:
-        message = '--> Select a transform and a camera or click in a pane and select a transform'
+        message = ('--> Select a transform and a camera'
+                    ' or click in a pane and select a transform')
 
         raise Exception(message)
 
@@ -124,8 +116,8 @@ def get_position_object():
         vertex = type(transform) is pymel.core.general.MeshVertex
 
     if not (locator or vertex):
-        raise Exception("--> can't get transform."""
-                """ Select vertex or locator..""")
+        raise Exception("--> can't get transform."
+                        " Select vertex or locator..")
 
     return transform
 
@@ -153,13 +145,13 @@ setAttr "{camshape}.{parm_v}" $pos[3];
     camparm_v = 'verticalPan' if pan else 'verticalFilmOffset'
 
     expression = expression.format(
-            camshape=cam.fullPathName(),
-            parm_h=camparm_h,
-            parm_v=camparm_v,
-            pos=pos,
-            camtransform=cam,
-            module_=__name__
-            )
+                    camshape=cam.fullPathName(),
+                    parm_h=camparm_h,
+                    parm_v=camparm_v,
+                    pos=pos,
+                    camtransform=cam,
+                    module_=__name__
+                )
 
     return expression
 
@@ -190,6 +182,7 @@ def get_screen_pos(point, camera, fieldOfView_h,
         normalized x & y screen position for export to 2D transforms,
         camera shape film offset x & y
     """
+
     from math import tan, radians
 
     PPosWrld = cmds.xform(point, query=True,
@@ -229,7 +222,9 @@ def stabilize():
     expression = create_expression(camera, transform)
     log.debug('--> transform ok...')
 
-    expression_node = setup_expression_node(expression, camera.name(), task='create')
+    expression_node = setup_expression_node(expression,
+                                            camera.name(),
+                                            task='create')
     log.debug('--> expression node ok...')
 
     return (transform, camera, expression, expression_node)
@@ -286,8 +281,3 @@ def main(**kwargs):
                 fade=True,
                 fadeOutTime=2
             )
-    elif kwargs['task'] == 'test':
-        import camstabilizer_tests
-        reload(camstabilizer_tests)
-
-        camstabilizer_tests.main()
