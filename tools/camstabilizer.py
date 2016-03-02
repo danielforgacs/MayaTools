@@ -146,8 +146,8 @@ def create_expression(cam, pos, pan=True):
             ' query = True, verticalFilmAperture = True)";'
         '\n$pos =`python "get_screen_pos(\'{pos}\',\'{camtransform}\','
             ' fov_h, fov_v,aperture_h, aperture_v)"`;'
-        '\nsetAttr "{camshape}.{parm_h}" $pos[2];'
-        '\nsetAttr "{camshape}.{parm_v}" $pos[3];'
+        '\nsetAttr "{camshape}.{parm_h}" ($pos[2]);'
+        '\nsetAttr "{camshape}.{parm_v}" ($pos[3]);'
     )
 
     camparm_h = 'horizontalPan' if pan else 'horizontalFilmOffset'
