@@ -11,13 +11,19 @@ set overscan
 matchmove_shelf
 RiggingAid
 
+Maya version: Maya 2015 Extension 1 + SP5
+
 todo:
     - prerender scripts
-    - camera init
-    - overscan setter
-    - node defaults
     - test render setups
     - precomp setup
+    - second eye
+
+    (- overscan setter)
+    (- camera init)
+    (- node defaults)
+    (- HARDCODED NODES: clear_stabilizer())
+    (- turn off camera reset)
 
 
 install:
