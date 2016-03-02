@@ -16,6 +16,11 @@ or add a camera to the selection
 geo mormalized screen positions for 2D transforms
 
 Maya version: Maya 2015 Extension 1 + SP5
+
+to do:
+    - HARDCODED NODES: clear_stabilizer()
+    - turn off camera reset
+    - second eye
 """
 
 import logging
@@ -42,7 +47,7 @@ log.addHandler(ch)
 def get_selection():
     selection = pymel.core.selected()
     error_message = ('--> Select a transform and a camera'
-                    ' or click in a pane and select a transform')
+                ' or click in a pane and select a transform')
 
     if len(selection) not in (1, 2):
         log.debug('selection not 1, 2')
@@ -90,8 +95,7 @@ def get_camera():
         camera_shape = None
 
     if not camera_shape:
-        message = ('--> Select a transform and a camera'
-                    'or click in a pane and select a transform')
+        message = '--> Select a transform and a camera or click in a pane and select a transform'
 
         raise Exception(message)
 
@@ -120,30 +124,30 @@ def get_position_object():
         vertex = type(transform) is pymel.core.general.MeshVertex
 
     if not (locator or vertex):
-        raise Exception("--> can't get transform."
-                        " Select vertex or locator..")
+        raise Exception("--> can't get transform."""
+                """ Select vertex or locator..""")
 
     return transform
 
 
 def create_expression(cam, pos, pan=True):
-    expression = (
-        '// {camshape}'
-        '// {pos}'
-        '// {parm_h}'
-        '// {parm_v}'
-        '\npython "import maya.cmds as cmds";'
-        'python "from {module_} import get_screen_pos";'
-        'python "reload(get_screen_pos)";'
-        '\nsetAttr "{camshape}.panZoomEnabled" 1;'
-        '\npython "fov_h = cmds.camera('{camshape}', query=True, horizontalFieldOfView=True)";'
-        'python "fov_v = cmds.camera('{camshape}', query=True, verticalFieldOfView=True)";'
-        'python "aperture_h = cmds.camera('{camshape}', query=True, horizontalFilmAperture=True)";'
-        'python "aperture_v = cmds.camera('{camshape}', query=True, verticalFilmAperture=True)";'
-        '\n$pos = `python "get_screen_pos('{pos}', '{camtransform}', fov_h, fov_v, aperture_h, aperture_v)"`;'
-        '\nsetAttr "{camshape}.{parm_h}" $pos[2];'
-        'setAttr "{camshape}.{parm_v}" $pos[3];'
-    )
+    expression = """
+// {camshape}
+// {pos}
+// {parm_h}
+// {parm_v}
+python "import maya.cmds as cmds";
+python "from {module_} import get_screen_pos";
+// python "reload(get_screen_pos)";
+setAttr "{camshape}.panZoomEnabled" 1;
+python "fov_h = cmds.camera ('{camshape}', query = True, horizontalFieldOfView = True)";
+python "fov_v = cmds.camera ('{camshape}', query = True, verticalFieldOfView = True)";
+python "aperture_h = cmds.camera ('{camshape}', query = True, horizontalFilmAperture = True)";
+python "aperture_v = cmds.camera ('{camshape}', query = True, verticalFilmAperture = True)";
+$pos =`python "get_screen_pos('{pos}','{camtransform}',fov_h, fov_v,aperture_h,aperture_v)"`;
+setAttr "{camshape}.{parm_h}" $pos[2];
+setAttr "{camshape}.{parm_v}" $pos[3];
+"""
 
     camparm_h = 'horizontalPan' if pan else 'horizontalFilmOffset'
     camparm_v = 'verticalPan' if pan else 'verticalFilmOffset'
@@ -231,18 +235,18 @@ def stabilize():
     return (transform, camera, expression, expression_node)
 
 
-# def clear_stabilizer_OBSOLETE():
-#     if not pymel.core.objExists('test_cameraShape_stabilizer'):
-#         raise Exception('--> Stabilizer is turned off...')
+def clear_stabilizer_OBSOLETE():
+    if not pymel.core.objExists('test_cameraShape_stabilizer'):
+        raise Exception('--> Stabilizer is turned off...')
 
-#     else:
-#         expr_node = pymel.core.PyNode('test_cameraShape_stabilizer')
-#         campath = expr_node.getExpression().split('\n')[0][3:]
-#         pymel.core.delete('test_cameraShape_stabilizer')
-#         camera_shape = pymel.core.PyNode(campath)
+    else:
+        expr_node = pymel.core.PyNode('test_cameraShape_stabilizer')
+        campath = expr_node.getExpression().split('\n')[0][3:]
+        pymel.core.delete('test_cameraShape_stabilizer')
+        camera_shape = pymel.core.PyNode(campath)
 
-#         camera_shape.setHorizontalFilmOffset(0)
-#         camera_shape.setVerticalFilmOffset(0)
+        camera_shape.setHorizontalFilmOffset(0)
+        camera_shape.setVerticalFilmOffset(0)
 
 
 def clear_stabilizer():
@@ -282,3 +286,8 @@ def main(**kwargs):
                 fade=True,
                 fadeOutTime=2
             )
+    elif kwargs['task'] == 'test':
+        import camstabilizer_tests
+        reload(camstabilizer_tests)
+
+        camstabilizer_tests.main()
