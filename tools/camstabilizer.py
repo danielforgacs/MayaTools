@@ -16,8 +16,12 @@ geo mormalized screen positions for 2D transforms
 
 import logging
 
-import pymel.core
-import maya.cmds as cmds
+try:
+    import pymel.core
+    import maya.cmds as cmds
+except:
+    pm = None
+    cmds = None
 
 
 formatter = logging.Formatter('--> %(levelname)s'
@@ -123,23 +127,28 @@ def get_position_object():
 
 
 def create_expression(cam, pos, pan=True):
-    expression = """
-// {camshape}
-// {pos}
-// {parm_h}
-// {parm_v}
-python "import maya.cmds as cmds";
-python "from {module_} import get_screen_pos";
-// python "reload(get_screen_pos)";
-setAttr "{camshape}.panZoomEnabled" 1;
-python "fov_h = cmds.camera ('{camshape}', query = True, horizontalFieldOfView = True)";
-python "fov_v = cmds.camera ('{camshape}', query = True, verticalFieldOfView = True)";
-python "aperture_h = cmds.camera ('{camshape}', query = True, horizontalFilmAperture = True)";
-python "aperture_v = cmds.camera ('{camshape}', query = True, verticalFilmAperture = True)";
-$pos =`python "get_screen_pos('{pos}','{camtransform}',fov_h, fov_v,aperture_h,aperture_v)"`;
-setAttr "{camshape}.{parm_h}" $pos[2];
-setAttr "{camshape}.{parm_v}" $pos[3];
-"""
+    expression = (
+        '\n// {camshape}'
+        '\n// {pos}'
+        '\n// {parm_h}'
+        '\n// {parm_v}'
+        '\npython "import maya.cmds as cmds";'
+        '\npython "from {module_} import get_screen_pos";'
+        '\n// python "reload(get_screen_pos)";'
+        '\nsetAttr "{camshape}.panZoomEnabled" 1;'
+        '\npython "fov_h = cmds.camera (\'{camshape}\','
+            ' query = True, horizontalFieldOfView = True)";'
+        '\npython "fov_v = cmds.camera (\'{camshape}\','
+            ' query = True, verticalFieldOfView = True)";'
+        '\npython "aperture_h = cmds.camera (\'{camshape}\','
+            ' query = True, horizontalFilmAperture = True)";'
+        '\npython "aperture_v = cmds.camera (\'{camshape}\','
+            ' query = True, verticalFilmAperture = True)";'
+        '\n$pos =`python "get_screen_pos(\'{pos}\',\'{camtransform}\','
+            ' fov_h, fov_v,aperture_h, aperture_v)"`;'
+        '\nsetAttr "{camshape}.{parm_h}" $pos[2];'
+        '\nsetAttr "{camshape}.{parm_v}" $pos[3];'
+    )
 
     camparm_h = 'horizontalPan' if pan else 'horizontalFilmOffset'
     camparm_v = 'verticalPan' if pan else 'verticalFilmOffset'
@@ -245,10 +254,12 @@ def clear_stabilizer_OBSOLETE():
 
 
 def clear_stabilizer():
-    stabexpression = [node for node in pymel.core.ls(exactType='expression') if 'stabilizer' in node.name()]
+    stabexpression = [node for node in pymel.core.ls(exactType=
+            'expression') if 'stabilizer' in node.name()]
 
     if len(stabexpression) > 1:
-        raise Exception('--> There are more than one stabilized camera in the scene...')
+        raise Exception('--> There are more than one'
+                        ' stabilized camera in the scene...')
 
     for node in stabexpression:
         exprstring = node.expression.get()
@@ -281,3 +292,7 @@ def main(**kwargs):
                 fade=True,
                 fadeOutTime=2
             )
+
+
+if __name__ == '__main__':
+    pass
