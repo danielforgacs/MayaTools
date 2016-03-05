@@ -134,7 +134,7 @@ def create_expression(cam, pos, pan=True):
         '\n// {parm_v}'
         '\npython "import maya.cmds as cmds";'
         '\npython "from {module_} import get_screen_pos";'
-        '\npython "reload(get_screen_pos)";'
+        '\npython "reload({module_})";'
         '\npython "fov_h = cmds.camera (\'{camshape}\', query=True, horizontalFieldOfView=True)";'
         '\npython "fov_v = cmds.camera (\'{camshape}\', query=True, verticalFieldOfView=True)";'
         '\npython "aperture_h = cmds.camera (\'{camshape}\', query=True, horizontalFilmAperture=True)";'
