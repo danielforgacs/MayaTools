@@ -34,9 +34,9 @@ install:
 MAYATOOLSPATH=<MAYA TOOLS PATH>
 
 // --> WINDOWS:
-XBMLANGPATH=%mayatoolspath%\MayaTools\icons;%mayatoolspath%\MayaTools\matchmove_shelf\matchmove_shelf_icons
-MAYA_SHELF_PATH=%mayatoolspath%\MayaTools\shelfs
-MAYA_SCRIPT_PATH=%mayatoolspath%\MayaTools\matchmove_shelf\mel
+XBMLANGPATH=%MAYATOOLSPATH%\MayaTools\icons;%MAYATOOLSPATH%\MayaTools\matchmove_shelf\matchmove_shelf_icons
+MAYA_SHELF_PATH=%MAYATOOLSPATH%\MayaTools\shelfs
+MAYA_SCRIPT_PATH=%MAYATOOLSPATH%\MayaTools\matchmove_shelf\mel
 
 // --> LINUX:
 XBMLANGPATH=$MAYATOOLSPATH/MayaTools/icons/%B:$MAYATOOLSPATH/MayaTools/matchmove_shelf/matchmove_shelf_icons/%B
