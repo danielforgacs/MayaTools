@@ -1,7 +1,7 @@
 
 
 global proc string getModelPanel()
-    {   	
+    {
 	string $modelPanel;
 	if (`modelEditor -q -activeView modelPanel1`) $modelPanel = "modelPanel1";
 	if (`modelEditor -q -activeView modelPanel2`) $modelPanel = "modelPanel2";
@@ -10,7 +10,7 @@ global proc string getModelPanel()
 
 	// dragger works now for up to 10 tear off panels
 	// if you need more, add more lines and increase the numbers...
-	if (`modelEditor -exists modelPanel5`) if (`modelEditor -q -activeView modelPanel5`) $modelPanel = "modelPanel5";	
+	if (`modelEditor -exists modelPanel5`) if (`modelEditor -q -activeView modelPanel5`) $modelPanel = "modelPanel5";
 	if (`modelEditor -exists modelPanel6`) if (`modelEditor -q -activeView modelPanel6`) $modelPanel = "modelPanel6";
 	if (`modelEditor -exists modelPanel7`) if (`modelEditor -q -activeView modelPanel7`) $modelPanel = "modelPanel7";
 	if (`modelEditor -exists modelPanel8`) if (`modelEditor -q -activeView modelPanel8`) $modelPanel = "modelPanel8";
@@ -20,10 +20,10 @@ global proc string getModelPanel()
 	if (`modelEditor -exists modelPanel12`) if (`modelEditor -q -activeView modelPanel12`) $modelPanel = "modelPanel12";
 	if (`modelEditor -exists modelPanel13`) if (`modelEditor -q -activeView modelPanel13`) $modelPanel = "modelPanel13";
 	if (`modelEditor -exists modelPanel14`) if (`modelEditor -q -activeView modelPanel14`) $modelPanel = "modelPanel14";
-	if (`modelEditor -exists modelPanel15`) if (`modelEditor -q -activeView modelPanel15`) $modelPanel = "modelPanel15"; 
+	if (`modelEditor -exists modelPanel15`) if (`modelEditor -q -activeView modelPanel15`) $modelPanel = "modelPanel15";
     return $modelPanel;
     }
-    
+
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -38,9 +38,9 @@ global proc string getModelPanel()
 ////////////////////////////////////////////////////////////////////////////////////;
 global proc createCones()
     {
-    
+
 /////// find the selected locators and camera
-    string $currentSelection[] = `ls -sl`;  select -hierarchy;   
+    string $currentSelection[] = `ls -sl`;  select -hierarchy;
   	string $modelPanel = getModelPanel();
 	string $cameras = `modelEditor -q -camera $modelPanel`;
 	//print ($cameras + " " + (`objectType $cameras`));
@@ -53,26 +53,26 @@ global proc createCones()
     string $cameraTrans[] = `listRelatives -p $cameras`;
     string $locators[] = `ls -type locator -sl`;
 
-////// import in cone if not already /////////////////   
-   
+////// import in cone if not already /////////////////
+
     string $cone = `objExists "cone_0Shape1"`;
     if ($cone == 0)
         {
-        file -import -type "mayaAscii" "/jobs/pt/users/chardman/tools/maya/cone.ma";
+        file -import -type "mayaAscii" "/home/DForgacs/dev/MayaTools/matchmove_shelf/mel/cone.ma";
         }
-    
+
 /////////////////// loop and aim and point constrain duplicate cones ///////
-   
+
     string $polygon = "cone_01"; select -cl;
-    group -em -name "cones"; 
+    group -em -name "cones";
     for ($i =0; $i < size($locators); $i ++)
         {
         string $locTran[] = `listRelatives -p $locators[$i]`;
-        string $dupPoly[] = `duplicate $polygon`;    
+        string $dupPoly[] = `duplicate $polygon`;
         pointConstraint $locTran[0] $dupPoly[0] ;
         aimConstraint -o 0 0 0 $cameraTrans[0] $dupPoly[0] ;
         parent $dupPoly[0] "cones";
-        }     
+        }
     parent "cone_01" "cones"; setAttr "cone_01.v" 0;
   //  expression -s ("cone_01.sy = cone_01.sx"); expression -s ("cone_01.sz = cone_01.sx");
     select $currentSelection; relevantToCameraExp;
@@ -86,23 +86,23 @@ global proc createCones()
 
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
-    
+
 global proc relevantToCameraExp()
-    {     
-    
+    {
+
     select -hierarchy;
     string $cameraAndLoc[] = `ls -sl`;
-    
+
   	string $modelPanel = getModelPanel();
 	string $cameras = `modelEditor -q -camera $modelPanel`;
     string $camTran[] = `listRelatives -p $cameras`;
-    
+
     string $con[] = `ls -type mesh "cone*"`;
     string $items[] = {"cone_01"};
     string $cones[] = stringArrayRemove($items, $con);
 
-    
-    
+
+
     string $currExp[] = `ls -type expression "scl*"`;
     if (size($currExp) > 0)
         {
@@ -113,38 +113,38 @@ global proc relevantToCameraExp()
         {
         delete $currExp;
         }
-        
 
 
-    int $selectedRadio = `radioButtonGrp -q -sl "whichScale"`; 
-    
+
+    int $selectedRadio = `radioButtonGrp -q -sl "whichScale"`;
+
 ///////////// if standard scale selected ///////////////////////////
-    
+
     if ($selectedRadio == 1)
-        {        
+        {
         for ($i =0; $i < size($cones); $i ++)
             {
             string $locTran[] = `listRelatives -p $cones[$i]`;
             print ($locTran[0] + ".sx = " + $items[0] + ".sx\n");
             if (!`gmatch $items[0] $locTran[0]`)
                 {
-                expression -s ($locTran[0] + ".sx = " + $items[0] + ".sx") -n ("sclx" + $i); 
+                expression -s ($locTran[0] + ".sx = " + $items[0] + ".sx") -n ("sclx" + $i);
                 expression -s ($locTran[0] + ".sy = " + $items[0] + ".sy") -n ("scly" + $i);
                 expression -s ($locTran[0] + ".sz = " + $items[0] + ".sz") -n ("sclz" + $i);
-                } 
-           } 
+                }
+           }
        }
 
-    
+
 ///////////// scale relevant to the camera ///////////////////////////
-                  
+
     if ($selectedRadio == 2)
-        {     
-        
-        float $pos2[] = `getAttr ($camTran[0] + ".translate")`;       
-        float $nearestDist = 10000; string $nearestLocator;        
+        {
+
+        float $pos2[] = `getAttr ($camTran[0] + ".translate")`;
+        float $nearestDist = 10000; string $nearestLocator;
         for ($i =0; $i < size($cones); $i ++)
-            {   
+            {
             string $locTran[] = `listRelatives -p $cones[$i]`;
             float $pos1[] = `getAttr ($locTran[0] + ".translate")`;
             float $dist = sqrt(((($pos1[0]-$pos2[0])*($pos1[0]-$pos2[0]))+(($pos1[1]-$pos2[1])*($pos1[1]-$pos2[1]))+(($pos1[2]-$pos2[2])*($pos1[2]-$pos2[2]))));
@@ -154,32 +154,32 @@ global proc relevantToCameraExp()
                 $nearestLocator = $locTran[0];
                 }
             }
-           
+
         print ("Nearest Locator: " + $nearestLocator + "\tDistance To Camera: " + $nearestDist);
         for ($i =0; $i < size($cones); $i ++)
             {
             string $locTran[] = `listRelatives -p $cones[$i]`;
-            string $closest = ("float $pos1[] = `getAttr (\"" + $items[0] + ".translate\")`;\n") ; 
-            string $getCa = ("float $pos2[] = `getAttr (\"" + $camTran[0] + ".translate\")`;\n") ;      
+            string $closest = ("float $pos1[] = `getAttr (\"" + $items[0] + ".translate\")`;\n") ;
+            string $getCa = ("float $pos2[] = `getAttr (\"" + $camTran[0] + ".translate\")`;\n") ;
             string $distCa = "float $distCa = sqrt(((($pos1[0]-$pos2[0])*($pos1[0]-$pos2[0]))+(($pos1[1]-$pos2[1])*($pos1[1]-$pos2[1]))+(($pos1[2]-$pos2[2])*($pos1[2]-$pos2[2]))));\n";
-     
-     
-            string $getPos = ("float $pos1[] = `getAttr (\"" + $locTran[0] + ".translate\")`;\n") ; 
+
+
+            string $getPos = ("float $pos1[] = `getAttr (\"" + $locTran[0] + ".translate\")`;\n") ;
             string $dista = "float $dist = sqrt(((($pos1[0]-$pos2[0])*($pos1[0]-$pos2[0]))+(($pos1[1]-$pos2[1])*($pos1[1]-$pos2[1]))+(($pos1[2]-$pos2[2])*($pos1[2]-$pos2[2]))));\n";
             string $newScale = "float $newSc = ($dist/$distCa);\n";
-            
+
             string $ex = $closest + $getCa + $distCa + $getPos + $dista + $newScale;
-            string $x = ($ex + "float $cu = " + $items[0] + ".sx;\n" + $locTran[0] + ".sx = ($cu * $newSc);\n");      
+            string $x = ($ex + "float $cu = " + $items[0] + ".sx;\n" + $locTran[0] + ".sx = ($cu * $newSc);\n");
             string $y = ($ex + "float $cy = " + $items[0] + ".sy;\n" + $locTran[0] + ".sy = ($cy * $newSc);\n");
             string $z = ($ex + "float $cz = " + $items[0] + ".sz;\n" + $locTran[0] + ".sz = ($cz *$newSc);\n");
-    
+
             if (!`gmatch $items[0] $locTran[0]`)
                 {
                 expression -s ($x) -n ("relx" + $i);  expression -s ($y) -n ("rely" + $i); expression -s ($z) -n ("relz" + $i);
                 }
-            }                  
+            }
         }
-    createConesGUI;  
+    createConesGUI;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -202,19 +202,19 @@ global proc deleteCones()
     delete $currExp; delete "cones"; delete $shadingEngine; delete $shader;
     createConesGUI;
     }
-    
-//////////////////////////////////////////////////////////////////////////////////////   
+
+//////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
 
 
 
 
 
-    
+
 //////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////// CREATE CONES GUI ///////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
- 
+
 global proc createConesGUI()
      {
       if(`window -q -ex createConesGUI`)
@@ -227,33 +227,33 @@ global proc createConesGUI()
             {
             $selected = 2;
             }
-        
-        radioButtonGrp -nrb 2 -cc relevantToCameraExp -l "Cone Scale      " -la2 "Standard" "Relevant To Camera" -select $selected "whichScale";
-   
 
-        
+        radioButtonGrp -nrb 2 -cc relevantToCameraExp -l "Cone Scale      " -la2 "Standard" "Relevant To Camera" -select $selected "whichScale";
+
+
+
         columnLayout  -cal left ; string $d = "================================================";
         int $cone01 = `objExists "cone_01"`;
         if ($cone01 == 1)
             {
             columnLayout -adjustableColumn true;
             text -l ($d + "\nSet Cone Colour\n") -fn boldLabelFont -align "center";
-            
+
             string $shadingEngine[] = `listConnections -type "shadingEngine" "cone_0Shape1"`;
             string $shader[] = `listConnections -type "lambert" $shadingEngine[0]`;
             attrColorSliderGrp -label "Cone Colour" -at ($shader[0] + ".color") "coneColor";
-            
-            text -l  ("\n" + $d + "\nSet Cone Scale\n")  -fn boldLabelFont -align "center";  
-            
+
+            text -l  ("\n" + $d + "\nSet Cone Scale\n")  -fn boldLabelFont -align "center";
+
             attrFieldSliderGrp -label "ScaleY:" -min -0.0 -max 60.0 -at ("cone_01.sy");
             attrFieldSliderGrp -label "ScaleZ:" -min -0.0 -max 60.0 -at ("cone_01.sz");
             }
-        text -l "" -fn boldLabelFont -align "center"; 
+        text -l "" -fn boldLabelFont -align "center";
         rowLayout -numberOfColumns 2 -cw2 203 203;
-        button -bgc 1.000 0.5 0.1 -label "Create Cones" -w 203 -c createCones;    
+        button -bgc 1.000 0.5 0.1 -label "Create Cones" -w 203 -c createCones;
         button -bgc 0.832 0.0 0.832 -label "Delete Cones" -w 203  -c deleteCones;
         setParent..;
-        
+
         button -bgc 0 0.8 0 -label "OK" -w 406  -c {"deleteUI createConesGUI;"};
         showWindow createConesGUI;
     }
