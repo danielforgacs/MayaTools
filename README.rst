@@ -14,6 +14,8 @@ RiggingAid
 Maya version: Maya 2015 Extension 1 + SP5
 
 todo:
+    - new camstab bug fix
+    - bake playback range
     - prerender scripts
     - test render setups
     - precomp setup
