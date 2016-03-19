@@ -1,67 +1,50 @@
 """
-	---------------------------
-	ford_stabilizer for Maya
-	---------------------------
-	v0.5.8
-	---------------------------
+forgacs.daniel@gmail.com
+github/danielforgacs/MayaTools
 
-	daniel forgacs / ford
-	forgacs.daniel@gmail.com
+remodified by Patcha Saheb
+patchasaheb@gmail.com
 
-	remodified by Patcha Saheb
-	patchasaheb@gmail.com
+nuke_track_node:	1. select the locator / vertex / transform you want to stabilize in nuke
+					2. add the camera to the selection
+					3. execute "fstab.nuke_track_node()"
+					4. copy paste track node to nuke
 
-	-------------------------------------------------------------------------
-	help:
+					it prints the track node for Nuke in the script editor.
+					Nuke handles nodes and scripts from the clipboard.
+					copy and paste the node line to Nuke. the nuke track node script
+					starts with:
 
-	nuke_track_node:	1. select the locator / vertex / transform you want to stabilize in nuke
-						2. add the camera to the selection
-						3. execute "fstab.nuke_track_node()"
-						4. copy paste track node to nuke
+					"Tracker3 { track1 {{curve x1..."
 
-						it prints the track node for Nuke in the script editor.
-						Nuke handles nodes and scripts from the clipboard.
-						copy and paste the node line to Nuke. the nuke track node script
-						starts with:
+					Works with only one tranform selected. You don`t need
+					to look through your render camera.
 
-						"Tracker3 { track1 {{curve x1..."
 
-						Works with only one tranform selected. You don`t need
-						to look through your render camera.
+!!! DO NOT USE with cameras when camera offset is used !!!
 
-	-------------------------------------------------------------------------
+changelog:
+19 march 2016	- reStarted camstab / fstab
+20 june 2012	- nuke track generator bug fixed
+					(test camera was left in the code)
+				- Nuke track node now gets the frame range
+					from render globals
 
-	!!! DO NOT USE with cameras when camera offset is used !!!
+26 May 2012		- Camera class updated,
+					turning stabilizer off
+					works without selected camera
 
-	test environment:
-		- maya 2011 x64, linux
+23 May 2012		- new stabilizator, better selection handling
+					code cleanup
 
-	changelog:
-	20 june 2012	- nuke track generator bug fixed
-						(test camera was left in the code)
-					- Nuke track node now gets the frame range
-						from render globals
+21 May 2012		- selection error fiexed:
+					works with complicated camera hierarchy
 
-	26 May 2012		- Camera class updated,
-						turning stabilizer off
-						works without selected camera
+14 May 2012		- button colour changed,
+				- code clean up
 
-	23 May 2012		- new stabilizator, better selection handling
-						code cleanup
-
-	21 May 2012		- selection error fiexed:
-						works with complicated camera hierarchy
-
-	14 May 2012		- button colour changed,
-					- code clean up
-
-	13 May 2012		- code clean up
-					- works with zoom lens
-
-	knowns bugs:
-
-	planned	developement:
-
+13 May 2012		- code clean up
+				- works with zoom lens
 """
 
 import		maya.cmds	as		cmds
