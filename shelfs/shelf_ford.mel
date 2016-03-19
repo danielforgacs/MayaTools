@@ -24,9 +24,9 @@ global proc shelf_ford () {
         -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "reload(MayaTools)\n\nMayaTools.tools.camstabilizer.main(task='stabilize')"
+        -command "reload(MayaTools)\n\nMayaTools.tools.camstab.stabilizer('start')"
         -sourceType "python"
-        -doubleClickCommand "reload(MayaTools)\n\nMayaTools.tools.camstabilizer.main(task='clear')"
+        -doubleClickCommand "reload(MayaTools)\n\nMayaTools.tools.camstab.stabilizer('end')"
         -commandRepeatable 0
         -flat 1
     ;
