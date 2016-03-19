@@ -141,6 +141,7 @@ def stabilizer (task):
 
 					expression = '//%s#' % camera.shape
 					expression += '\npython "import maya.cmds as cmds";'
+					expression += '\npython "fstab = MayaTools.tools.camstab";'
 					expression += '\npython "fov_h = cmds.camera (\'%s\', query = True, horizontalFieldOfView = True)";' % camera.shape
 					expression += '\npython "fov_v = cmds.camera (\'%s\', query = True, verticalFieldOfView = True)";' % camera.shape
 					expression += '\npython "aperture_h = cmds.camera (\'%s\', query = True, horizontalFilmAperture = True)";' % camera.shape
