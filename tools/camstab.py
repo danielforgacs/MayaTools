@@ -230,7 +230,7 @@ def gui ():
 						label				= "stabilize",
 						width				= 220,height=30,
 						backgroundColor		= (0, 0.5, 0),
-						command				= 'fstab.stabilizer("start")')
+						command				= 'MayaTools.tools.camstab.stabilizer("start")')
 	cmds.showWindow		('Stabilizer')
 
 if __name__ == '__main__':
