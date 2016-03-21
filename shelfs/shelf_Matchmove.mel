@@ -12,20 +12,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Deletes Unknown Nodes" 
+        -annotation "Deletes Unknown Nodes"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/unknown_nodes.jpg" 
-        -image1 "matchmove_shelf_icons/unknown_nodes.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/unknown_nodes.jpg"
+        -image1 "matchmove_shelf_icons/unknown_nodes.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "delete `ls -type unknown`" 
-        -sourceType "mel" 
+        -command "delete `ls -type unknown`"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -38,15 +38,15 @@ global proc shelf_Matchmove () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "plainLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -sourceType "mel" 
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -58,20 +58,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Imports a series of maya files and renders looking through the current camera" 
+        -annotation "Imports a series of maya files and renders looking through the current camera"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/stop_motion.jpg" 
-        -image1 "matchmove_shelf_icons/stop_motion.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/stop_motion.jpg"
+        -image1 "matchmove_shelf_icons/stop_motion.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"stopMotion\";" 
-        -sourceType "mel" 
+        -command "source \"stopMotion\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -83,21 +83,21 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..." 
+        -annotation "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..."
         -enableBackground 0
-        -align "center" 
-        -label "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..." 
+        -align "center"
+        -label "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..."
         -labelOffset 0
-        -font "plainLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/rename_files.jpg" 
-        -image1 "matchmove_shelf_icons/rename_files.jpg" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/rename_files.jpg"
+        -image1 "matchmove_shelf_icons/rename_files.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/python/\")\nimport renamer\nrenamer.renamer()" 
-        -sourceType "python" 
+        -command "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/python/\")\nimport renamer\nrenamer.renamer()"
+        -sourceType "python"
         -commandRepeatable 1
         -flat 1
     ;
@@ -110,18 +110,18 @@ global proc shelf_Matchmove () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "plainLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/multi_rename_objs.jpg" 
-        -image1 "matchmove_shelf_icons/multi_rename_objs.jpg" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/multi_rename_objs.jpg"
+        -image1 "matchmove_shelf_icons/multi_rename_objs.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"rename_mult_objs\";" 
-        -sourceType "mel" 
+        -command "source \"rename_mult_objs\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -134,15 +134,15 @@ global proc shelf_Matchmove () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "plainLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -sourceType "mel" 
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -154,20 +154,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Convert Survey Data to Maya Locators" 
+        -annotation "Convert Survey Data to Maya Locators"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/convert_survey.jpg" 
-        -image1 "matchmove_shelf_icons/convert_survey.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/convert_survey.jpg"
+        -image1 "matchmove_shelf_icons/convert_survey.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "pfTheodToLocator();" 
-        -sourceType "mel" 
+        -command "pfTheodToLocator();"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -179,20 +179,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Exports your world space locators as Survey Data to 3dE4" 
+        -annotation "Exports your world space locators as Survey Data to 3dE4"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/xportloc.jpg" 
-        -image1 "matchmove_shelf_icons/xportloc.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/xportloc.jpg"
+        -image1 "matchmove_shelf_icons/xportloc.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"exportSurveyFileTo3DE\";" 
-        -sourceType "mel" 
+        -command "source \"exportSurveyFileTo3DE\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -204,20 +204,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Imports Matchmover 2d Points within the Selected Camera" 
+        -annotation "Imports Matchmover 2d Points within the Selected Camera"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/mm2maya.jpg" 
-        -image1 "matchmove_shelf_icons/mm2maya.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/mm2maya.jpg"
+        -image1 "matchmove_shelf_icons/mm2maya.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"MM2Maya/mm2MayaUI\";" 
-        -sourceType "mel" 
+        -command "source \"MM2Maya/mm2MayaUI\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -230,15 +230,15 @@ global proc shelf_Matchmove () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "plainLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -sourceType "mel" 
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -251,15 +251,15 @@ global proc shelf_Matchmove () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "plainLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -sourceType "mel" 
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -271,20 +271,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Adds 3de4 Attributes to Maya Cam" 
+        -annotation "Adds 3de4 Attributes to Maya Cam"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/3de4Cams.jpg" 
-        -image1 "matchmove_shelf_icons/3de4Cams.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/3de4Cams.jpg"
+        -image1 "matchmove_shelf_icons/3de4Cams.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "import threeDE4CamSetup;reload(threeDE4CamSetup);threeDE4CamSetup.cameraAttr();" 
-        -sourceType "python" 
+        -command "import threeDE4CamSetup;reload(threeDE4CamSetup);threeDE4CamSetup.cameraAttr();"
+        -sourceType "python"
         -commandRepeatable 1
         -flat 1
     ;
@@ -296,20 +296,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Sets Your Clipping Plane" 
+        -annotation "Sets Your Clipping Plane"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/clipPlane.jpg" 
-        -image1 "matchmove_shelf_icons/clipPlane.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/clipPlane.jpg"
+        -image1 "matchmove_shelf_icons/clipPlane.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"setClippingPlanes\";" 
-        -sourceType "mel" 
+        -command "source \"setClippingPlanes\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -321,20 +321,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Turns off the ImagePlane" 
+        -annotation "Turns off the ImagePlane"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/bgToggle.jpg" 
-        -image1 "matchmove_shelf_icons/bgToggle.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/bgToggle.jpg"
+        -image1 "matchmove_shelf_icons/bgToggle.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"imageToggle\";" 
-        -sourceType "mel" 
+        -command "source \"imageToggle\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -346,21 +346,21 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..." 
+        -annotation "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..."
         -enableBackground 0
-        -align "center" 
-        -label "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..." 
+        -align "center"
+        -label "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..."
         -labelOffset 0
-        -font "plainLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/f_stab.jpg" 
-        -image1 "matchmove_shelf_icons/f_stab.jpg" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/f_stab.jpg"
+        -image1 "matchmove_shelf_icons/f_stab.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/python/\")\nimport ford_stabilizer as fstab;fstab.gui()" 
-        -sourceType "python" 
+        -command "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/python/\")\nimport ford_stabilizer as fstab;fstab.gui()"
+        -sourceType "python"
         -commandRepeatable 1
         -flat 1
     ;
@@ -372,21 +372,21 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..." 
+        -annotation "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..."
         -enableBackground 0
-        -align "center" 
-        -label "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..." 
+        -align "center"
+        -label "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..."
         -labelOffset 0
-        -font "plainLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/fstab_Stereo.jpg" 
-        -image1 "matchmove_shelf_icons/fstab_Stereo.jpg" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/fstab_Stereo.jpg"
+        -image1 "matchmove_shelf_icons/fstab_Stereo.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/python/\")\nimport ford_stabilizerStereo as fstabS;fstabS.gui()" 
-        -sourceType "python" 
+        -command "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/python/\")\nimport ford_stabilizerStereo as fstabS;fstabS.gui()"
+        -sourceType "python"
         -commandRepeatable 1
         -flat 1
     ;
@@ -398,20 +398,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Reflects the camera and animation to match a flipped plate" 
+        -annotation "Reflects the camera and animation to match a flipped plate"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/cam_reflect.jpg" 
-        -image1 "matchmove_shelf_icons/cam_reflect.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/cam_reflect.jpg"
+        -image1 "matchmove_shelf_icons/cam_reflect.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"reflectionCamera\";" 
-        -sourceType "mel" 
+        -command "source \"reflectionCamera\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -423,20 +423,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "An Advanced Backface Culling Tool" 
+        -annotation "An Advanced Backface Culling Tool"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/roto_view.jpg" 
-        -image1 "matchmove_shelf_icons/roto_view.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/roto_view.jpg"
+        -image1 "matchmove_shelf_icons/roto_view.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"rotoView\";" 
-        -sourceType "mel" 
+        -command "source \"rotoView\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -449,15 +449,15 @@ global proc shelf_Matchmove () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "plainLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -sourceType "mel" 
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -469,20 +469,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Flips between left_track and right_track Cameras" 
+        -annotation "Flips between left_track and right_track Cameras"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/flipcam.jpg" 
-        -image1 "matchmove_shelf_icons/flipcam.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/flipcam.jpg"
+        -image1 "matchmove_shelf_icons/flipcam.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"flipCam\";" 
-        -sourceType "mel" 
+        -command "source \"flipCam\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -494,20 +494,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Creates a Maya Stereo Camera from your left_track and right_track cameras" 
+        -annotation "Creates a Maya Stereo Camera from your left_track and right_track cameras"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/stereoViewer.jpg" 
-        -image1 "matchmove_shelf_icons/stereoViewer.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/stereoViewer.jpg"
+        -image1 "matchmove_shelf_icons/stereoViewer.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"stereoCamera\";" 
-        -sourceType "mel" 
+        -command "source \"stereoCamera\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -520,15 +520,15 @@ global proc shelf_Matchmove () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "plainLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -sourceType "mel" 
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -540,20 +540,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Parents multiple objects to the first selected object" 
+        -annotation "Parents multiple objects to the first selected object"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/parentMultipleObject.jpg" 
-        -image1 "matchmove_shelf_icons/parentMultipleObject.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/parentMultipleObject.jpg"
+        -image1 "matchmove_shelf_icons/parentMultipleObject.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"parentMultiple\";" 
-        -sourceType "mel" 
+        -command "source \"parentMultiple\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -565,20 +565,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Creates a locator between 2 selected edges of an object" 
+        -annotation "Creates a locator between 2 selected edges of an object"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/loconloc.jpg" 
-        -image1 "matchmove_shelf_icons/loconloc.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/loconloc.jpg"
+        -image1 "matchmove_shelf_icons/loconloc.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"rivet\";" 
-        -sourceType "mel" 
+        -command "source \"rivet\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -590,20 +590,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Smooths curves in the Graph Editor" 
+        -annotation "Smooths curves in the Graph Editor"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/smooth_curve.jpg" 
-        -image1 "matchmove_shelf_icons/smooth_curve.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/smooth_curve.jpg"
+        -image1 "matchmove_shelf_icons/smooth_curve.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"smoothcurve\";" 
-        -sourceType "mel" 
+        -command "source \"smoothcurve\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -615,20 +615,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Adds a Time Remapper node to create a retimed camera" 
+        -annotation "Adds a Time Remapper node to create a retimed camera"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/time_remap.jpg" 
-        -image1 "matchmove_shelf_icons/time_remap.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/time_remap.jpg"
+        -image1 "matchmove_shelf_icons/time_remap.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"Toggle_Time_Remapping_0.9\";" 
-        -sourceType "mel" 
+        -command "source \"Toggle_Time_Remapping_0.9\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -640,20 +640,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Retimes your animated objects using a Nuke Retime curve." 
+        -annotation "Retimes your animated objects using a Nuke Retime curve."
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/nuke_retime.jpg" 
-        -image1 "matchmove_shelf_icons/nuke_retime.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/nuke_retime.jpg"
+        -image1 "matchmove_shelf_icons/nuke_retime.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"objectRetimer\";" 
-        -sourceType "mel" 
+        -command "source \"objectRetimer\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -665,20 +665,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Adjusts the Channel Box Sensitivity" 
+        -annotation "Adjusts the Channel Box Sensitivity"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "matchmove_shelf_icons/chnelBox.jpg" 
-        -image1 "matchmove_shelf_icons/chnelBox.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "matchmove_shelf_icons/chnelBox.jpg"
+        -image1 "matchmove_shelf_icons/chnelBox.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "// source \"chBoxSensitivity\";\n// c:\\_store\\dev\\Maya-tools-env\\MayaTools\\matchmove_shelf\\mel\\chBoxSensitivity.mel\nsource \"chBoxSensitivity\";" 
-        -sourceType "mel" 
+        -command "// source \"chBoxSensitivity\";\n// c:\\_store\\dev\\Maya-tools-env\\MayaTools\\matchmove_shelf\\mel\\chBoxSensitivity.mel\nsource \"chBoxSensitivity\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -691,15 +691,15 @@ global proc shelf_Matchmove () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "plainLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -sourceType "mel" 
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -711,21 +711,21 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..." 
+        -annotation "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..."
         -enableBackground 0
-        -align "center" 
-        -label "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..." 
+        -align "center"
+        -label "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..."
         -labelOffset 0
-        -font "plainLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/uv_render_head.jpg" 
-        -image1 "matchmove_shelf_icons/uv_render_head.jpg" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/uv_render_head.jpg"
+        -image1 "matchmove_shelf_icons/uv_render_head.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/python/\")\nimport trackProjection as trackProjection; trackProjection.createProjectionUI()" 
-        -sourceType "python" 
+        -command "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/python/\")\nimport trackProjection as trackProjection; trackProjection.createProjectionUI()"
+        -sourceType "python"
         -commandRepeatable 1
         -flat 1
     ;
@@ -737,20 +737,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Creates a WireFrame Shader to the selected objects" 
+        -annotation "Creates a WireFrame Shader to the selected objects"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/wireShader.jpg" 
-        -image1 "matchmove_shelf_icons/wireShader.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/wireShader.jpg"
+        -image1 "matchmove_shelf_icons/wireShader.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"createWireframeLayer\";" 
-        -sourceType "mel" 
+        -command "source \"createWireframeLayer\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -762,20 +762,20 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Creates Cones on selected locators" 
+        -annotation "Creates Cones on selected locators"
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/cones.jpg" 
-        -image1 "matchmove_shelf_icons/cones.jpg" 
-        -style "iconOnly" 
+        -font "tinyBoldLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/cones.jpg"
+        -image1 "matchmove_shelf_icons/cones.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"createCones\";" 
-        -sourceType "mel" 
+        -command "source \"createCones\";"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -788,15 +788,15 @@ global proc shelf_Matchmove () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -align "center" 
+        -align "center"
         -labelOffset 0
-        -font "plainLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -sourceType "mel" 
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -808,21 +808,21 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/sc..." 
+        -annotation "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/sc..."
         -enableBackground 0
-        -align "center" 
-        -label "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/sc..." 
+        -align "center"
+        -label "source \"/Users/chrishardman/Library/Preferences/Autodesk/maya/sc..."
         -labelOffset 0
-        -font "plainLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/reparent.jpg" 
-        -image1 "matchmove_shelf_icons/reparent.jpg" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/reparent.jpg"
+        -image1 "matchmove_shelf_icons/reparent.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "source \"reparentGui\";reparentGui();" 
-        -sourceType "mel" 
+        -command "source \"reparentGui\";reparentGui();"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -834,23 +834,53 @@ global proc shelf_Matchmove () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..." 
+        -annotation "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..."
         -enableBackground 0
-        -align "center" 
-        -label "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..." 
+        -align "center"
+        -label "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferen..."
         -labelOffset 0
-        -font "plainLabelFont" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "matchmove_shelf_icons/proj_loc.jpg" 
-        -image1 "matchmove_shelf_icons/proj_loc.jpg" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "matchmove_shelf_icons/proj_loc.jpg"
+        -image1 "matchmove_shelf_icons/proj_loc.jpg"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/python/\")\nimport closestMeshpoint as closestMP; closestMP.LocIntersect().closestMeshpointGui()" 
-        -sourceType "python" 
+        -command "import sys\nsys.path.append(\"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/python/\")\nimport closestMeshpoint as closestMP; closestMP.LocIntersect().closestMeshpointGui()"
+        -sourceType "python"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "import softimport softmodSculpt\nreload(softmodSculpt)\nsoftmodSculpt.run.showWin()"
+        -enableBackground 0
+        -align "center"
+        -label "import softimport softmodSculpt\nreload(softmodSculpt)\nsoftmodScu..."
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "import softimport softmodSculpt\nreload(softmodSculpt)\nsoftmodSculpt.run.showWin()"
+        -sourceType "python"
         -commandRepeatable 1
         -flat 1
     ;
 
-} 
+}
