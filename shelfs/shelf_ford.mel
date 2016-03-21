@@ -105,4 +105,376 @@ global proc shelf_ford () {
         -commandRepeatable 0
         -flat 1
     ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "string $gffu[] = `ls -sl`;\nfor ($rfo in $gffu) \n{\n\tlockNode -lock off $rfo;\n//\tdelete $rfo; \n}\n\n"
+        -enableBackground 0
+        -align "center"
+        -label "string $gffu[] = `ls -sl`;\nfor ($rfo in $gffu) \n{\n\tlockNode -loc..."
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "unlock"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "commandButton.png"
+        -image1 "commandButton.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "string $gffu[] = `ls -sl`;\nfor ($rfo in $gffu) \n{\n\tlockNode -lock off $rfo;\n//\tdelete $rfo; \n}\n\n"
+        -sourceType "mel"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "setProject \"/jobs/fsb/shots/rjc/rjc_0130/work/camera/task01/maya/\";"
+        -enableBackground 0
+        -align "center"
+        -label "setProject \"/jobs/fsb/shots/rjc/rjc_0130/work/camera/task01/maya..."
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "rjc 130"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "commandButton.png"
+        -image1 "commandButton.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "setProject \"/jobs/fsb/shots/rjc/rjc_0130/work/camera/task01/maya/\";"
+        -sourceType "mel"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "setproject \"/jobs/fsb/shots/rjc/rjc_0170/work/camera/task01/maya/\";"
+        -enableBackground 0
+        -align "center"
+        -label "setproject \"/jobs/fsb/shots/rjc/rjc_0170/work/camera/task01/maya..."
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "rjc 170"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "commandButton.png"
+        -image1 "commandButton.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "setProject \"/jobs/fsb/shots/rjc/rjc_0170/work/camera/task01/maya/\";"
+        -sourceType "mel"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "setProject \"/jobs/fsb/shots/rjc/rjc_0140/work/camera/task01/maya/\";"
+        -enableBackground 0
+        -align "center"
+        -label "setProject \"/jobs/fsb/shots/rjc/rjc_0140/work/camera/task01/maya..."
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "rjc 0140"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "commandButton.png"
+        -image1 "commandButton.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "setProject \"/jobs/fsb/shots/rjc/rjc_0140/work/camera/task01/maya/\";"
+        -sourceType "mel"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Edit expressions between attributes"
+        -enableBackground 0
+        -align "center"
+        -label "Expression Editor"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "EE"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "menuIconWindow.png"
+        -image1 "menuIconWindow.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "ExpressionEditor"
+        -sourceType "mel"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "setProject \"/jobs/fsb/shots/jtj/jtj_0390/work/camera/task01/maya/\";"
+        -enableBackground 0
+        -align "center"
+        -label "setProject \"/jobs/fsb/shots/jtj/jtj_0390/work/camera/task01/maya..."
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "jtj 390"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "commandButton.png"
+        -image1 "commandButton.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "setProject \"/jobs/fsb/shots/jtj/jtj_0390/work/camera/task01/maya/\";"
+        -sourceType "mel"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "from MayaTools.utils import randomanim\nreload(randomanim)\n\nrandomanim.main()"
+        -enableBackground 0
+        -align "center"
+        -label "from MayaTools.utils import randomanim\nreload(randomanim)\n\nrando..."
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "rndAnim"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "from MayaTools.utils import randomanim\nreload(randomanim)\n\nrandomanim.main()"
+        -sourceType "python"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "\"\"\"\ncreates rig_controls selection set\nif doesn't exists and add selection\nto it\n\"\"\"\n\nimport pymel.core as pm\n\ntry:\n    pm.PyNode('rig_contorls')\nexcept:\n    s = pm.sets()\n    s.rename('rig_contorls')\n\nfor n in pm.selected():\n    s.add(n)\n    \n"
+        -enableBackground 0
+        -align "center"
+        -label "\"\"\"\ncreates rig_controls selection set\nif doesn't exists and add..."
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "ctrlSet"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "\"\"\"\ncreates rig_controls selection set\nif doesn't exists and add selection\nto it\n\"\"\"\n\nimport pymel.core as pm\n\ntry:\n    s = pm.PyNode('rig_contorls')\nexcept:\n    s = pm.sets()\n    s.rename('rig_contorls')\n\nfor n in pm.selected():\n    s.add(n)\n    \n"
+        -sourceType "python"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "// source \"chBoxSensitivity\";\n// c:\\_store\\dev\\Maya-tools-env\\MayaTools\\matchmove_shelf\\mel\\chBoxSensitivity.mel\nsource \"chBoxSensitivity\";"
+        -enableBackground 0
+        -align "center"
+        -label "// source \"chBoxSensitivity\";\n// c:\\_store\\dev\\Maya-tools-env\\Ma..."
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "0.001"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "commandButton.png"
+        -image1 "commandButton.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "// source \"chBoxSensitivity\";\n// c:\\_store\\dev\\Maya-tools-env\\MayaTools\\matchmove_shelf\\mel\\chBoxSensitivity.mel\nsource \"chBoxSensitivity\";"
+        -sourceType "mel"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "import sys\n# sys.path.append(\"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/python/\")\nimport ford_stabilizer as fstab;\nfstab.gui()"
+        -enableBackground 0
+        -align "center"
+        -label "import sys\n# sys.path.append(\"/Users/chrishardman/Library/Prefer..."
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "fstab"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "import sys\n# sys.path.append(\"/Users/chrishardman/Library/Preferences/Autodesk/maya/scripts/matchmove/python/\")\nimport ford_stabilizer as fstab;\nfstab.gui()"
+        -sourceType "python"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "from MayaTools.tools import viewplate\nreload(viewplate)\n\nviewplate.main()"
+        -enableBackground 0
+        -align "center"
+        -label "from MayaTools.tools import viewplate\nreload(viewplate)\n\nviewpla..."
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "plate"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "from MayaTools.tools import viewplate\nreload(viewplate)\n\nviewplate.main()"
+        -sourceType "python"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "setAttr \"imagePlaneShape1.depth\" 1;\nsetAttr \"imagePlaneShape1.alphaGain\" 0.7;"
+        -enableBackground 0
+        -align "center"
+        -label "setAttr \"imagePlaneShape1.depth\" 1;\nsetAttr \"imagePlaneShape1.al..."
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "visualize"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "commandButton.png"
+        -image1 "commandButton.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "ip = pm.PyNode('imagePlaneShape1')\n\nif ip.depth.get() == 5000:\n    ip.depth.set(1)\nelse:\n    ip.depth.set(5000)"
+        -sourceType "python"
+        -commandRepeatable 1
+        -flat 1
+    ;
 }
