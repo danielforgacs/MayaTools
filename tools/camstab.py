@@ -181,16 +181,16 @@ def nuke_track_node():
     trackNode   = 'Tracker3 { track1 {{curve x1 '
     tx          = ''
     ty          = ''
-    startframe  = cmds.getAttr( "defaultRenderGlobals.startFrame" )
-    endframe    = cmds.getAttr( "defaultRenderGlobals.endFrame" )
+    startframe  = int(cmds.getAttr( "defaultRenderGlobals.startFrame" ))
+    endframe    = int(cmds.getAttr( "defaultRenderGlobals.endFrame" ))
 
     for frame in range( startframe, endframe + 1 ):
         cmds.currentTime( frame )
         fov_h   = cmds.camera( camera, hfv=1, q=1)
         fov_v   = cmds.camera( camera, vfv=1, q=1)
         track   = get_normalized_screen_position( point, camera, fov_h, fov_v, aperture_h, aperture_v )
-        tx      += str( track[0] * 1280 ) + ' '
-        ty      += str( track[1] * 720 ) + ' '
+        tx      += str( track[0] * cmds.getAttr("defaultResolution.width")) + ' '
+        ty      += str( track[1] * cmds.getAttr("defaultResolution.height") ) + ' '
 
     trackNode += tx + '} {curve x1 ' + ty + '}}}'
     print '#' * 50
