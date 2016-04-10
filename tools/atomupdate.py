@@ -1,3 +1,16 @@
+"""
+ATOM anim export / import
+has a lot's of problems and restrictions.
+
+selection on import has to match
+selection on export, etc...
+
+this script exports all selected
+objects anim to separated files
+and imports it to the selected nodes.
+"""
+
+
 import pymel.core as pm
 
 
