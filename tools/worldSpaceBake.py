@@ -1,3 +1,9 @@
+"""
+bake selected object
+to world space
+"""
+
+
 try:
     import pymel.core as pm
 except:

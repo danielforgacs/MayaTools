@@ -1,3 +1,11 @@
+"""
+adds random anim
+to the selected nodes.
+
+good to test rigs.
+"""
+
+
 import random
 import pymel.core as pm
 

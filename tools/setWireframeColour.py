@@ -1,3 +1,9 @@
+"""
+set wirefrane color
+of selected objects
+"""
+
+
 try:
     import pymel.core as pm
 except:
