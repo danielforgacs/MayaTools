@@ -27,12 +27,14 @@ def constrain_loc_to_vtx():
     mesh = pymel.core.PyNode(vtx).getParent()
     # mesh = pymel.core.PyNode(vtx).getParent().getTransform()
     locator = pymel.core.spaceLocator()
-    locator = locator.rename('locator_vertexConstrained')
+    print(vtx)
+    print(vtx.name())
+    print(type(vtx))
+    print(str(vtx))
+    locator = locator.rename('locator_vertexConstrained_vtx{vtx}'.format(vtx=str(vtx)))
     expression = (
-            """// Next line is old code. some attribute enquery\n"""
-            """// should be put there what evaluates constantly\n"""
-            """// so the expression refreshes on transforming\n"""
-            """// the object and not only on frame change\n"""
+            """// some attribute enquery should be put there what evaluates constantly\n"""
+            """// so the expression refreshes on transforming the object and not only on frame change\n"""
             """float $BBoxSize = `getAttr {mesh}.boundingBoxMinX`;\n\n"""
             """$vertexWorldPos = `pointPosition -world {vtx}`;\n\n"""
             """setAttr {locator}.translateX $vertexWorldPos[0];\n"""
