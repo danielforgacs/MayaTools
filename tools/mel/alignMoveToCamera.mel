@@ -1,0 +1,18 @@
+// shortcut to align the move tool axis
+// to the camera. the camera is hardcoded.
+// update camera/target object name select
+// something and run this
+
+string $selection[];
+$selection = `ls -selection`;
+
+{
+	// string $selection[];
+	// $selection[0] = "locator_Cam_PosShape";
+	manipMoveAlignHandleToComponent("locator_Cam_PosShape", {$selection[0]}, {""}, "none", 0);
+};
+
+// locator_Main_Ctrl;
+
+escapeCurrentTool;
+autoUpdateAttrEd;
