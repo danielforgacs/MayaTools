@@ -32,7 +32,7 @@ class Cam(object):
     def imageplane(self):
         path = self.shape.attr('imagePlane').get()
 
-        try: 
+        try:
             return path[0]
         except:
             return None
@@ -52,7 +52,8 @@ def main(viewer=None):
     print '~@~'*10
 
     if not viewer:
-        viewer = 'C:/software/djv-1.1.0-Windows-64/bin/djv_view.exe'
+        # viewer = 'C:/software/djv-1.1.0-Windows-64/bin/djv_view.exe'
+        viewer = 'djv_view'
 
     cam = None
 
@@ -65,7 +66,7 @@ def main(viewer=None):
     cam = Cam(selection)
 
     if not cam.shape:
-        return  
+        return
 
     # print(cam.transform)
     # print(cam.shape)
@@ -78,9 +79,9 @@ def main(viewer=None):
     # print(planepath)
 
     cmd = ' '.join([viewer, planepath])
-    # print(cmd)
-    
-    subprocess.call(cmd)
+    print(cmd)
+
+    subprocess.Popen(cmd, shell=True)
 
 
 
