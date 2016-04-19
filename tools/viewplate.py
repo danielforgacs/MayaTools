@@ -9,24 +9,33 @@ imagePlane in djv_view
 import subprocess
 
 try:
-	import pymel.core as pm
+    import pymel.core as pm
 except:
-	pm = None
+    pm = None
 
 
 class Cam(object):
-	def __init__(self, camtransform):
-		node = pm.PyNode(camtransform)
+    def __init__(self, camtransform):
+        node = pm.PyNode(camtransform)
+        self.transform = None
+        self.shape = None
 
-		self.transform = node
-		self.shape = node
+        if isinstance(node, pm.nodetypes.Transform):
+            self.transform = node
+            self.shape = node.getShape()
+        elif isinstance(node, pm.nodetypes.Camera):
+            self.transform = node.getTransform()
+            self.shape = node
 
-		if isinstance(self.shape, pm.nodetypes.Transform):
-			self.shape = self.shape.getShape()
 
-	@property
-	def imageplane(self):
-		return self.shape.attr('imagePlane').get()[0]
+    @property
+    def imageplane(self):
+        path = self.shape.attr('imagePlane').get()
+
+        try: 
+            return path[0]
+        except:
+            return None
 
 
 def main_v1():
@@ -39,15 +48,40 @@ def main_v1():
     subprocess.Popen(['djv_view', seq])
 
 
-def main():
-	print '~@~'*10
-	selection = pm.ls(selection=True)[0]
-	cam = Cam(selection)
+def main(viewer=None):
+    print '~@~'*10
 
-	print(cam.transform)
-	print(cam.shape)
-	print(cam.imageplane)
-	print(cam.imageplane.attr('imageName').get())
+    if not viewer:
+        viewer = 'C:/software/djv-1.1.0-Windows-64/bin/djv_view.exe'
+
+    cam = None
+
+    try:
+        selection = pm.ls(selection=True)[0]
+    except:
+        print('--> select a camera')
+        return
+
+    cam = Cam(selection)
+
+    if not cam.shape:
+        return  
+
+    # print(cam.transform)
+    # print(cam.shape)
+    # print(cam.imageplane)
+
+    if not cam.imageplane:
+        return
+
+    planepath = cam.imageplane.attr('imageName').get()
+    # print(planepath)
+
+    cmd = ' '.join([viewer, planepath])
+    # print(cmd)
+    
+    subprocess.call(cmd)
+
 
 
 if __name__ == '__main__':
